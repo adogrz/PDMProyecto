@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">PDMProyectoEtapa1</string>
+    <string name="btncompra">Compras</string>
+    <string name="btnagregarcompra">Agregar compra</string>
+    <string name="btnconsultarcompra">Consultar compra</string>
+    <string name="btnactualizarcompra">Actualizar compra</string>
+    <string name="btnEliminarcompra">Eliminar compra</string>
+
+    ----------------------------------------------------------------
+    <string name="txtCompras">Agregue compra</string>
+    <string name="txtproductocompra">Producto</string>
+    <string name="txtcantidadcompra">Cantidad</string>
+    <string name="txtpreciocompra">Precio</string>
+    <string name="btnaddcompra">Agregar</string>
+    <string name="textP"> producto</string>
+    <string name="textC">cantidad</string>
+    <string name="textPr">precio</string>
+    ------------------------------------------------------------------
+    <string name="btnconsultcompra">Consultar</string>
+    ------------------------------------------------------------------
+    <string name="txtActualizar">Actualize los datos</string>
+    <string name="btnupdatecompra">Actualizar</string>
+    -----------------------------------------------------------------
+    <string name="btndeletecompra">Eliminar</string>
 </resources>

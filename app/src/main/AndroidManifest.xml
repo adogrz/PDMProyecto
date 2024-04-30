@@ -13,6 +13,21 @@
         android:theme="@style/Theme.PDMProyectoEtapa1"
         tools:targetApi="31">
         <activity
+            android:name=".EliminarCompra"
+            android:exported="false" />
+        <activity
+            android:name=".ActualizarCompra"
+            android:exported="false" />
+        <activity
+            android:name=".ConsultarCompra"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarCompra"
+            android:exported="false" />
+        <activity
+            android:name=".MenuCompra"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
