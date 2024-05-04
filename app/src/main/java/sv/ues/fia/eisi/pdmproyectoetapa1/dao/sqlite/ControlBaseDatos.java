@@ -1,6 +1,5 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ArticuloDAO;
@@ -8,30 +7,31 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
 
 /**
- * Clase auxiliar que implementa {@link BaseDatosFarmacia} para llevar a cabo la conexión a la base de datos.
+ * Clase auxiliar que implementa {@link BaseDatosFarmacia} para llevar a cabo la conexión a la base
+ * de datos.
  */
 public final class ControlBaseDatos {
-    @SuppressLint("StaticFieldLeak")
-    private static BaseDatosFarmacia baseDatos;
-    private static final ControlBaseDatos instancia = new ControlBaseDatos();
-    private Context contexto;
+    private static ControlBaseDatos instancia;
+    private BaseDatosFarmacia baseDatos;
     private TipoArticuloDAO tipoArticulos = null;
     private ArticuloDAO articulos = null;
     private MedicamentoDAO medicamentos = null;
 
-    private ControlBaseDatos() {
-    }
-
-    /**
-     * Método que obtiene la instancia de la clase que controla la base de datos.
-     * @param contexto Contexto de la aplicación.
-     * @return Instancia de la clase que controla la base de datos.
-     */
-    public static ControlBaseDatos obtenerInstancia(Context contexto) {
+    private ControlBaseDatos(Context contexto) {
         if (baseDatos == null) {
             baseDatos = new BaseDatosFarmacia(contexto);
         }
-        instancia.contexto = contexto;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase.
+     * @param contexto Contexto de la aplicación.
+     * @return Instancia de la clase.
+     */
+    public static ControlBaseDatos obtenerInstancia(Context contexto) {
+        if (instancia == null) {
+            instancia = new ControlBaseDatos(contexto);
+        }
         return instancia;
     }
 
@@ -41,7 +41,7 @@ public final class ControlBaseDatos {
      */
     public TipoArticuloDAO getTipoArticuloDAO() {
         if (tipoArticulos == null) {
-            tipoArticulos = new TipoArticuloDAOImpl(baseDatos, contexto);
+            tipoArticulos = new TipoArticuloDAOImpl(baseDatos);
         }
         return tipoArticulos;
     }
@@ -52,7 +52,7 @@ public final class ControlBaseDatos {
      */
     public ArticuloDAO getArticuloDAO() {
         if (articulos == null) {
-            articulos = new ArticuloDAOImpl(baseDatos, contexto);
+            articulos = new ArticuloDAOImpl(baseDatos);
         }
         return articulos;
     }
@@ -63,7 +63,7 @@ public final class ControlBaseDatos {
      */
     public MedicamentoDAO getMedicamentoDAO() {
         if (medicamentos == null) {
-            medicamentos = new MedicamentoDAOImpl(baseDatos, contexto);
+            medicamentos = new MedicamentoDAOImpl(baseDatos);
         }
         return medicamentos;
     }

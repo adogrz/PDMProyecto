@@ -1,6 +1,5 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -17,11 +16,9 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaTipo
  */
 public class TipoArticuloDAOImpl implements TipoArticuloDAO {
     private final BaseDatosFarmacia baseDatos;
-    private final Context contexto;
 
-    public TipoArticuloDAOImpl(BaseDatosFarmacia baseDatos, Context contexto) {
+    public TipoArticuloDAOImpl(BaseDatosFarmacia baseDatos) {
         this.baseDatos = baseDatos;
-        this.contexto = contexto;
     }
 
     @Override

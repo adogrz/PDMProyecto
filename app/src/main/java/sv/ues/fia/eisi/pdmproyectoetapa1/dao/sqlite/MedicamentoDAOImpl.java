@@ -1,7 +1,5 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite;
 
-import android.content.Context;
-
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
@@ -9,11 +7,9 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Medicamento;
 
 public class MedicamentoDAOImpl implements MedicamentoDAO {
     private final BaseDatosFarmacia baseDatos;
-    private final Context contexto;
 
-    public MedicamentoDAOImpl(BaseDatosFarmacia baseDatos, Context contexto) {
+    public MedicamentoDAOImpl(BaseDatosFarmacia baseDatos) {
         this.baseDatos = baseDatos;
-        this.contexto = contexto;
     }
 
     @Override

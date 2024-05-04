@@ -1,7 +1,5 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite;
 
-import android.content.Context;
-
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ArticuloDAO;
@@ -12,11 +10,9 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Articulo;
  */
 public class ArticuloDAOImpl implements ArticuloDAO {
     private final BaseDatosFarmacia baseDatos;
-    private final Context contexto;
 
-    public ArticuloDAOImpl(BaseDatosFarmacia baseDatos, Context contexto) {
+    public ArticuloDAOImpl(BaseDatosFarmacia baseDatos) {
         this.baseDatos = baseDatos;
-        this.contexto = contexto;
     }
 
     @Override
