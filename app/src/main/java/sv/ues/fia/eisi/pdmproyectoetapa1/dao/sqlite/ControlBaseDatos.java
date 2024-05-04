@@ -1,6 +1,7 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
@@ -33,6 +34,10 @@ public final class ControlBaseDatos {
             instancia = new ControlBaseDatos(contexto);
         }
         return instancia;
+    }
+
+    public SQLiteDatabase getDb() {
+        return baseDatos.getWritableDatabase();
     }
 
     /**
