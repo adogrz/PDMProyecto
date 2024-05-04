@@ -1,6 +1,7 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +9,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.List;
+
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DAOException;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.ControlBaseDatos;
+import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.TipoArticulo;
+
 public class MainActivity extends AppCompatActivity {
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +29,20 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        ControlBaseDatos controlBaseDatos = ControlBaseDatos.obtenerInstancia(MainActivity.this);
+
+        TipoArticuloDAO tipoArticuloDAO = controlBaseDatos.getTipoArticuloDAO();
+
+        List<TipoArticulo> tipoArticulos = null;
+
+        try {
+            tipoArticulos = tipoArticuloDAO.obtenerTodos();
+        } catch (DAOException e) {
+            throw new RuntimeException(e);
+        }
+
+        textView = findViewById(R.id.textViewPrueba);
+        textView.setText(tipoArticulos.get(0).getNombre());
     }
 }
