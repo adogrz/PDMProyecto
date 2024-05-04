@@ -2,6 +2,7 @@ package sv.ues.fia.eisi.pdmproyectoetapa1;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,19 +31,23 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        textView = findViewById(R.id.textViewPrueba);
+
         ControlBaseDatos controlBaseDatos = ControlBaseDatos.obtenerInstancia(MainActivity.this);
 
         TipoArticuloDAO tipoArticuloDAO = controlBaseDatos.getTipoArticuloDAO();
 
-        List<TipoArticulo> tipoArticulos = null;
+        List<TipoArticulo> tipoArticulos;
 
         try {
             tipoArticulos = tipoArticuloDAO.obtenerTodos();
-        } catch (DAOException e) {
-            throw new RuntimeException(e);
-        }
+            String idPrimero = tipoArticulos.get(7).getId();
 
-        textView = findViewById(R.id.textViewPrueba);
-        textView.setText(tipoArticulos.get(0).getNombre());
+            TipoArticulo tipoArticulo = tipoArticuloDAO.obtener(idPrimero);
+            textView.setText(tipoArticulo.getNombre());
+        } catch (DAOException | IndexOutOfBoundsException e) {
+            Toast.makeText(this, "Error al obtener los datos", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 }
