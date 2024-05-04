@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.List;
 
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DAOException;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.ControlBaseDatos;
 import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.TipoArticulo;
@@ -33,7 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
         TipoArticuloDAO tipoArticuloDAO = controlBaseDatos.getTipoArticuloDAO();
 
-        List<TipoArticulo> tipoArticulos = tipoArticuloDAO.obtenerTodos();
+        List<TipoArticulo> tipoArticulos = null;
+
+        try {
+            tipoArticulos = tipoArticuloDAO.obtenerTodos();
+        } catch (DAOException e) {
+            throw new RuntimeException(e);
+        }
 
         textView = findViewById(R.id.textViewPrueba);
         textView.setText(tipoArticulos.get(0).getNombre());
