@@ -40,6 +40,12 @@ public final class ControlBaseDatos {
         return baseDatos.getWritableDatabase();
     }
 
+    public void cerrar() {
+        if (baseDatos != null) {
+            baseDatos.close();
+        }
+    }
+
     /**
      * Método que obtiene la instancia de la clase que implementa la interfaz TipoArticuloDAO.
      * @return Instancia de la clase que implementa la interfaz TipoArticuloDAO.
