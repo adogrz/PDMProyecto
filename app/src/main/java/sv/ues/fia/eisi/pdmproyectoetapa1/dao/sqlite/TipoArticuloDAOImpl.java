@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DAOException;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.TipoArticulo;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.BaseDatosFarmacia.Tablas;
@@ -22,17 +23,17 @@ public class TipoArticuloDAOImpl implements TipoArticuloDAO {
     }
 
     @Override
-    public void insertar(TipoArticulo obj) {
+    public void insertar(TipoArticulo obj) throws DAOException {
         throw new UnsupportedOperationException("No implementado");
     }
 
     @Override
-    public void modificar(TipoArticulo obj) {
+    public void modificar(TipoArticulo obj) throws DAOException {
         throw new UnsupportedOperationException("No implementado");
     }
 
     @Override
-    public void eliminar(TipoArticulo obj) {
+    public void eliminar(TipoArticulo obj) throws DAOException {
         throw new UnsupportedOperationException("No implementado");
     }
 
@@ -41,7 +42,7 @@ public class TipoArticuloDAOImpl implements TipoArticuloDAO {
      * @return Lista con los registros de la entidad TipoArticulo.
      */
     @Override
-    public List<TipoArticulo> obtenerTodos() {
+    public List<TipoArticulo> obtenerTodos() throws DAOException {
         List<TipoArticulo> listaTipoArticulo = new ArrayList<>();
 
         SQLiteDatabase db = baseDatos.getReadableDatabase();
@@ -76,7 +77,7 @@ public class TipoArticuloDAOImpl implements TipoArticuloDAO {
     }
 
     @Override
-    public TipoArticulo obtener(String id) {
+    public TipoArticulo obtener(String id) throws DAOException {
         throw new UnsupportedOperationException("No implementado");
     }
 }
