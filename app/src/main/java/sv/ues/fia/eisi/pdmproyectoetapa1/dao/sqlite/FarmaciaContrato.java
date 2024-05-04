@@ -21,7 +21,7 @@ public class FarmaciaContrato {
         String ID_ARTICULO = "id_articulo";
         String NOMBRE_ARTICULO = "nombre_articulo";
         String PRECIO_UNITARIO_ARTICULO = "precio_unitario_articulo";
-        String STOK_ARTICULO = "stok_articulo";
+        String STOCK_ARTICULO = "stock_articulo";
         String DESCRIPCION_ARTICULO = "descripcion_articulo";
         String ID_PROVEEDOR = "id_proveedor";
         String ID_TIPO_ARTICULO = "id_tipo_articulo";
@@ -93,6 +93,20 @@ public class FarmaciaContrato {
     public interface ColumnasMetodoPago {
         String ID_METODO_PAGO = "id_metodo_pago";
         String TIPO_METODO_PAGO = "tipo_metodo_pago";
+    }
+
+    public interface ColumnasCliente {
+        String ID_CLIENTE = "id_cliente";
+        String NOMBRE_CLIENTE = "nombre_cliente";
+        String APELLIDO_CLIENTE = "apellido_cliente";
+    }
+
+    public interface ColumnasVenta {
+        String ID_VENTA = "id_venta";
+        String MONTO_TOTAL_VENTA = "monto_total_venta";
+        String FECHA_VENTA = "fecha_venta";
+        String ID_CLIENTE = "id_cliente";
+        String ID_METODO_PAGO = "id_metodo_pago";
     }
 
     public static class EntradaProveedor implements ColumnasProveedor {
@@ -173,6 +187,18 @@ public class FarmaciaContrato {
     public static class EntradaMetodoPago implements ColumnasMetodoPago {
         public static String generarIdMetodoPago() {
             return "MP-" + UUID.randomUUID().toString();
+        }
+    }
+
+    public static class EntradaCliente implements ColumnasCliente {
+        public static String generarIdCliente() {
+            return "CLI-" + UUID.randomUUID().toString();
+        }
+    }
+
+    public static class EntradaVenta implements ColumnasVenta {
+        public static String generarIdVenta() {
+            return "VEN-" + UUID.randomUUID().toString();
         }
     }
 

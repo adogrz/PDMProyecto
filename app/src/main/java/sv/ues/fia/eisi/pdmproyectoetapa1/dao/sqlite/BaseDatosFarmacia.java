@@ -17,6 +17,8 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaDist
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaDireccion;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaLocal;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaMetodoPago;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaCliente;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaVenta;
 
 /**
  * Clase que administra la conexión a la base de datos SQLite y su estructura.
@@ -44,6 +46,8 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         String FORMA_FARMACEUTICA = "forma_farmaceutica";
         String METODO_PAGO = "metodo_pago";
         String MEDICAMENTO = "medicamento";
+        String CLIENTE = "cliente";
+        String VENTA = "venta";
     }
 
     /**
@@ -72,6 +76,10 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Tablas.VIA_ADMINISTRACION, EntradaViaAdministracion.ID_VIA_ADMINISTRACION);
         String ID_LABORATORIO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.LABORATORIO, EntradaLaboratorio.ID_LABORATORIO);
+        String ID_METODO_PAGO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.METODO_PAGO, EntradaMetodoPago.ID_METODO_PAGO);
+        String ID_CLIENTE = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.CLIENTE, EntradaCliente.ID_CLIENTE);
     }
 
     public BaseDatosFarmacia(Context context) {
@@ -112,7 +120,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                         "NOT NULL CHECK(%s>=0), %s TEXT NOT NULL, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s)",
                 Tablas.ARTICULO, BaseColumns._ID, EntradaArticulo.ID_ARTICULO,
                 EntradaArticulo.NOMBRE_ARTICULO, EntradaArticulo.PRECIO_UNITARIO_ARTICULO,
-                EntradaArticulo.STOK_ARTICULO, EntradaArticulo.STOK_ARTICULO,
+                EntradaArticulo.STOCK_ARTICULO, EntradaArticulo.STOCK_ARTICULO,
                 EntradaArticulo.DESCRIPCION_ARTICULO, EntradaArticulo.ID_PROVEEDOR,
                 Referencias.ID_PROVEEDOR, EntradaArticulo.ID_TIPO_ARTICULO,
                 Referencias.ID_TIPO_ARTICULO));
@@ -160,6 +168,12 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL)", Tablas.FORMA_FARMACEUTICA,
                 BaseColumns._ID, EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA,
                 EntradaFormaFarmaceutica.TIPO_FORMA_FARMACEUTICA));
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "%s TEXT UNIQUE NOT NULL, %s REAL NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL %S," +
+                "%s TEXT NOT NULL %s)", Tablas.VENTA, BaseColumns._ID, EntradaVenta.ID_VENTA,
+                EntradaVenta.MONTO_TOTAL_VENTA, EntradaVenta.FECHA_VENTA,
+                EntradaMetodoPago.ID_METODO_PAGO, Referencias.ID_METODO_PAGO,
+                EntradaVenta.ID_CLIENTE, Referencias.ID_CLIENTE));
         // TODO Crear tabla de medicamento
         // TODO Crear tabla de receta
         // TODO Crear tabla de detalle receta
@@ -172,11 +186,6 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         insertarDatosInicial(db);
     }
 
-    /**
-     * Método que inserta datos iniciales en la base de datos.
-     *
-     * @param db
-     */
     private void insertarDatosInicial(SQLiteDatabase db) {
         // Insertar datos de prueba en la tabla PROVEEDOR
         insertarDatosProveedores(db);

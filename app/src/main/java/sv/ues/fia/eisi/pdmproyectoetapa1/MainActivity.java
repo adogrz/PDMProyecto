@@ -33,13 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         TipoArticuloDAO tipoArticuloDAO = controlBaseDatos.getTipoArticuloDAO();
 
-        List<TipoArticulo> tiposArticulo = tipoArticuloDAO.obtenerTodos();
-
-        for (TipoArticulo tipoArticulo : tiposArticulo) {
-            System.out.println(tipoArticulo.getNombre());
-        }
+        List<TipoArticulo> tipoArticulos = tipoArticuloDAO.obtenerTodos();
 
         textView = findViewById(R.id.textViewPrueba);
-        textView.setText(tiposArticulo.get(0).getNombre());
+        textView.setText(tipoArticulos.get(0).getNombre());
     }
 }
