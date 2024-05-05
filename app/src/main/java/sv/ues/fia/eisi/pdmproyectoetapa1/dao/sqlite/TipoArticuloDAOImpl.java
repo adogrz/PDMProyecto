@@ -38,8 +38,9 @@ public class TipoArticuloDAOImpl implements TipoArticuloDAO {
     }
 
     /**
-     * Método que obtiene todos los registros de la entidad TipoArticulo.
-     * @return Lista con los registros de la entidad TipoArticulo.
+     * Obtiene una lista de todos los tipos de artículo en la base de datos.
+     * @return Lista de tipos de artículo.
+     * @throws DAOException Si el no existen las columnas en la tabla.
      */
     @Override
     public List<TipoArticulo> obtenerTodos() throws DAOException {
@@ -63,7 +64,7 @@ public class TipoArticuloDAOImpl implements TipoArticuloDAO {
 
                 // Verifica que las columnas existan.
                 if (idIndex == -1 || nombreIndex == -1) {
-                    return listaTipoArticulo;
+                    throw new DAOException("Error al extraer los datos de la consulta.");
                 }
 
                 tipoArticulo.setId(cursor.getString(idIndex));
@@ -76,8 +77,43 @@ public class TipoArticuloDAOImpl implements TipoArticuloDAO {
         return listaTipoArticulo;
     }
 
+    /**
+     * Obtiene un tipo de artículo por su ID.
+     * @param id ID del tipo de artículo a buscar.
+     * @return Tipo de artículo encontrado.
+     * @throws DAOException Si no se encuentra el registro o no existen las columnas en la tabla.
+     */
     @Override
     public TipoArticulo obtener(String id) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        SQLiteDatabase db = baseDatos.getReadableDatabase();
+
+        String selection = String.format("%s = ?", EntradaTipoArticulo.ID_TIPO_ARTICULO);
+        String[] selectionArgs = {id};
+        String[] columnasTipoArticulo = {
+                EntradaTipoArticulo.ID_TIPO_ARTICULO,
+                EntradaTipoArticulo.NOMBRE_TIPO_ARTICULO
+        };
+
+        try (Cursor cursor = db.query(Tablas.TIPO_ARTICULO, columnasTipoArticulo, selection,
+                selectionArgs, null, null, null)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                throw new DAOException("No se encontró el registro en la base de datos.");
+            }
+
+            TipoArticulo tipoArticulo = new TipoArticulo();
+
+            int idIndex = cursor.getColumnIndex(EntradaTipoArticulo.ID_TIPO_ARTICULO);
+            int nombreIndex = cursor.getColumnIndex(EntradaTipoArticulo.NOMBRE_TIPO_ARTICULO);
+
+            // Verifica que las columnas existan.
+            if (idIndex == -1 || nombreIndex == -1) {
+                throw new DAOException("Error al extraer los datos de la consulta.");
+            }
+
+            tipoArticulo.setId(cursor.getString(idIndex));
+            tipoArticulo.setNombre(cursor.getString(nombreIndex));
+
+            return tipoArticulo;
+        }
     }
 }

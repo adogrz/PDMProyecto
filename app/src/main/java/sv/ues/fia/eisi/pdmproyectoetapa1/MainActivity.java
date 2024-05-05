@@ -2,6 +2,7 @@ package sv.ues.fia.eisi.pdmproyectoetapa1;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +13,9 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DAOException;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.ControlBaseDatos;
-import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.TipoArticulo;
+import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Proveedor;
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
@@ -30,19 +31,19 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        textView = findViewById(R.id.textViewPrueba);
+
         ControlBaseDatos controlBaseDatos = ControlBaseDatos.obtenerInstancia(MainActivity.this);
-
-        TipoArticuloDAO tipoArticuloDAO = controlBaseDatos.getTipoArticuloDAO();
-
-        List<TipoArticulo> tipoArticulos = null;
+        ProveedorDAO proveedorDAO = controlBaseDatos.getProveedorDAO();
 
         try {
-            tipoArticulos = tipoArticuloDAO.obtenerTodos();
+            List<Proveedor> proveedores = proveedorDAO.obtenerTodos();
+            Proveedor primerProveedor = proveedores.get(1);
+            Proveedor proveedorEncontrado = proveedorDAO.obtener(primerProveedor.getIdProveedor());
+            textView.setText(proveedorEncontrado.getNombre());
+            Toast.makeText(MainActivity.this, "Proveedores obtenidos correctamente.", Toast.LENGTH_SHORT).show();
         } catch (DAOException e) {
-            throw new RuntimeException(e);
+            Toast.makeText(MainActivity.this, "Error al obtener los proveedores.", Toast.LENGTH_SHORT).show();
         }
-
-        textView = findViewById(R.id.textViewPrueba);
-        textView.setText(tipoArticulos.get(0).getNombre());
     }
 }
