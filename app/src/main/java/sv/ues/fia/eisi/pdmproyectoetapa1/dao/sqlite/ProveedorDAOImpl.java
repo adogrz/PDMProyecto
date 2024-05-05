@@ -72,6 +72,37 @@ public class ProveedorDAOImpl implements ProveedorDAO {
 
     @Override
     public Proveedor obtener(String id) throws DAOException {
-        return null;
+        SQLiteDatabase db = baseDatos.getReadableDatabase();
+
+        String selection = String.format("%s = ?", EntradaProveedor.ID_PROVEEDOR);
+        String[] selectionArgs = {id};
+        String[] columnas = {
+                EntradaProveedor.ID_PROVEEDOR,
+                EntradaProveedor.NOMBRE_PROVEEDOR,
+                EntradaProveedor.TELEFONO_PROVEEDOR
+        };
+
+        try (Cursor cursor = db.query(Tablas.PROVEEDOR, columnas, selection, selectionArgs, null,
+                null, null)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                throw new DAOException("No se encontró el proveedor");
+            }
+
+            Proveedor proveedor = new Proveedor();
+
+            int idIndex = cursor.getColumnIndex(EntradaProveedor.ID_PROVEEDOR);
+            int nombreIndex = cursor.getColumnIndex(EntradaProveedor.NOMBRE_PROVEEDOR);
+            int telefonoIndex = cursor.getColumnIndex(EntradaProveedor.TELEFONO_PROVEEDOR);
+
+            if (idIndex == -1 || nombreIndex == -1 || telefonoIndex == -1) {
+                throw new DAOException("Error al obtener los índices de las columnas.");
+            }
+
+            proveedor.setIdProveedor(cursor.getString(idIndex));
+            proveedor.setNombre(cursor.getString(nombreIndex));
+            proveedor.setTelefono(cursor.getString(telefonoIndex));
+
+            return proveedor;
+        }
     }
 }

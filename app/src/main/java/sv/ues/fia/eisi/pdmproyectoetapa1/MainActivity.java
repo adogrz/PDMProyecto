@@ -38,9 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             List<Proveedor> proveedores = proveedorDAO.obtenerTodos();
-            for (Proveedor proveedor : proveedores) {
-                textView.append(proveedor.getNombre() + "\n");
-            }
+            Proveedor primerProveedor = proveedores.get(1);
+            Proveedor proveedorEncontrado = proveedorDAO.obtener(primerProveedor.getIdProveedor());
+            textView.setText(proveedorEncontrado.getNombre());
+            Toast.makeText(MainActivity.this, "Proveedores obtenidos correctamente.", Toast.LENGTH_SHORT).show();
         } catch (DAOException e) {
             Toast.makeText(MainActivity.this, "Error al obtener los proveedores.", Toast.LENGTH_SHORT).show();
         }
