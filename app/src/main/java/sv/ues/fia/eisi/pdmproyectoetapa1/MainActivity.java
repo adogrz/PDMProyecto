@@ -13,9 +13,9 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DAOException;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.ControlBaseDatos;
-import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.TipoArticulo;
+import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Proveedor;
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
@@ -34,20 +34,15 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.textViewPrueba);
 
         ControlBaseDatos controlBaseDatos = ControlBaseDatos.obtenerInstancia(MainActivity.this);
-
-        TipoArticuloDAO tipoArticuloDAO = controlBaseDatos.getTipoArticuloDAO();
-
-        List<TipoArticulo> tipoArticulos;
+        ProveedorDAO proveedorDAO = controlBaseDatos.getProveedorDAO();
 
         try {
-            tipoArticulos = tipoArticuloDAO.obtenerTodos();
-            String idPrimero = tipoArticulos.get(7).getId();
-
-            TipoArticulo tipoArticulo = tipoArticuloDAO.obtener(idPrimero);
-            textView.setText(tipoArticulo.getNombre());
-        } catch (DAOException | IndexOutOfBoundsException e) {
-            Toast.makeText(this, "Error al obtener los datos", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
+            List<Proveedor> proveedores = proveedorDAO.obtenerTodos();
+            for (Proveedor proveedor : proveedores) {
+                textView.append(proveedor.getNombre() + "\n");
+            }
+        } catch (DAOException e) {
+            Toast.makeText(MainActivity.this, "Error al obtener los proveedores.", Toast.LENGTH_SHORT).show();
         }
     }
 }

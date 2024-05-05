@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
 
 /**
@@ -15,6 +16,7 @@ public final class ControlBaseDatos {
     private static ControlBaseDatos instancia;
     private BaseDatosFarmacia baseDatos;
     private TipoArticuloDAO tipoArticulos = null;
+    private ProveedorDAO proveedores = null;
     private ArticuloDAO articulos = null;
     private MedicamentoDAO medicamentos = null;
 
@@ -55,6 +57,17 @@ public final class ControlBaseDatos {
             tipoArticulos = new TipoArticuloDAOImpl(baseDatos);
         }
         return tipoArticulos;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz ProveedorDAO.
+     * @return Instancia de la clase que implementa la interfaz ProveedorDAO.
+     */
+    public ProveedorDAO getProveedorDAO() {
+        if (proveedores == null) {
+            proveedores = new ProveedorDAOImpl(baseDatos);
+        }
+        return proveedores;
     }
 
     /**
