@@ -7,14 +7,17 @@
     <string name="btnEliminarcompra">Eliminar compra</string>
 
     ----------------------------------------------------------------
-    <string name="txtCompras">Agregue compra</string>
-    <string name="txtproductocompra">Producto</string>
-    <string name="txtcantidadcompra">Cantidad</string>
+    <string name="txtCompras">Realizar compra</string>
+    <string name="txtproveedor">Nombre</string>
+    <string name="txtCantidad">Cantidad</string>
     <string name="txtpreciocompra">Precio</string>
     <string name="btnaddcompra">Agregar</string>
-    <string name="textP"> producto</string>
-    <string name="textC">cantidad</string>
+    <string name="textNP"> Nombre proveedor</string>
+    <string name="textSelect">Seleccione que decea comprar </string>
+    <string name="TextCant">Cantidad</string>
     <string name="textPr">precio</string>
+    <string name="btnart">Articulo</string>
+    <string name="btnMed">Medicamento</string>
     ------------------------------------------------------------------
     <string name="btnconsultcompra">Consultar</string>
     ------------------------------------------------------------------
@@ -22,4 +25,27 @@
     <string name="btnupdatecompra">Actualizar</string>
     -----------------------------------------------------------------
     <string name="btndeletecompra">Eliminar</string>
+
+    --------------------------------------------
+    <string name="CRUD_ARTICULO">Datos Ariculo</string>
+        <string name="textnombre">Nombre</string>
+        <string name="textPU">Precio Unitario</string>
+    <string name="textDescrart">Descripcion</string>
+    <string name="txtnomart">nombre</string>
+    <string name="txtPU">Precio</string>
+    <string name="txtDesart">Descripción</string>
+    <string name="textinsTipoArt">Tipo de Articulo</string>
+    <string name="textinslocalArt">Local</string>
+    <string name="btnaceptarInsertArt">Aceptar</string>
+    <string name="btcancelarInsertArt">Cancelar</string>
+    <string name="btnlimpiarInsertArt">Limpiar</string>
+    -------------------------------------------------
+    <string name="CRUDINSERTARMEDICAMENTO">Datos de medicamento</string>
+    <string name="textinserdateiniciomed">Fecha Inicio:</string>
+    <string name="textinserdatevencmed">Fecha Vencimiento:</string>
+    <string name="btninsertlimpiarmed">Limpiar</string>
+    <string name="btninsertaceptarmed">Aceptar</string>
+    <string name="btninsercancelarmed">Cancelar</string>
+
+
 </resources>
