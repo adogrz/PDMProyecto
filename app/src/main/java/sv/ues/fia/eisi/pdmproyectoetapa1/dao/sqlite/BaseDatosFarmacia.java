@@ -135,6 +135,12 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL %s)",
                 Tablas.LOCAL, BaseColumns._ID, EntradaLocal.ID_LOCAL, EntradaLocal.NOMBRE_LOCAL,
                 EntradaLocal.ID_DIRECCION, Referencias.ID_DIRECCION));
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER, %s TEXT NOT NULL %s, %s TEXT " +
+                        "NOT NULL %s, PRIMARY KEY (%s, %s, %s))",
+                Tablas.LOCAL_ARTICULO, BaseColumns._ID, EntradaLocalArticulo.ID_LOCAL,
+                Referencias.ID_LOCAL, EntradaLocalArticulo.ID_ARTICULO,
+                Referencias.ID_ARTICULO, BaseColumns._ID, EntradaLocalArticulo.ID_LOCAL,
+                EntradaLocalArticulo.ID_ARTICULO));
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL)", Tablas.METODO_PAGO,
                 BaseColumns._ID, EntradaMetodoPago.ID_METODO_PAGO, EntradaMetodoPago.TIPO_METODO_PAGO));
@@ -151,9 +157,9 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 BaseColumns._ID, EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA,
                 EntradaFormaFarmaceutica.TIPO_FORMA_FARMACEUTICA));
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "%s TEXT UNIQUE NOT NULL, %s REAL NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL %S," +
-                "%s TEXT NOT NULL %s)", Tablas.VENTA, BaseColumns._ID, EntradaVenta.ID_VENTA,
-                EntradaVenta.MONTO_TOTAL_VENTA, EntradaVenta.FECHA_VENTA,
+                        "%s TEXT UNIQUE NOT NULL, %s REAL NOT NULL, %s DATE NOT NULL, %s TEXT " +
+                        "NOT NULL %S, %s TEXT NOT NULL %s)", Tablas.VENTA, BaseColumns._ID,
+                EntradaVenta.ID_VENTA, EntradaVenta.MONTO_TOTAL_VENTA, EntradaVenta.FECHA_VENTA,
                 EntradaMetodoPago.ID_METODO_PAGO, Referencias.ID_METODO_PAGO,
                 EntradaVenta.ID_CLIENTE, Referencias.ID_CLIENTE));
         // TODO Crear tabla de medicamento

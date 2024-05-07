@@ -14,8 +14,8 @@ public class ClienteDAOImpl implements ClienteDAO {
     }
 
     @Override
-    public void insertar(Cliente obj) throws DAOException {
-
+    public String insertar(Cliente obj) throws DAOException {
+        return null;
     }
 
     @Override
