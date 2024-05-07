@@ -17,8 +17,9 @@ public class ArticuloDAOImpl implements ArticuloDAO {
     }
 
     @Override
-    public void insertar(Articulo obj) throws DAOException {
+    public String insertar(Articulo obj) throws DAOException {
 
+        return null;
     }
 
     @Override
