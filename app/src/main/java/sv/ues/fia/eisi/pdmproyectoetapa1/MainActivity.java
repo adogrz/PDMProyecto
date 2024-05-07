@@ -3,7 +3,6 @@ package sv.ues.fia.eisi.pdmproyectoetapa1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -26,17 +25,14 @@ public class MainActivity extends AppCompatActivity {
             return insets;
 
 
-
-
         });
-
-        iracompra=(Button)findViewById(R.id.iracompra);
-        iracompra.setOnClickListener(new View.OnClickListener(){
+        iracompra = (Button) findViewById(R.id.iracompra);
+        iracompra.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
 
-                Intent iracompra =new Intent( MainActivity.this, MenuCompra.class);
+                Intent iracompra = new Intent(MainActivity.this, MenuCompra.class);
                 startActivity(iracompra);
             }
 
