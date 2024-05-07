@@ -109,6 +109,25 @@ public class FarmaciaContrato {
         String ID_METODO_PAGO = "id_metodo_pago";
     }
 
+    public interface ColumnasCompra {
+
+       String ID_COMPRA = "id_compra";
+       String MONTO_TOTAL_COMPRA = "monto_total_compra";
+       String FECHA_COMPRA = "fecha_compra";
+       String ID_PROVEEDOR = "id_proveedor";
+
+
+    }
+
+    public interface ColumnasDetalleCompra{
+        String ID_DETALLE_COMPRA = "id_detalle_compra";
+        String CANTIDAD_PRODUCTO_COMPRA ="cantidad_producto_compra";
+        String SUBTOTAL_COMPRA = "subtotal_compra";
+        String ID_COMPRA ="id_compra";
+        String ID_ARTICULO ="id_articulo";
+
+    }
+
     public static class EntradaProveedor implements ColumnasProveedor {
         public static String generarIdProveedor() {
             return "PROV-" + UUID.randomUUID().toString();
@@ -191,7 +210,7 @@ public class FarmaciaContrato {
     }
 
     public static class EntradaCliente implements ColumnasCliente {
-        public static String generarIdCliente() {
+        public static String generarIdCliCompraente() {
             return "CLI-" + UUID.randomUUID().toString();
         }
     }
@@ -200,6 +219,16 @@ public class FarmaciaContrato {
         public static String generarIdVenta() {
             return "VEN-" + UUID.randomUUID().toString();
         }
+    }
+
+    public static class EntradaCompra implements ColumnasCompra {
+        public static String generarIdCompra() {
+            return "COM-" + UUID.randomUUID().toString();
+        }
+    }
+    public static class EntradaDetalleCompra implements ColumnasDetalleCompra {
+        public static String generarIdDetalleCompra()
+        {return "DETCOM-" + UUID.randomUUID().toString();}
     }
 
     private FarmaciaContrato() {

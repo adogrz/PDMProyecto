@@ -19,6 +19,8 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
      * Interfaz que establece los nombres de las tablas de la base de datos.
      */
     interface Tablas {
+        String COMPRA = "compra";
+        String DETALLE_COMPRA = "detalle_compra";
         String TIPO_ARTICULO = "tipo_articulo";
         String PROVEEDOR = "proveedor";
         String ARTICULO = "articulo";
@@ -67,6 +69,11 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Tablas.METODO_PAGO, EntradaMetodoPago.ID_METODO_PAGO);
         String ID_CLIENTE = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.CLIENTE, EntradaCliente.ID_CLIENTE);
+
+        String ID_COMPRA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.COMPRA, EntradaCompra.ID_COMPRA);
+        String ID_DETALLE_COMPRA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.DETALLE_COMPRA, EntradaDetalleCompra.ID_DETALLE_COMPRA);
     }
 
     public BaseDatosFarmacia(Context context) {
@@ -162,13 +169,25 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 EntradaVenta.ID_VENTA, EntradaVenta.MONTO_TOTAL_VENTA, EntradaVenta.FECHA_VENTA,
                 EntradaMetodoPago.ID_METODO_PAGO, Referencias.ID_METODO_PAGO,
                 EntradaVenta.ID_CLIENTE, Referencias.ID_CLIENTE));
+
         // TODO Crear tabla de medicamento
         // TODO Crear tabla de receta
         // TODO Crear tabla de detalle receta
         // TODO Crear tabla de detalle venta
         // TODO Crear tabla de venta
-        // TODO Crear tabla de detalle compra
-        // TODO Crear tabla de compra
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT UNIQUE NOT NULL, %s REAL NOT NULL,  %s REAL NOT NULL, " +
+                        " %s TEXT NOT NULL %s,  %s TEXT NOT NULL %s)",
+                Tablas.DETALLE_COMPRA, BaseColumns._ID, EntradaDetalleCompra.ID_DETALLE_COMPRA,
+                EntradaDetalleCompra.CANTIDAD_PRODUCTO_COMPRA, EntradaDetalleCompra.SUBTOTAL_COMPRA,
+                EntradaDetalleCompra.ID_COMPRA, Referencias.ID_COMPRA, EntradaDetalleCompra.ID_ARTICULO,
+                Referencias.ID_ARTICULO));
+
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT UNIQUE NOT NULL,%s REAL NOT NULL, %s DATE NOT NULL, " +
+                        " %s TEXT NOT NULL %s)", Tablas.COMPRA, BaseColumns._ID,
+                EntradaCompra.ID_COMPRA, EntradaCompra.MONTO_TOTAL_COMPRA, EntradaCompra.FECHA_COMPRA,
+                EntradaCompra.ID_PROVEEDOR, Referencias.ID_PROVEEDOR));
 
         // Insertar datos iniciales
         insertarDatosInicial(db);

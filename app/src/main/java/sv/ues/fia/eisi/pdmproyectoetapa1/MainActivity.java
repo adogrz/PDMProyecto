@@ -11,6 +11,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.List;
+
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DAOException;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.BaseDatosFarmacia;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.ControlBaseDatos;
+import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Proveedor;
+
 public class MainActivity extends AppCompatActivity {
     Button iracompra;
 
@@ -38,5 +46,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+        ControlBaseDatos DB = ControlBaseDatos.obtenerInstancia(MainActivity.this);
+        ProveedorDAO PRDAO = DB.getProveedorDAO();
+        try {
+            List<Proveedor> proveedors = PRDAO.obtenerTodos();
+        } catch (DAOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 }
