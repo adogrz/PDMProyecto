@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LocalDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
@@ -17,6 +18,7 @@ public final class ControlBaseDatos {
     private BaseDatosFarmacia baseDatos;
     private TipoArticuloDAO tipoArticulos = null;
     private ProveedorDAO proveedores = null;
+    private LocalDAO locales = null;
     private ArticuloDAO articulos = null;
     private MedicamentoDAO medicamentos = null;
 
@@ -68,6 +70,17 @@ public final class ControlBaseDatos {
             proveedores = new ProveedorDAOImpl(baseDatos);
         }
         return proveedores;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz LocalDAO.
+     * @return Instancia de la clase que implementa la interfaz LocalDAO.
+     */
+    public LocalDAO getLocalDAO() {
+        if (locales == null) {
+            locales = new LocalDAOImpl(baseDatos);
+        }
+        return locales;
     }
 
     /**

@@ -13,8 +13,10 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DAOException;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LocalDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.ControlBaseDatos;
+import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Local;
 import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Proveedor;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.textViewPrueba);
 
         ControlBaseDatos controlBaseDatos = ControlBaseDatos.obtenerInstancia(MainActivity.this);
-        ProveedorDAO proveedorDAO = controlBaseDatos.getProveedorDAO();
+        LocalDAO localDAO = controlBaseDatos.getLocalDAO();
 
         try {
-            List<Proveedor> proveedores = proveedorDAO.obtenerTodos();
-            Proveedor primerProveedor = proveedores.get(1);
-            Proveedor proveedorEncontrado = proveedorDAO.obtener(primerProveedor.getIdProveedor());
-            textView.setText(proveedorEncontrado.getNombre());
+            List<Local> locales = localDAO.obtenerTodos();
+            Local primerLocal = locales.get(2);
+            Local localEncontrado = localDAO.obtener(primerLocal.getIdLocal());
+            textView.setText(localEncontrado.getNombreLocal());
             Toast.makeText(MainActivity.this, "Proveedores obtenidos correctamente.", Toast.LENGTH_SHORT).show();
         } catch (DAOException e) {
             Toast.makeText(MainActivity.this, "Error al obtener los proveedores.", Toast.LENGTH_SHORT).show();
