@@ -18,7 +18,6 @@ public class ArticuloDAOImpl implements ArticuloDAO {
 
     @Override
     public String insertar(Articulo obj) throws DAOException {
-
         return null;
     }
 
