@@ -9,7 +9,7 @@ import java.util.List;
  * @param <K>
  */
 public interface DAO<T, K> {
-    void insertar(T obj) throws DAOException;
+    String insertar(T obj) throws DAOException;
 
     void modificar(T obj) throws DAOException;
 
