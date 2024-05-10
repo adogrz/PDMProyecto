@@ -1,12 +1,12 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-public class MedicamentosInsetarActivity extends Activity {
+public class MedicamentosInsertatActivity extends AppCompatActivity {
     //ControlBDProyecto Proyecto;
     EditText editMedicamento;
     EditText editNombreArticulo;
@@ -18,7 +18,7 @@ public class MedicamentosInsetarActivity extends Activity {
 
     public  void  onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mendicamentos_insetar);
+        setContentView(R.layout.activity_medicamentos_insertar);
         editMedicamento = (EditText) findViewById(R.id.editMedicamento);
         editNombreArticulo = (EditText) findViewById(R.id.editNombreArticulo);
         editFechaExpedicion = (EditText) findViewById(R.id.editFechaExpedicion);

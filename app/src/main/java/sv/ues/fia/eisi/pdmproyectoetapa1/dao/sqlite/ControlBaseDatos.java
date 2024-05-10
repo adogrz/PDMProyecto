@@ -18,6 +18,7 @@ public final class ControlBaseDatos {
     private ArticuloDAO articulos = null;
     private MedicamentoDAO medicamentos = null;
 
+
     private ControlBaseDatos(Context contexto) {
         if (baseDatos == null) {
             baseDatos = new BaseDatosFarmacia(contexto);
@@ -68,14 +69,18 @@ public final class ControlBaseDatos {
         return articulos;
     }
 
+
+
     /**
      * Método que obtiene la instancia de la clase que implementa la interfaz MedicamentoDAO.
      * @return Instancia de la clase que implementa la interfaz MedicamentoDAO.
      */
-    public MedicamentoDAO getMedicamentoDAO() {
-        if (medicamentos == null) {
-            medicamentos = new MedicamentoDAOImpl(baseDatos);
+
+    public MedicamentoDAO getMedicamentosDAO(){
+        if(medicamentos == null){
+            medicamentos=new MedicamentoDAOImpl(baseDatos);
         }
         return medicamentos;
     }
+
 }

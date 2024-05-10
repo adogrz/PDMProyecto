@@ -70,11 +70,11 @@
             tools:ignore="TouchTargetSizeCheck" />
     </TableRow>
     <TableRow>
-        <TextView android:text="@string/nombre_laboratrio" />
+        <TextView android:text="@string/nombre_laboratorio" />
 
         <EditText
             android:id="@+id/editNombreLaboratorio"
-            android:hint="@string/nombre_laboratrio"
+            android:hint="@string/nombre_laboratorio"
             android:inputType="text"
             android:longClickable="false"
             android:maxLength="1"

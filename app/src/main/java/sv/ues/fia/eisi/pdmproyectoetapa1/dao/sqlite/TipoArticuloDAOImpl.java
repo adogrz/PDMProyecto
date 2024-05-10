@@ -23,7 +23,7 @@ public class TipoArticuloDAOImpl implements TipoArticuloDAO {
     }
 
     @Override
-    public void insertar(TipoArticulo obj) throws DAOException {
+    public String insertar(TipoArticulo obj) throws DAOException {
         throw new UnsupportedOperationException("No implementado");
     }
 

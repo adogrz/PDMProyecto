@@ -44,5 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.textViewPrueba);
         textView.setText(tipoArticulos.get(0).getNombre());
+
+
     }
 }
