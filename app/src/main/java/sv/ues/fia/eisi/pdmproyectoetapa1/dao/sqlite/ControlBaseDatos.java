@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ViaAdministracionDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LaboratorioDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.FormaFarmaceuticaDAO;
 
 /**
  * Clase auxiliar que implementa {@link BaseDatosFarmacia} para llevar a cabo la conexión a la base
@@ -17,6 +20,12 @@ public final class ControlBaseDatos {
     private TipoArticuloDAO tipoArticulos = null;
     private ArticuloDAO articulos = null;
     private MedicamentoDAO medicamentos = null;
+
+    private ViaAdministracionDAO viaAdministracion = null;
+
+    private LaboratorioDAO laboratorio = null;
+
+    private FormaFarmaceuticaDAO formaFarmaceutica = null;
 
 
     private ControlBaseDatos(Context contexto) {
@@ -83,4 +92,36 @@ public final class ControlBaseDatos {
         return medicamentos;
     }
 
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz ViaAdministracionDAO.
+     * @return Instancia de la clase que implementa la interfaz ViaAdministracionDAO.
+     *  */
+    public  ViaAdministracionDAO getViaAdministracionDAO(){
+        if(viaAdministracion == null){
+            viaAdministracion = new ViaAdministracionDAOImpl(baseDatos);
+        }
+        return viaAdministracion;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz LaboratorioDAO.
+     * @return Instancia de la clase que implementa la interfaz LaboratorioDAO.
+     */
+    public LaboratorioDAO getLaboratorioDAO(){
+        if(laboratorio == null){
+            laboratorio = new LaboratorioDAOImpl(baseDatos);
+        }
+        return laboratorio;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz FormaFarmaceuticaDAO.
+     * @return Instancia de la clase que implementa la interfaz FormaFarmaceuticaDAO.
+     */
+    public FormaFarmaceuticaDAO getFormaFarmaceuticaDAO(){
+        if(formaFarmaceutica == null){
+            formaFarmaceutica = new FormaFarmaceuticaDAOImpl(baseDatos);
+        }
+        return formaFarmaceutica;
+    }
 }
