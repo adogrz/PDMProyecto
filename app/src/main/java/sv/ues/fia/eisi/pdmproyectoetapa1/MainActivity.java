@@ -1,6 +1,9 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        textView = findViewById(R.id.textViewPrueba);
+        /*
+
+
+        textView = findViewById(R.id.textViewMenu);
 
         ControlBaseDatos controlBaseDatos = ControlBaseDatos.obtenerInstancia(MainActivity.this);
         ProveedorDAO proveedorDAO = controlBaseDatos.getProveedorDAO();
@@ -45,5 +51,15 @@ public class MainActivity extends AppCompatActivity {
         } catch (DAOException e) {
             Toast.makeText(MainActivity.this, "Error al obtener los proveedores.", Toast.LENGTH_SHORT).show();
         }
+        */
+
+        Button botonVentas = findViewById(R.id.btn_Ventas);
+        botonVentas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MenuVentasActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
