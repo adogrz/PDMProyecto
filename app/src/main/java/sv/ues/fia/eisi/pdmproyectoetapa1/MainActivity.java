@@ -18,11 +18,11 @@ import java.util.List;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DAOException;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.ControlBaseDatos;
 import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.TipoArticulo;
 import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Medicamento;
-
-
+import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Proveedor;
 
 public class MainActivity extends AppCompatActivity {
    Button btnmedicamentos;
@@ -47,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
         ControlBaseDatos db=ControlBaseDatos.obtenerInstancia(MainActivity.this);
+        ProveedorDAO proveedorDAO=db.getProveedorDAO();
+
+        try {
+            List<Proveedor> proveedores=proveedorDAO.obtenerTodos();
+
+        }catch (DAOException e){
+            throw new RuntimeException(e);
+        }
 
 
 

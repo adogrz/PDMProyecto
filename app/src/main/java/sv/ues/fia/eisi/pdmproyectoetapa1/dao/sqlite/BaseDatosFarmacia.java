@@ -83,7 +83,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Tablas.METODO_PAGO, EntradaMetodoPago.ID_METODO_PAGO);
         String ID_CLIENTE = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.CLIENTE, EntradaCliente.ID_CLIENTE);
-        String ID_MEDICAMENTO = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+       String ID_MEDICAMENTO = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.MEDICAMENTO, EntradaMedicamento.ID_MEDICAMENTO);
     }
 
@@ -181,16 +181,15 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 EntradaVenta.ID_CLIENTE, Referencias.ID_CLIENTE));
         //tabla medicamento
         db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "%s TEXT UNIQUE NOT NULL, %s DATE NOT NULL, %s DATE NOT NULL,  " +
-                        "%s, %s TEXT NOT NULL %s, %s, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s, " +
-                        "%s TEXT NOT NULL %s, %s TEXT NOT NULL %s)",
+                        "%s TEXT UNIQUE NOT NULL, %s DATE NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL, " +
+                        "%s TEXT NOT NULL %s, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s)",
                 Tablas.MEDICAMENTO, BaseColumns._ID, EntradaMedicamento.ID_MEDICAMENTO,
                 EntradaMedicamento.FECHA_EXPEDICION, EntradaMedicamento.FECHA_EXPIRACION,
-                EntradaMedicamento.REQUIERE_RECETA_MEDICA,
-                EntradaMedicamento.ID_ARTICULO, Referencias.ID_ARTICULO,
-                EntradaMedicamento.ID_LABORATORIO, Referencias.ID_LABORATORIO,
-                EntradaMedicamento.ID_VIA_ADMINISTRACION, Referencias.ID_VIA_ADMINISTRACION,
-                EntradaMedicamento.ID_FORMA_FARMACEUTICA, Referencias.ID_FORMA_FARMACEUTICA));
+                EntradaMedicamento.REQUIERE_RECETA_MEDICA, EntradaMedicamento.ID_ARTICULO,
+                Referencias.ID_ARTICULO, EntradaMedicamento.ID_FORMA_FARMACEUTICA,
+                Referencias.ID_FORMA_FARMACEUTICA, EntradaMedicamento.ID_VIA_ADMINISTRACION,
+                Referencias.ID_VIA_ADMINISTRACION, EntradaMedicamento.ID_LABORATORIO,
+                Referencias.ID_LABORATORIO));
 
 
 

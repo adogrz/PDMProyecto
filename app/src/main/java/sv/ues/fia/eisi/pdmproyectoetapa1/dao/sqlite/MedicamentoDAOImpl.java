@@ -63,12 +63,14 @@ public class MedicamentoDAOImpl implements MedicamentoDAO {
 
     @Override
     public List<Medicamento> obtenerTodos() throws DAOException {
+
         List<Medicamento> listaMedicamento = new ArrayList<>();
 
         SQLiteDatabase db = baseDatos.getReadableDatabase();
-        String sql = String.format("SELECT * FROM %s", BaseDatosFarmacia.Tablas.MEDICAMENTO);
+        String sql = String.format("SELECT * FROM %s",Tablas.MEDICAMENTO);
 
         try(Cursor cursor = db.rawQuery(sql, null)) {
+            // Verifica que el cursor no esté vacío.
             if (cursor == null || !cursor.moveToFirst()) {
                 return listaMedicamento;
             }
@@ -85,7 +87,7 @@ public class MedicamentoDAOImpl implements MedicamentoDAO {
                 int idLaboratorioIndex=cursor.getColumnIndex(EntradaMedicamento.ID_LABORATORIO);
 
 
-
+                // Verifica que las columnas existan.
                 if (idIndex != -1 || fechaExpedicionIndex != -1 || fechaExpiracionIndex != -1
                         || requiereRecetaMedicaIndex != -1 || idArticuloIndex != -1 || idFormaFarmaceuticaIndex != -1
                         || idViaAdministracionIndex != -1 || idLaboratorioIndex != -1)

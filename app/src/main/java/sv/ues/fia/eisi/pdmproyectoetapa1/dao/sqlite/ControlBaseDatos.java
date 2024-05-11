@@ -9,6 +9,8 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ViaAdministracionDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LaboratorioDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.FormaFarmaceuticaDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
+
 
 /**
  * Clase auxiliar que implementa {@link BaseDatosFarmacia} para llevar a cabo la conexión a la base
@@ -26,6 +28,8 @@ public final class ControlBaseDatos {
     private LaboratorioDAO laboratorio = null;
 
     private FormaFarmaceuticaDAO formaFarmaceutica = null;
+
+    private ProveedorDAO proveedores = null;
 
 
     private ControlBaseDatos(Context contexto) {
@@ -65,6 +69,17 @@ public final class ControlBaseDatos {
             tipoArticulos = new TipoArticuloDAOImpl(baseDatos);
         }
         return tipoArticulos;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz ProveedorDAO.
+     * @return Instancia de la clase que implementa la interfaz ProveedorDAO.
+     */
+    public ProveedorDAO getProveedorDAO() {
+       if (proveedores == null) {
+            proveedores = new ProveedorDAOImpl(baseDatos);
+        }
+        return proveedores;
     }
 
     /**
