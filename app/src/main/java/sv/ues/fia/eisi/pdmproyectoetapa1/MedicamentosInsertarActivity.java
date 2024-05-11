@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-public class MedicamentosInsertatActivity extends AppCompatActivity {
+public class MedicamentosInsertarActivity extends AppCompatActivity {
     //ControlBDProyecto Proyecto;
     EditText editMedicamento;
     EditText editNombreArticulo;

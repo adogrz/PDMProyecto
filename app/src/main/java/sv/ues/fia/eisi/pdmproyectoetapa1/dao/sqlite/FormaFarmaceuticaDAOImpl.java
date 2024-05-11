@@ -52,12 +52,12 @@ public class FormaFarmaceuticaDAOImpl implements FormaFarmaceuticaDAO {
                 FormaFarmaceutica formaFarmaceutica = new FormaFarmaceutica();
 
                 int idIndex = cursor.getColumnIndex(EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA);
-                int nombreIndex = cursor.getColumnIndex(EntradaFormaFarmaceutica.TIPO_FORMA_FARMACEUTICA);
+                int formaIndex = cursor.getColumnIndex(EntradaFormaFarmaceutica.TIPO_FORMA_FARMACEUTICA);
 
                 // Verifica que las columnas existan
-                if (idIndex != -1 || nombreIndex == -1) {
+                if (idIndex != -1 || formaIndex == -1) {
                     formaFarmaceutica.setIdFormaFarmaceutica(cursor.getString(idIndex));
-                    formaFarmaceutica.setFormaFarmaceutica(cursor.getString(nombreIndex));
+                    formaFarmaceutica.setFormaFarmaceutica(cursor.getString(formaIndex));
 
                     listaFormaFarmaceutica.add(formaFarmaceutica);
                 }

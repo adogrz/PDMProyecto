@@ -52,12 +52,12 @@ public class ViaAdministracionDAOImpl implements ViaAdministracionDAO {
                 ViaAdministracion viaAdministracion = new ViaAdministracion();
 
                 int idIndex = cursor.getColumnIndex(EntradaViaAdministracion.ID_VIA_ADMINISTRACION);
-                int nombreIndex = cursor.getColumnIndex(EntradaViaAdministracion.TIPO_VIA_ADMINISTRACION);
+                int tipoIndex = cursor.getColumnIndex(EntradaViaAdministracion.TIPO_VIA_ADMINISTRACION);
 
                 //verifica que las columnas existan
-                if(idIndex != -1||nombreIndex==-1){
+                if(idIndex != -1||tipoIndex==-1){
                     viaAdministracion.setIdViaAdministracion(cursor.getString(idIndex));
-                    viaAdministracion.setViaAdministracion(cursor.getString(nombreIndex));
+                    viaAdministracion.setViaAdministracion(cursor.getString(tipoIndex));
                     listaViaAdministracion.add(viaAdministracion);
                 }
             }while (cursor.moveToNext());

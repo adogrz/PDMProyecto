@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">PDMProyectoEtapa1</string>
 
+
+    <!--CRUD GENERAL-->
+    <string name="Ventas">Ventas</string>
+    <string name="Compras">Compras</string>
+    <string name="Medicamentos">Medicamentos</string>
+    <string name="RecetasMedicas">Recetas Medicas</string>
+
+    <!--Activities y elementos-->
     <string name="MedicamentosMenuActivity">MedicamentosMenuActivity</string>
     <string name="title_activity_medicamnetos_menu">MedicamentosInsertarActivity</string>
     <string name="title_activity_medicamentos_insertar">MedicamentosInsertarActivity</string>
@@ -46,6 +54,7 @@
     <string name="insertar">Insertar</string>
     <string name="actualizar">Actualizar</string>
     <string name="limpiar">Limpiar</string>
+
 
     <!--Atributos de las llaves foraneas-->
     <string name="id_proveedor">Id Proveedor</string>

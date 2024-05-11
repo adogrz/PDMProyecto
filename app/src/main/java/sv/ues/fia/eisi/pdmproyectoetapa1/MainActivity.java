@@ -1,7 +1,11 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1;
 
 import android.os.Bundle;
+import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +17,15 @@ import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DAOException;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.ControlBaseDatos;
 import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.TipoArticulo;
+import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Medicamento;
+
+
 
 public class MainActivity extends AppCompatActivity {
-    TextView textView;
+   Button btnmedicamentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +38,18 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        ControlBaseDatos controlBaseDatos = ControlBaseDatos.obtenerInstancia(MainActivity.this);
+       /* btnmedicamentos=(Button)findViewById(R.id.btn_medicamentos);
+        btnmedicamentos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent btnmedicamentos = new Intent(MainActivity.this, MedicamentosMenuActivity.class);
+                startActivity(btnmedicamentos);
+            }
+        });*/
+        ControlBaseDatos db=ControlBaseDatos.obtenerInstancia(MainActivity.this);
 
-        TipoArticuloDAO tipoArticuloDAO = controlBaseDatos.getTipoArticuloDAO();
 
-        List<TipoArticulo> tipoArticulos = null;
 
-        try {
-            tipoArticulos = tipoArticuloDAO.obtenerTodos();
-        } catch (DAOException e) {
-            throw new RuntimeException(e);
-        }
-
-        textView = findViewById(R.id.textViewPrueba);
-        textView.setText(tipoArticulos.get(0).getNombre());
 
 
     }
