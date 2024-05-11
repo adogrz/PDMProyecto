@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.*;
+import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.RecetaMedica;
 
 /**
  * Clase que administra la conexión a la base de datos SQLite y su estructura.
@@ -35,6 +36,9 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         String MEDICAMENTO = "medicamento";
         String CLIENTE = "cliente";
         String VENTA = "venta";
+        String RECETA_MEDICA = "receta_medica";
+        String DETALLE_RECETA = "detalle_receta";
+        String MEDICO = "medico";
     }
 
     /**
@@ -57,6 +61,8 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Tablas.DIRECCION, EntradaDireccion.ID_DIRECCION);
         String ID_LOCAL = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.LOCAL, EntradaLocal.ID_LOCAL);
+        String ID_MEDICAMENTO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.MEDICAMENTO, EntradaMedicamento.ID_MEDICAMENTO);
         String ID_FORMA_FARMACEUTICA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.FORMA_FARMACEUTICA, EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA);
         String ID_VIA_ADMINISTRACION = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
@@ -67,6 +73,10 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Tablas.METODO_PAGO, EntradaMetodoPago.ID_METODO_PAGO);
         String ID_CLIENTE = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.CLIENTE, EntradaCliente.ID_CLIENTE);
+        String ID_RECETA_MEDICA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.RECETA_MEDICA, EntradaRecetaMedica.ID_RECETA_MEDICA);
+        String ID_MEDICO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.MEDICO, EntradaMedico.ID_MEDICO);
     }
 
     public BaseDatosFarmacia(Context context) {
@@ -163,8 +173,24 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 EntradaMetodoPago.ID_METODO_PAGO, Referencias.ID_METODO_PAGO,
                 EntradaVenta.ID_CLIENTE, Referencias.ID_CLIENTE));
         // TODO Crear tabla de medicamento
+        // TODO Crear tabla de medico
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL)",
+                Tablas.MEDICO, BaseColumns._ID, EntradaMedico.ID_MEDICO, EntradaMedico.NOMBRE_MEDICO,
+                EntradaMedico.APELLIDO_MEDICO, EntradaMedico.ESPECIALIDAD,
+                EntradaMedico.JVPM));
         // TODO Crear tabla de receta
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT NOT NULL, %s INTEGER NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL %s)", Tablas.RECETA_MEDICA, BaseColumns._ID,
+                EntradaRecetaMedica.ID_RECETA_MEDICA, EntradaRecetaMedica.NUMERO_RECETA, EntradaRecetaMedica.FECHA_RECETA_MEDICA, EntradaRecetaMedica.ID_MEDICO, Referencias.ID_MEDICO));
         // TODO Crear tabla de detalle receta
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s DATE NOT NULL, " +
+                        "%s DATE NOT NULL, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s)",
+                Tablas.DETALLE_RECETA, BaseColumns._ID, EntradaDetalleReceta.ID_DETALLE_RECETA,
+                EntradaDetalleReceta.PERIODICIDAD, EntradaDetalleReceta.DOSIS,
+                EntradaDetalleReceta.FECHA_INICIO_TRATAMIENTO, EntradaDetalleReceta.FECHA_FIN_TRATAMIENTO,
+                EntradaDetalleReceta.ID_RECETA_MEDICA, Referencias.ID_RECETA_MEDICA, EntradaDetalleReceta.ID_MEDICAMENTO, Referencias.ID_MEDICAMENTO));
         // TODO Crear tabla de detalle venta
         // TODO Crear tabla de venta
         // TODO Crear tabla de detalle compra
