@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-public class MedicamentosMenuActivity extends AppCompatActivity {
+public class MenuMedicamentos extends AppCompatActivity {
 
     Button insertarMedicamento;
     Button actualizarMedicamento;
@@ -15,13 +15,13 @@ public class MedicamentosMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medicamentos_menu);
+        setContentView(R.layout.activity_menu_medicamentos);
 
         insertarMedicamento=(Button)findViewById(R.id.btn_insertarMedicamento);
         insertarMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MedicamentosMenuActivity.this, MedicamentosInsertarActivity.class);
+                Intent intent = new Intent(MenuMedicamentos.this, MedicamentosInsertarActivity.class);
                 startActivity(intent);
             }
         });
@@ -30,7 +30,7 @@ public class MedicamentosMenuActivity extends AppCompatActivity {
         actualizarMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MedicamentosMenuActivity.this, MedicamentosActualizarActivity.class);
+                Intent intent = new Intent(MenuMedicamentos.this, MedicamentosActualizarActivity.class);
                 startActivity(intent);
             }
         });
@@ -39,7 +39,7 @@ public class MedicamentosMenuActivity extends AppCompatActivity {
         eliminarMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MedicamentosMenuActivity.this, MedicamentosEliminarActivity.class);
+                Intent intent = new Intent(MenuMedicamentos.this, MedicamentosEliminarActivity.class);
                 startActivity(intent);
             }
         });
@@ -49,7 +49,7 @@ public class MedicamentosMenuActivity extends AppCompatActivity {
         consultarMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MedicamentosMenuActivity.this, MedicamentosConsultarActivity.class);
+                Intent intent = new Intent(MenuMedicamentos.this, MedicamentosConsultarActivity.class);
                 startActivity(intent);
             }
         });

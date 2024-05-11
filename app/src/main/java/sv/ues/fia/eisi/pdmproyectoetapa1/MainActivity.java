@@ -38,14 +38,15 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-       /* btnmedicamentos=(Button)findViewById(R.id.btn_medicamentos);
+      btnmedicamentos=(Button)findViewById(R.id.btn_Medicamentos);
         btnmedicamentos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent btnmedicamentos = new Intent(MainActivity.this, MedicamentosMenuActivity.class);
+                Intent btnmedicamentos = new Intent(MainActivity.this, MenuMedicamentos.class);
                 startActivity(btnmedicamentos);
             }
-        });*/
+        });
+
         ControlBaseDatos db=ControlBaseDatos.obtenerInstancia(MainActivity.this);
         ProveedorDAO proveedorDAO=db.getProveedorDAO();
 
