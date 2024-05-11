@@ -126,8 +126,6 @@ public class MedicamentoDAOImpl implements MedicamentoDAO {
         }catch (SQLException e){
             throw new DAOException("MedicamentoDAO: Error al insertar medicamento "+e.getMessage());
         }
-
-
     }
 
     @Override
