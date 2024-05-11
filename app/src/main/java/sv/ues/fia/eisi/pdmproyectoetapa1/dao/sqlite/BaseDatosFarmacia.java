@@ -1,5 +1,7 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite;
 
+import static java.lang.String.format;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -45,34 +47,34 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
      * Interfaz que establece las referencias de las claves foráneas.
      */
     interface Referencias {
-        String ID_TIPO_ARTICULO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_TIPO_ARTICULO = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.TIPO_ARTICULO, EntradaTipoArticulo.ID_TIPO_ARTICULO);
-        String ID_PROVEEDOR = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_PROVEEDOR = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.PROVEEDOR, EntradaProveedor.ID_PROVEEDOR);
-        String ID_ARTICULO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_ARTICULO = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.ARTICULO, EntradaArticulo.ID_ARTICULO);
-        String ID_DEPARTAMENTO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_DEPARTAMENTO = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.DEPARTAMENTO, EntradaDepartamento.ID_DEPARTAMENTO);
-        String ID_MUNICIPIO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_MUNICIPIO = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.MUNICIPIO, EntradaMunicipio.ID_MUNICIPIO);
-        String ID_DISTRITO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_DISTRITO = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.DISTRITO, EntradaDistrito.ID_DISTRITO);
-        String ID_DIRECCION = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_DIRECCION = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.DIRECCION, EntradaDireccion.ID_DIRECCION);
-        String ID_LOCAL = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_LOCAL = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.LOCAL, EntradaLocal.ID_LOCAL);
-        String ID_MEDICAMENTO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
-                Tablas.MEDICAMENTO, EntradaMedicamento.ID_MEDICAMENTO);
-        String ID_FORMA_FARMACEUTICA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_FORMA_FARMACEUTICA = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.FORMA_FARMACEUTICA, EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA);
-        String ID_VIA_ADMINISTRACION = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_VIA_ADMINISTRACION = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.VIA_ADMINISTRACION, EntradaViaAdministracion.ID_VIA_ADMINISTRACION);
-        String ID_LABORATORIO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_LABORATORIO = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.LABORATORIO, EntradaLaboratorio.ID_LABORATORIO);
-        String ID_METODO_PAGO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_METODO_PAGO = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.METODO_PAGO, EntradaMetodoPago.ID_METODO_PAGO);
-        String ID_CLIENTE = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_CLIENTE = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.CLIENTE, EntradaCliente.ID_CLIENTE);
+       String ID_MEDICAMENTO = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.MEDICAMENTO, EntradaMedicamento.ID_MEDICAMENTO);
         String ID_RECETA_MEDICA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.RECETA_MEDICA, EntradaRecetaMedica.ID_RECETA_MEDICA);
         String ID_MEDICO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
@@ -172,18 +174,33 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 EntradaVenta.ID_VENTA, EntradaVenta.MONTO_TOTAL_VENTA, EntradaVenta.FECHA_VENTA,
                 EntradaMetodoPago.ID_METODO_PAGO, Referencias.ID_METODO_PAGO,
                 EntradaVenta.ID_CLIENTE, Referencias.ID_CLIENTE));
-        // TODO Crear tabla de medicamento
-        // TODO Crear tabla de medico
+        //tabla medicamento
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT UNIQUE NOT NULL, %s DATE NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL, " +
+                        "%s TEXT NOT NULL %s, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s)",
+                Tablas.MEDICAMENTO, BaseColumns._ID, EntradaMedicamento.ID_MEDICAMENTO,
+                EntradaMedicamento.FECHA_EXPEDICION, EntradaMedicamento.FECHA_EXPIRACION,
+                EntradaMedicamento.REQUIERE_RECETA_MEDICA, EntradaMedicamento.ID_ARTICULO,
+                Referencias.ID_ARTICULO, EntradaMedicamento.ID_FORMA_FARMACEUTICA,
+                Referencias.ID_FORMA_FARMACEUTICA, EntradaMedicamento.ID_VIA_ADMINISTRACION,
+                Referencias.ID_VIA_ADMINISTRACION, EntradaMedicamento.ID_LABORATORIO,
+                Referencias.ID_LABORATORIO));
+        //tabla cliente
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL)", Tablas.CLIENTE,
+                BaseColumns._ID, EntradaCliente.ID_CLIENTE, EntradaCliente.NOMBRE_CLIENTE,
+                EntradaCliente.APELLIDO_CLIENTE));
+        //tabla de medico
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL)",
                 Tablas.MEDICO, BaseColumns._ID, EntradaMedico.ID_MEDICO, EntradaMedico.NOMBRE_MEDICO,
                 EntradaMedico.APELLIDO_MEDICO, EntradaMedico.ESPECIALIDAD,
                 EntradaMedico.JVPM));
-        // TODO Crear tabla de receta
+        //tabla de receta
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT NOT NULL, %s INTEGER NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL %s)", Tablas.RECETA_MEDICA, BaseColumns._ID,
                 EntradaRecetaMedica.ID_RECETA_MEDICA, EntradaRecetaMedica.NUMERO_RECETA, EntradaRecetaMedica.FECHA_RECETA_MEDICA, EntradaRecetaMedica.ID_MEDICO, Referencias.ID_MEDICO));
-        // TODO Crear tabla de detalle receta
+        //tabla de detalle receta
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s DATE NOT NULL, " +
                         "%s DATE NOT NULL, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s)",
@@ -241,7 +258,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         query.append(") VALUES ");
 
         for (int i = 0; i < proveedores.length; i++) {
-            query.append(String.format("('%s', '%s', '%s')", EntradaProveedor.generarIdProveedor(),
+            query.append(format("('%s', '%s', '%s')", EntradaProveedor.generarIdProveedor(),
                     proveedores[i][0], proveedores[i][1]));
             if (i < proveedores.length - 1) {
                 query.append(", ");
@@ -263,7 +280,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         query.append(") VALUES ");
 
         for (int i = 0; i < tiposArticulo.length; i++) {
-            query.append(String.format("('%s', '%s')", EntradaTipoArticulo.generarIdTipoArticulo(),
+            query.append(format("('%s', '%s')", EntradaTipoArticulo.generarIdTipoArticulo(),
                     tiposArticulo[i]));
             if (i < tiposArticulo.length - 1) {
                 query.append(", ");
@@ -319,7 +336,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         query.append(") VALUES ");
 
         for (int i = 0; i < metodosPago.length; i++) {
-            query.append(String.format("('%s', '%s')", EntradaMetodoPago.generarIdMetodoPago(),
+            query.append(format("('%s', '%s')", EntradaMetodoPago.generarIdMetodoPago(),
                     metodosPago[i]));
             if (i < metodosPago.length - 1) {
                 query.append(", ");
@@ -344,7 +361,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         query.append(") VALUES ");
 
         for (int i = 0; i < laboratorios.length; i++) {
-            query.append(String.format("('%s', '%s')", EntradaLaboratorio.generarIdLaboratorio(),
+            query.append(format("('%s', '%s')", EntradaLaboratorio.generarIdLaboratorio(),
                     laboratorios[i]));
             if (i < laboratorios.length - 1) {
                 query.append(", ");
@@ -367,7 +384,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         query.append(") VALUES ");
 
         for (int i = 0; i < viasAdministracion.length; i++) {
-            query.append(String.format("('%s', '%s')", EntradaViaAdministracion.generarIdViaAdministracion(),
+            query.append(format("('%s', '%s')", EntradaViaAdministracion.generarIdViaAdministracion(),
                     viasAdministracion[i]));
             if (i < viasAdministracion.length - 1) {
                 query.append(", ");
@@ -390,7 +407,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         query.append(") VALUES ");
 
         for (int i = 0; i < formasFarmaceuticas.length; i++) {
-            query.append(String.format("('%s', '%s')", EntradaFormaFarmaceutica.generarIdFormaFarmaceutica(),
+            query.append(format("('%s', '%s')", EntradaFormaFarmaceutica.generarIdFormaFarmaceutica(),
                     formasFarmaceuticas[i]));
             if (i < formasFarmaceuticas.length - 1) {
                 query.append(", ");
@@ -402,9 +419,9 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(String.format("DROP TABLE IF EXISTS %s", Tablas.ARTICULO));
-        db.execSQL(String.format("DROP TABLE IF EXISTS %s", Tablas.PROVEEDOR));
-        db.execSQL(String.format("DROP TABLE IF EXISTS %s", Tablas.TIPO_ARTICULO));
+        db.execSQL(format("DROP TABLE IF EXISTS %s", Tablas.ARTICULO));
+        db.execSQL(format("DROP TABLE IF EXISTS %s", Tablas.PROVEEDOR));
+        db.execSQL(format("DROP TABLE IF EXISTS %s", Tablas.TIPO_ARTICULO));
 
         onCreate(db);
     }

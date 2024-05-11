@@ -24,17 +24,17 @@ public class TipoArticuloDAOImpl implements TipoArticuloDAO {
 
     @Override
     public String insertar(TipoArticulo obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+       throw new DAOException("No implementado");
     }
 
     @Override
     public void modificar(TipoArticulo obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
     }
 
     @Override
     public void eliminar(TipoArticulo obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+       throw new DAOException("No implementado");
     }
 
     /**
@@ -89,15 +89,14 @@ public class TipoArticuloDAOImpl implements TipoArticuloDAO {
 
         String selection = String.format("%s = ?", EntradaTipoArticulo.ID_TIPO_ARTICULO);
         String[] selectionArgs = {id};
-        String[] columnasTipoArticulo = {
+        String[] columnas = {
                 EntradaTipoArticulo.ID_TIPO_ARTICULO,
                 EntradaTipoArticulo.NOMBRE_TIPO_ARTICULO
         };
 
-        try (Cursor cursor = db.query(Tablas.TIPO_ARTICULO, columnasTipoArticulo, selection,
-                selectionArgs, null, null, null)) {
+        try (Cursor cursor = db.query(Tablas.TIPO_ARTICULO, columnas, selection, selectionArgs, null, null, null)) {
             if (cursor == null || !cursor.moveToFirst()) {
-                throw new DAOException("No se encontró el registro en la base de datos.");
+                throw new DAOException("No se ha encontro el tipo de articulo");
             }
 
             TipoArticulo tipoArticulo = new TipoArticulo();
@@ -105,9 +104,8 @@ public class TipoArticuloDAOImpl implements TipoArticuloDAO {
             int idIndex = cursor.getColumnIndex(EntradaTipoArticulo.ID_TIPO_ARTICULO);
             int nombreIndex = cursor.getColumnIndex(EntradaTipoArticulo.NOMBRE_TIPO_ARTICULO);
 
-            // Verifica que las columnas existan.
             if (idIndex == -1 || nombreIndex == -1) {
-                throw new DAOException("Error al extraer los datos de la consulta.");
+                throw new DAOException("Error al obtener los índices de las columnas.");
             }
 
             tipoArticulo.setId(cursor.getString(idIndex));

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="30dip"
+    android:stretchColumns="1" >
+    <TableRow>
+        <TextView android:text="@string/id_medicamento"/>
+
+        <EditText
+            android:id="@+id/editMedicamento"
+            android:hint="@string/id_medicamento"
+            android:inputType="number"
+            tools:ignore="TouchTargetSizeCheck" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/nombre_articulo" />
+
+        <EditText
+            android:id="@+id/editNombreArticulo"
+            android:hint="@string/nombre_articulo"
+            android:inputType="text"
+            android:maxLength="30"
+            tools:ignore="TouchTargetSizeCheck" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/fecha_expedicion_medicamento" />
+
+        <EditText
+            android:id="@+id/editFechaExpedicion"
+            android:hint="@string/fecha_expedicion_medicamento"
+            android:inputType="date"
+            android:maxLength="30"
+            tools:ignore="TouchTargetSizeCheck" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/fecha_experacion_medicamento" />
+
+        <EditText
+            android:id="@+id/editFechaExperacion"
+            android:hint="@string/fecha_experacion_medicamento"
+            android:inputType="date"
+            android:maxLength="1"
+            tools:ignore="TouchTargetSizeCheck" />
+    </TableRow>
+
+    <!--Atributos de las llaves foraneas-->
+    <TableRow>
+        <TextView android:text="@string/tipo_forma_farmaceutica" />
+
+        <EditText
+            android:id="@+id/editFormaFarmaceutica"
+            android:hint="@string/tipo_forma_farmaceutica"
+            android:inputType="text"
+            android:longClickable="false"
+            android:maxLength="1"
+            tools:ignore="TouchTargetSizeCheck" />
+    </TableRow>
+
+    <TableRow>
+        <TextView android:text="@string/tipo_via_administracion" />
+
+        <EditText
+            android:id="@+id/editViaAdministracion"
+            android:hint="@string/tipo_via_administracion"
+            android:inputType="text"
+            android:longClickable="false"
+            android:maxLength="1"
+            tools:ignore="TouchTargetSizeCheck" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/nombre_laboratorio" />
+
+        <EditText
+            android:id="@+id/editNombreLaboratorio"
+            android:hint="@string/nombre_laboratorio"
+            android:inputType="text"
+            android:longClickable="false"
+            android:maxLength="1"
+            tools:ignore="TouchTargetSizeCheck" />
+    </TableRow>
+
+    <TableRow>
+        <TextView android:text="@string/opciones" />
+    </TableRow>
+
+    <Button
+        android:layout_width="207dp"
+        android:onClick="insertarMedicamento"
+        android:text="@string/insertar" />
+
+    <Button
+        android:onClick="limpiarTexto"
+        android:text="@string/limpiar" />
+</TableLayout>

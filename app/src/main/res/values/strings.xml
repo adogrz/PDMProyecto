@@ -1,3 +1,66 @@
 <resources>
     <string name="app_name">PDMProyectoEtapa1</string>
+
+
+    <!--CRUD GENERAL-->
+    <string name="Ventas">Ventas</string>
+    <string name="Compras">Compras</string>
+    <string name="Medicamentos">Medicamentos</string>
+    <string name="RecetasMedicas">Recetas Medicas</string>
+
+    <!--Activities y elementos-->
+    <string name="MedicamentosMenuActivity">MedicamentosMenuActivity</string>
+    <string name="title_activity_medicamnetos_menu">MedicamentosInsertarActivity</string>
+    <string name="title_activity_medicamentos_insertar">MedicamentosInsertarActivity</string>
+    <string name="title_activity_medicamentos_consultar">MedicamentosConsultarActivity</string>
+    <string name="title_activity_medicamentos_eliminar">MedicamentosEliminarActivity</string>
+    <string name="title_activity_medicamentos_actualizar">MedicamentosActualizarActivity</string>
+
+    <string name="medicamentos_menu">Funcion a Ejecutar el Medicamento</string>
+    <string name="insertar_registro">Insertar Registro</string>
+    <string name="consultar_registro">Consultar Registro</string>
+    <string name="eliminar_registro">Eliminar Registro</string>
+    <string name="actualizar_registro">Actualizar Registro</string>
+
+    <!--Atributos de la tabla articulos-->
+    <string name="nombre_articulo">Nombre Articulo</string>
+    <string name="precio_unitario_articlo">Precio Unitario</string>
+    <string name="stock_articulo">Stock</string>
+    <string name="descripcion_articulo">Descripcion</string>
+
+    <!--Atributos de la tabla laboratorio-->
+    <string name="nombre_laboratorio">Laboratorio</string>
+
+    <!--Atributos de la tabla proveedores-->
+    <string name="nombre_proveedor">Proveedor</string>
+    <string name="telefono_proveedor">Telefono</string>
+
+    <!--Atributos de la tabla forma farmaceutica-->
+    <string name="tipo_forma_farmaceutica">Forma Farmaceutica</string>
+
+    <!--Atributos de la tabla via administracion-->
+    <string name="tipo_via_administracion">Via Administracion</string>
+
+
+    <!--Atributos de la tabla medicamentos-->
+    <string name="fecha_expedicion_medicamento">Fecha Expedicion</string>
+    <string name="fecha_experacion_medicamento">Fecha Expiracion</string>
+    <string name="requiere_receta_medica">Receta Medica</string>
+
+    <!--Botones-->
+    <string name="opciones">Opciones</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="consultar">Consultar</string>
+    <string name="insertar">Insertar</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="limpiar">Limpiar</string>
+
+
+    <!--Atributos de las llaves foraneas-->
+    <string name="id_proveedor">Id Proveedor</string>
+    <string name="id_medicamento">Id Medicamento</string>
+    <string name="id_laboratorio">Id Laboratorio</string>
+    <string name="id_forma_farmaceutica">Id Forma Farmaceutica</string>
+    <string name="id_via_administracion">Id Via Administracion</string>
+    <string name="id_articulo">Id Articulo</string>
 </resources>
