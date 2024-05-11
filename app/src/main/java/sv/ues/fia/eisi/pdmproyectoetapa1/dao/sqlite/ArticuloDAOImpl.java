@@ -52,16 +52,16 @@ public class ArticuloDAOImpl implements ArticuloDAO {
         switch (operacion) {
             case 1:
                 // Verificar que al insertar un articulo, el proveedor y el tipo de articulo existan
-                return !existeProveedor || !existeTipoArticulo;
+                return existeProveedor && existeTipoArticulo;
             case 2:
                 // Verificar que al modificar un articulo, el proveedor y el tipo de articulo existan
                 // y que el articulo exista
-                return !existeProveedor || !existeTipoArticulo || !existeArticulo;
+                return existeProveedor && existeTipoArticulo && existeArticulo;
             case 3:
                 // Verificar que al eliminar un articulo, el articulo exista
-                return !existeArticulo;
+                return existeArticulo;
             default:
-                return true;
+                return false;
         }
     }
 
@@ -93,7 +93,7 @@ public class ArticuloDAOImpl implements ArticuloDAO {
     @Override
     public String insertar(Articulo obj) throws DAOException {
         // Verificar que el articulo, el proveedor y el tipo de articulo existan
-        if (verificarIntegridad(obj, 1)) {
+        if (!verificarIntegridad(obj, 1)) {
             throw new DAOException("ArticuloDAO: No se pueden insertar un articulo con un " +
                     "proveedor o tipo de articulo no existente.");
         }
@@ -117,7 +117,7 @@ public class ArticuloDAOImpl implements ArticuloDAO {
     @Override
     public void modificar(Articulo obj) throws DAOException {
         // Verificar que el articulo, el proveedor y el tipo de articulo existan
-        if (verificarIntegridad(obj, 2)) {
+        if (!verificarIntegridad(obj, 2)) {
             throw new DAOException("ArticuloDAO: El articulo, el proveedor o el tipo de articulo " +
                     "no existen.");
         }
@@ -134,7 +134,7 @@ public class ArticuloDAOImpl implements ArticuloDAO {
 
     @Override
     public void eliminar(Articulo obj) throws DAOException {
-        if (verificarIntegridad(obj, 3)) {
+        if (!verificarIntegridad(obj, 3)) {
             throw new DAOException("ArticuloDAO: El articulo no existe.");
         }
 
