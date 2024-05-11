@@ -21,17 +21,17 @@ public class ViaAdministracionDAOImpl implements ViaAdministracionDAO {
 
     @Override
     public String insertar(ViaAdministracion obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
     }
 
     @Override
     public void modificar(ViaAdministracion obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
     }
 
     @Override
     public void eliminar(ViaAdministracion obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
     }
 
     @Override
@@ -68,7 +68,35 @@ public class ViaAdministracionDAOImpl implements ViaAdministracionDAO {
 
     @Override
     public ViaAdministracion obtener(String id) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+       SQLiteDatabase db = baseDatos.getReadableDatabase();
+
+       String selection = String.format("%s=?", EntradaViaAdministracion.ID_VIA_ADMINISTRACION);
+       String[] selectionArgs = {id};
+       String[] columnas={
+              EntradaViaAdministracion.ID_VIA_ADMINISTRACION,
+              EntradaViaAdministracion.TIPO_VIA_ADMINISTRACION
+         };
+
+       try(Cursor cursor = db.query(Tablas.VIA_ADMINISTRACION,columnas,selection,selectionArgs,null,null,null)) {
+           if (cursor == null || !cursor.moveToFirst()) {
+               throw new DAOException("No se encontró la vía de administración");
+           }
+
+           ViaAdministracion viaAdministracion = new ViaAdministracion();
+
+           int idIndex = cursor.getColumnIndex(EntradaViaAdministracion.ID_VIA_ADMINISTRACION);
+           int tipoIndex = cursor.getColumnIndex(EntradaViaAdministracion.TIPO_VIA_ADMINISTRACION);
+
+           if (idIndex == -1 || tipoIndex == -1) {
+               throw new DAOException("Error al obtener los índices de las columnas.");
+           }
+
+           viaAdministracion.setIdViaAdministracion(cursor.getString(idIndex));
+           viaAdministracion.setViaAdministracion(cursor.getString(tipoIndex));
+
+           return viaAdministracion;
+       }
+
     }
 
 }

@@ -21,17 +21,17 @@ public class FormaFarmaceuticaDAOImpl implements FormaFarmaceuticaDAO {
 
     @Override
     public String insertar(FormaFarmaceutica obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
     }
 
     @Override
     public void modificar(FormaFarmaceutica obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
     }
 
     @Override
     public void eliminar(FormaFarmaceutica obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
     }
 
     @Override
@@ -69,7 +69,34 @@ public class FormaFarmaceuticaDAOImpl implements FormaFarmaceuticaDAO {
 
     @Override
     public FormaFarmaceutica obtener(String id) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        SQLiteDatabase db = baseDatos.getReadableDatabase();
+
+        String selection = String.format("%s = ?", EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA);
+        String[] selectionArgs = {id};
+        String[] columnas = {
+                EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA,
+                EntradaFormaFarmaceutica.TIPO_FORMA_FARMACEUTICA
+        };
+
+        try(Cursor cursor=db.query(Tablas.FORMA_FARMACEUTICA,columnas,selection,selectionArgs,null,
+                null,null)) {
+
+            if(cursor == null || !cursor.moveToFirst()) {
+                throw new DAOException("No se encontró la forma farmacéutica");
+            }
+            FormaFarmaceutica formaFarmaceutica = new FormaFarmaceutica();
+
+            int idIndex = cursor.getColumnIndex((EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA));
+            int formaIndex = cursor.getColumnIndex(EntradaFormaFarmaceutica.TIPO_FORMA_FARMACEUTICA);
+
+            if (idIndex != -1 || formaIndex == -1) {
+                throw new DAOException("Error al obtener los índices de las columnas.");
+            }
+            formaFarmaceutica.setIdFormaFarmaceutica(cursor.getString(idIndex));
+            formaFarmaceutica.setFormaFarmaceutica(cursor.getString(formaIndex));
+
+            return formaFarmaceutica;
+        }
     }
 
 

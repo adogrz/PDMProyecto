@@ -113,14 +113,14 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL)", Tablas.TIPO_ARTICULO, BaseColumns._ID,
                 EntradaTipoArticulo.ID_TIPO_ARTICULO, EntradaTipoArticulo.NOMBRE_TIPO_ARTICULO));
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL)", Tablas.PROVEEDOR,
                 BaseColumns._ID, EntradaProveedor.ID_PROVEEDOR, EntradaProveedor.NOMBRE_PROVEEDOR,
                 EntradaProveedor.TELEFONO_PROVEEDOR));
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s REAL NOT NULL, %s INTEGER " +
                         "NOT NULL CHECK(%s>=0), %s TEXT NOT NULL, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s)",
                 Tablas.ARTICULO, BaseColumns._ID, EntradaArticulo.ID_ARTICULO,
@@ -129,27 +129,27 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 EntradaArticulo.DESCRIPCION_ARTICULO, EntradaArticulo.ID_PROVEEDOR,
                 Referencias.ID_PROVEEDOR, EntradaArticulo.ID_TIPO_ARTICULO,
                 Referencias.ID_TIPO_ARTICULO));
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL)", Tablas.DEPARTAMENTO,
                 BaseColumns._ID, EntradaDepartamento.ID_DEPARTAMENTO,
                 EntradaDepartamento.NOMBRE_DEPARTAMENTO));
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL %s)",
                 Tablas.MUNICIPIO, BaseColumns._ID, EntradaMunicipio.ID_MUNICIPIO,
                 EntradaMunicipio.NOMBRE_MUNICIPIO, EntradaMunicipio.ID_DEPARTAMENTO,
                 Referencias.ID_DEPARTAMENTO));
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL %s)",
                 Tablas.DISTRITO, BaseColumns._ID, EntradaDistrito.ID_DISTRITO,
                 EntradaDistrito.NOMBRE_DISTRITO, EntradaDistrito.ID_MUNICIPIO,
                 Referencias.ID_MUNICIPIO));
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, " +
                         "%s TEXT NOT NULL, %s TEXT NOT NULL %s)", Tablas.DIRECCION, BaseColumns._ID,
                 EntradaDireccion.ID_DIRECCION, EntradaDireccion.COLONIA, EntradaDireccion.CALLE,
                 EntradaDireccion.PASAJE, EntradaDireccion.NUMERO, EntradaDireccion.ID_DISTRITO,
                 Referencias.ID_DISTRITO));
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL %s)",
                 Tablas.LOCAL, BaseColumns._ID, EntradaLocal.ID_LOCAL, EntradaLocal.NOMBRE_LOCAL,
                 EntradaLocal.ID_DIRECCION, Referencias.ID_DIRECCION));
@@ -158,29 +158,29 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
 //                Tablas.LOCAL_ARTICULO, BaseColumns._ID, EntradaLocalArticulo.ID_LOCAL,
 //                Referencias.ID_LOCAL, EntradaLocalArticulo.ID_ARTICULO, Referencias.ID_ARTICULO,
 //                BaseColumns._ID, EntradaLocalArticulo.ID_LOCAL, EntradaLocalArticulo.ID_ARTICULO));
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL)", Tablas.METODO_PAGO,
                 BaseColumns._ID, EntradaMetodoPago.ID_METODO_PAGO, EntradaMetodoPago.TIPO_METODO_PAGO));
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL)", Tablas.LABORATORIO,
                 BaseColumns._ID, EntradaLaboratorio.ID_LABORATORIO,
                 EntradaLaboratorio.NOMBRE_LABORATORIO));
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL)", Tablas.VIA_ADMINISTRACION,
                 BaseColumns._ID, EntradaViaAdministracion.ID_VIA_ADMINISTRACION,
                 EntradaViaAdministracion.TIPO_VIA_ADMINISTRACION));
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL)", Tablas.FORMA_FARMACEUTICA,
                 BaseColumns._ID, EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA,
                 EntradaFormaFarmaceutica.TIPO_FORMA_FARMACEUTICA));
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "%s TEXT UNIQUE NOT NULL, %s REAL NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL %S," +
                 "%s TEXT NOT NULL %s)", Tablas.VENTA, BaseColumns._ID, EntradaVenta.ID_VENTA,
                 EntradaVenta.MONTO_TOTAL_VENTA, EntradaVenta.FECHA_VENTA,
                 EntradaMetodoPago.ID_METODO_PAGO, Referencias.ID_METODO_PAGO,
                 EntradaVenta.ID_CLIENTE, Referencias.ID_CLIENTE));
         //tabla medicamento
-        db.execSQL(format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s DATE NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL, " +
                         "%s TEXT NOT NULL %s, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s)",
                 Tablas.MEDICAMENTO, BaseColumns._ID, EntradaMedicamento.ID_MEDICAMENTO,
@@ -190,7 +190,11 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Referencias.ID_FORMA_FARMACEUTICA, EntradaMedicamento.ID_VIA_ADMINISTRACION,
                 Referencias.ID_VIA_ADMINISTRACION, EntradaMedicamento.ID_LABORATORIO,
                 Referencias.ID_LABORATORIO));
-
+        //tabla cliente
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL)", Tablas.CLIENTE,
+                BaseColumns._ID, EntradaCliente.ID_CLIENTE, EntradaCliente.NOMBRE_CLIENTE,
+                EntradaCliente.APELLIDO_CLIENTE));
 
 
         // TODO Crear tabla de receta

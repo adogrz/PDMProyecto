@@ -1,9 +1,9 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite;
 
-import android.content.ContentValues;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class MedicamentoDAOImpl implements MedicamentoDAO {
 
     @Override
     public String insertar(Medicamento obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
         /**String regInsertados="Registro Insertado Nº=";
          long contador=0;
 
@@ -53,12 +53,12 @@ public class MedicamentoDAOImpl implements MedicamentoDAO {
 
     @Override
     public void modificar(Medicamento obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
     }
 
     @Override
     public void eliminar(Medicamento obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
     }
 
     @Override
@@ -109,8 +109,54 @@ public class MedicamentoDAOImpl implements MedicamentoDAO {
         return listaMedicamento;
     }
 
-    @Override
-    public Medicamento obtener(String id) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
-    }
+        @Override
+        public Medicamento obtener(String id) throws DAOException {
+           SQLiteDatabase db= baseDatos.getReadableDatabase();
+
+           String selection= String.format("%s=?", EntradaMedicamento.ID_MEDICAMENTO);
+             String[] selectionArgs={id};
+             String [] columnas={
+                        EntradaMedicamento.ID_MEDICAMENTO,
+                        EntradaMedicamento.FECHA_EXPEDICION,
+                        EntradaMedicamento.FECHA_EXPIRACION,
+                        EntradaMedicamento.REQUIERE_RECETA_MEDICA,
+                        EntradaMedicamento.ID_ARTICULO,
+                        EntradaMedicamento.ID_FORMA_FARMACEUTICA,
+                        EntradaMedicamento.ID_VIA_ADMINISTRACION,
+                        EntradaMedicamento.ID_LABORATORIO
+             };
+             try(Cursor cursor=db.query(Tablas.MEDICAMENTO,columnas,selection,selectionArgs,null,null,null)){
+                 if(cursor==null || !cursor.moveToFirst()){
+                    throw new DAOException("No se ha encontrado el medicamento");
+                 }
+                    Medicamento medicamento=new Medicamento();
+
+                    int idIndex=cursor.getColumnIndex(EntradaMedicamento.ID_MEDICAMENTO);
+                    int fechaExpedicionIndex=cursor.getColumnIndex(EntradaMedicamento.FECHA_EXPEDICION);
+                    int fechaExpiracionIndex=cursor.getColumnIndex(EntradaMedicamento.FECHA_EXPIRACION);
+                    int requiereRecetaMedicaIndex=cursor.getColumnIndex(EntradaMedicamento.REQUIERE_RECETA_MEDICA);
+                    int idArticuloIndex=cursor.getColumnIndex(EntradaMedicamento.ID_ARTICULO);
+                    int idFormaFarmaceuticaIndex=cursor.getColumnIndex(EntradaMedicamento.ID_FORMA_FARMACEUTICA);
+                    int idViaAdministracionIndex=cursor.getColumnIndex(EntradaMedicamento.ID_VIA_ADMINISTRACION);
+                    int idLaboratorioIndex=cursor.getColumnIndex(EntradaMedicamento.ID_LABORATORIO);
+
+                    if(idIndex != -1 || fechaExpedicionIndex != -1 || fechaExpiracionIndex != -1
+                        || requiereRecetaMedicaIndex != -1 || idArticuloIndex != -1 || idFormaFarmaceuticaIndex != -1
+                        || idViaAdministracionIndex != -1 || idLaboratorioIndex != -1)
+                    {
+                        throw new DAOException("Error al obtner los indices de las columnas.");
+                    }
+                    medicamento.setIdMedicamento(cursor.getString(idIndex));
+                    medicamento.setFechaExpedicion(cursor.getString(fechaExpedicionIndex));
+                    medicamento.setFechaExpiracion(cursor.getString(fechaExpiracionIndex));
+                    medicamento.setRequiereRecetaMedica(cursor.getString(requiereRecetaMedicaIndex));
+                    medicamento.setIdArticulo(cursor.getString(idArticuloIndex));
+                    medicamento.setIdFormaFarmaceutica(cursor.getString(idFormaFarmaceuticaIndex));
+                    medicamento.setIdViaAdministracion(cursor.getString(idViaAdministracionIndex));
+                    medicamento.setIdLaboratorio(cursor.getString(idLaboratorioIndex));
+
+                    return medicamento;
+             }
+        }
+
 }

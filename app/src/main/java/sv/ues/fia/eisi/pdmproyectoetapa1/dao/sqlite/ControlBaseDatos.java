@@ -10,6 +10,8 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ViaAdministracionDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LaboratorioDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.FormaFarmaceuticaDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ClienteDAO;
+
 
 
 /**
@@ -30,6 +32,8 @@ public final class ControlBaseDatos {
     private FormaFarmaceuticaDAO formaFarmaceutica = null;
 
     private ProveedorDAO proveedores = null;
+
+    private ClienteDAO clientes = null;
 
 
     private ControlBaseDatos(Context contexto) {
@@ -138,5 +142,18 @@ public final class ControlBaseDatos {
             formaFarmaceutica = new FormaFarmaceuticaDAOImpl(baseDatos);
         }
         return formaFarmaceutica;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz ClienteDAO.
+     * @return Instancia de la clase que implementa la interfaz ClienteDAO.
+     */
+
+    public ClienteDAO getClienteDAO() {
+        if (clientes == null) {
+            clientes = new ClienteDAOImpl(baseDatos);
+        }
+        return clientes;
+
     }
 }
