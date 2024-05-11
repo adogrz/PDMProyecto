@@ -43,18 +43,18 @@ public class CompraDAOImpl implements CompraDAO {
         switch (operacion) {
             case 1:
                 // Verificar que al insertar una compra, el proveedor  exista
-                return existeProveedor;
+                return !existeProveedor;
 
             case 2:
                 // Verificar que al modificar una compra, la compra o proveedor exista
-                return existeCompra && existeProveedor;
+                return !existeCompra || !existeProveedor;
 
             case 3:
                 //Verificar que al eliminar exista una compra
-                return existeCompra;
+                return !existeCompra;
 
             default:
-                return false;
+                return true;
         }
     }
 
@@ -82,7 +82,7 @@ public class CompraDAOImpl implements CompraDAO {
 
     public String insertar(Compra obj) throws DAOException {
             // Verificar que el compra y el proveedor
-            if (!verificarIntegridad(obj, 1)) {
+            if (verificarIntegridad(obj, 1)) {
                 throw new DAOException("CompraDAO: No se pueden insertar una compra con un " +
                         "proveedor si no existente.");
             }
@@ -107,7 +107,7 @@ public class CompraDAOImpl implements CompraDAO {
     @Override
     public void modificar(Compra obj) throws DAOException {
         // Verificar que la compra y proveedor  existan
-        if (!verificarIntegridad(obj, 2)) {
+        if (verificarIntegridad(obj, 2)) {
             throw new DAOException("CompraDAO: La compra, o el proveedor  " +
                     "no existen.");
         }
@@ -126,7 +126,7 @@ public class CompraDAOImpl implements CompraDAO {
 
     @Override
     public void eliminar(Compra obj) throws DAOException {
-        if (!verificarIntegridad(obj, 3)) {
+        if (verificarIntegridad(obj, 3)) {
             throw new DAOException("CompraDAO: La compra no existe.");
         }
 

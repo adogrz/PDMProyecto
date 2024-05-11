@@ -1,7 +1,5 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.modelo;
 
-import java.util.Date;
-
 public class Compra {
     private String idCompra;
     private String idProveedor;
@@ -18,8 +16,6 @@ public class Compra {
         this.idProveedor = idProveedor;
         this.montoTotal = montoTotal;
         this.fechaCompra = fechaCompra;
-
-
     }
 
     public String getIdCompra() {
