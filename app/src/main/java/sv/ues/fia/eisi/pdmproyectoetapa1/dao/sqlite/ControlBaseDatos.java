@@ -4,9 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.CompraDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DetalleCompraDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.DetalleCompra;
 
 /**
  * Clase auxiliar que implementa {@link BaseDatosFarmacia} para llevar a cabo la conexión a la base
@@ -19,6 +22,9 @@ public final class ControlBaseDatos {
     private ProveedorDAO proveedores = null;
     private ArticuloDAO articulos = null;
     private MedicamentoDAO medicamentos = null;
+    private CompraDAO compras= null;
+    private DetalleCompraDAO detalleCompras =null;
+
 
     private ControlBaseDatos(Context contexto) {
         if (baseDatos == null) {
@@ -90,5 +96,17 @@ public final class ControlBaseDatos {
             medicamentos = new MedicamentoDAOImpl(baseDatos);
         }
         return medicamentos;
+    }
+    public CompraDAO getCompraDAO() {
+        if (compras == null) {
+            compras = new CompraDAOImpl(baseDatos);
+        }
+        return compras;
+    }
+    public DetalleCompraDAO getDetalleCompraDAO() {
+        if (detalleCompras == null) {
+            detalleCompras = new DetalleCompraDAOImpl(baseDatos);
+        }
+        return detalleCompras;
     }
 }
