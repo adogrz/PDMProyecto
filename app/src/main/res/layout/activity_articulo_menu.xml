@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/articulo_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/titulo_menu_articulos"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewTitle"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/buttonConsultar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="consultarArticulo"
+            android:text="@string/boton_consultar_articulo" />
+
+        <Button
+            android:id="@+id/buttonInsertar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="insertarArticulo"
+            android:text="@string/boton_insertar_articulo" />
+
+        <Button
+            android:id="@+id/buttonModificar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="modificarArticulo"
+            android:text="@string/boton_modificar_articulo" />
+
+        <Button
+            android:id="@+id/buttonEliminar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="eliminarArticulo"
+            android:text="@string/boton_eliminar_articulo" />
+
+    </LinearLayout>
+
+</RelativeLayout>

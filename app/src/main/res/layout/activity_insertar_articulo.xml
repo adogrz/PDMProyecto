@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_insertar_articulo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".InsertarArticuloActivity">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/insertar_articulo_label"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextIdArticulo"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:hint="@string/id_articulo"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+
+    <EditText
+        android:id="@+id/editTextNombreArticulo"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:hint="@string/nombre_articulo"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextIdArticulo" />
+
+    <EditText
+        android:id="@+id/editTextPrecioUnitarioArticulo"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:hint="@string/precio_unitario_articulo"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombreArticulo" />
+
+    <EditText
+        android:id="@+id/editTextDescripcionArticulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:hint="@string/descripcion_articulo"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPrecioUnitarioArticulo" />
+
+    <TextView
+        android:id="@+id/textViewProveedorHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/proveedor_articulo"
+        android:textColor="#A9A9A9"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="389dp" />
+
+    <Spinner
+        android:id="@+id/spinnerProveedorArticulo"
+        android:layout_width="259dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerTipoArticuloArticulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.914"
+        app:layout_constraintStart_toEndOf="@+id/textViewProveedorHint" />
+
+    <TextView
+        android:id="@+id/textViewTipoArticuloHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tipo_articulo_articulo"
+        android:textColor="#A9A9A9"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerTipoArticuloArticulo"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="475dp" />
+
+    <Spinner
+        android:id="@+id/spinnerTipoArticuloArticulo"
+        android:layout_width="261dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerLocalArticulo"
+        tools:layout_editor_absoluteX="120dp" />
+
+    <TextView
+        android:id="@+id/textViewLocalHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/local_articulo"
+        android:textColor="#A9A9A9"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerLocalArticulo"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="555dp" />
+
+    <Spinner
+        android:id="@+id/spinnerLocalArticulo"
+        android:layout_width="257dp"
+        android:layout_height="52dp"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="541dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabGuardarActiculo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/insertar_un_nuevo_articulo"
+        android:src="@android:drawable/ic_menu_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

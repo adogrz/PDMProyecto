@@ -37,4 +37,9 @@ public class Local {
     public void setIdDireccion(String idDireccion) {
         this.idDireccion = idDireccion;
     }
+
+    @Override
+    public String toString() {
+        return nombreLocal;
+    }
 }

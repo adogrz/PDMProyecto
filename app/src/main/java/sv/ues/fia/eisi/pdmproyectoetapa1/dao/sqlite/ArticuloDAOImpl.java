@@ -101,7 +101,7 @@ public class ArticuloDAOImpl implements ArticuloDAO {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
 
         // Generar Pk
-        String idArticulo = EntradaArticulo.generarIdArticulo();
+        String idArticulo = obj.getIdArticulo();
 
         ContentValues valores = getContentValues(obj, idArticulo);
 

@@ -30,9 +30,6 @@ public class TipoArticulo {
 
     @Override
     public String toString() {
-        return "TipoArticulo{" +
-                "id='" + id + '\'' +
-                ", nombre='" + nombre + '\'' +
-                '}';
+        return nombre;
     }
 }
