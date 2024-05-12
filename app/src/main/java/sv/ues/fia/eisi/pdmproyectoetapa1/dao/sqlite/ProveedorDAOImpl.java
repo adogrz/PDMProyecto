@@ -20,7 +20,7 @@ public class ProveedorDAOImpl implements ProveedorDAO {
     }
 
     @Override
-    public void insertar(Proveedor obj) throws DAOException {
+    public String insertar(Proveedor obj) throws DAOException {
         throw new DAOException("No implementado");
     }
 

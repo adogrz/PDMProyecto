@@ -1,5 +1,6 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -35,6 +36,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         String MEDICAMENTO = "medicamento";
         String CLIENTE = "cliente";
         String VENTA = "venta";
+        String DETALLE_VENTA = "detalle_venta";
     }
 
     /**
@@ -67,6 +69,10 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Tablas.METODO_PAGO, EntradaMetodoPago.ID_METODO_PAGO);
         String ID_CLIENTE = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.CLIENTE, EntradaCliente.ID_CLIENTE);
+        String ID_VENTA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.VENTA, EntradaVenta.ID_VENTA);
+        String ID_DETALLE_VENTA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.DETALLE_VENTA, EntradaDetalleVenta.ID_DETALLE_VENTA);
     }
 
     public BaseDatosFarmacia(Context context) {
@@ -154,13 +160,23 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 "%s TEXT UNIQUE NOT NULL, %s REAL NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL %S," +
                 "%s TEXT NOT NULL %s)", Tablas.VENTA, BaseColumns._ID, EntradaVenta.ID_VENTA,
                 EntradaVenta.MONTO_TOTAL_VENTA, EntradaVenta.FECHA_VENTA,
-                EntradaMetodoPago.ID_METODO_PAGO, Referencias.ID_METODO_PAGO,
+                EntradaVenta.ID_METODO_PAGO, Referencias.ID_METODO_PAGO,
                 EntradaVenta.ID_CLIENTE, Referencias.ID_CLIENTE));
         // TODO Crear tabla de medicamento
         // TODO Crear tabla de receta
         // TODO Crear tabla de detalle receta
-        // TODO Crear tabla de detalle venta
-        // TODO Crear tabla de venta
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "%s TEXT UNIQUE NOT NULL, %s INTEGER NOT NULL, %s REAL NOT NULL, %s TEXT UNIQUE NOT NULL," +
+                "%s TEXT UNIQUE NOT NULL)", Tablas.DETALLE_VENTA, BaseColumns._ID,
+                EntradaDetalleVenta.ID_DETALLE_VENTA, EntradaDetalleVenta.CANTIDAD_PRODUCTO_VENTA,
+                EntradaDetalleVenta.SUBTOTAL_VENTA,
+                EntradaDetalleVenta.ID_VENTA,
+                EntradaDetalleVenta.ID_ARTICULO));
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL," +
+                        "%s TEXT NOT NULL)", Tablas.CLIENTE, BaseColumns._ID,
+                EntradaCliente.ID_CLIENTE, EntradaCliente.NOMBRE_CLIENTE,
+                EntradaCliente.APELLIDO_CLIENTE));
         // TODO Crear tabla de detalle compra
         // TODO Crear tabla de compra
 
@@ -189,6 +205,13 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
 
         // Insertar datos de prueba en la tabla LOCAL
         insertarDatosLocales(db);
+
+        //Insertar datos de prueba en clientes
+        insertarDatosClientes(db);
+
+        //Insertar venta
+        //insertarDatosVentas(db);
+
     }
 
     private void insertarDatosProveedores(SQLiteDatabase db) {
@@ -275,7 +298,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
     }
 
     private void insertarDatosMetodosPago(SQLiteDatabase db) {
-        String[] metodosPago = {"Efectivo", "Tarjeta de crédito", "Tarjeta de débito",
+        String[] metodosPago = {"Efectivo", "Tarjeta de credito", "Tarjeta de debito",
                 "Transferencia bancaria", "Bitcoin"};
         StringBuilder query = new StringBuilder("INSERT INTO ");
 
@@ -368,11 +391,58 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         db.execSQL(query.toString());
     }
 
+    private void insertarDatosClientes(SQLiteDatabase db) {
+        String[][] clientes = {
+                {"David", "Ortiz"}
+        };
+
+        StringBuilder query = new StringBuilder("INSERT INTO ");
+        query.append(Tablas.CLIENTE);
+        query.append(" (");
+        query.append(EntradaCliente.ID_CLIENTE);
+        query.append(", ");
+        query.append(EntradaCliente.NOMBRE_CLIENTE);
+        query.append(", ");
+        query.append(EntradaCliente.APELLIDO_CLIENTE);
+        query.append(") VALUES ");
+
+        for (int i = 0; i < clientes.length; i++) {
+            query.append(String.format("('%s', '%s', '%s')", EntradaCliente.generarIdCliente(),
+                    clientes[i][0], clientes[i][1]));
+            if (i < clientes.length - 1) {
+                query.append(", ");
+            }
+        }
+
+        db.execSQL(query.toString());
+    }
+
+
+    private void insertarDatosVentas(SQLiteDatabase db) {
+        String idVenta = EntradaVenta.generarIdVenta();
+        String idCliente = EntradaCliente.generarIdCliente();
+        String idMetodoPago = EntradaMetodoPago.generarIdMetodoPago();
+
+        ContentValues valores = new ContentValues();
+        valores.put(EntradaVenta.ID_VENTA, idVenta);
+        valores.put(EntradaVenta.MONTO_TOTAL_VENTA, "200");
+        valores.put(EntradaVenta.FECHA_VENTA, "2024-05-08");
+        valores.put(EntradaVenta.ID_CLIENTE, idCliente);
+        valores.put(EntradaVenta.ID_METODO_PAGO, idMetodoPago);
+
+        db.insert(Tablas.VENTA, null, valores);
+    }
+
+
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", Tablas.ARTICULO));
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", Tablas.PROVEEDOR));
         db.execSQL(String.format("DROP TABLE IF EXISTS %s", Tablas.TIPO_ARTICULO));
+        db.execSQL(String.format("DROP TABLE IF EXISTS %s", Tablas.CLIENTE));
+        db.execSQL(String.format("DROP TABLE IF EXIST %s", Tablas.VENTA));
+        db.execSQL(String.format("DROP TABLE IF EXIST %s", Tablas.METODO_PAGO));
 
         onCreate(db);
     }
