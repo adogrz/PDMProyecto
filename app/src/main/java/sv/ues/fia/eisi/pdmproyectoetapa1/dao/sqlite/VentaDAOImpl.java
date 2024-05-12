@@ -104,7 +104,20 @@ public class VentaDAOImpl implements VentaDAO {
 
     @Override
     public void modificar(Venta obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        // Verificar que el cliente, el metodo de pago y la venta existan
+        if (!verificarIntegridad(obj, 2)) {
+            throw new DAOException("ArticuloDAO: El articulo, el proveedor o el tipo de articulo " +
+                    "no existen.");
+        }
+
+        SQLiteDatabase db = baseDatos.getWritableDatabase();
+
+        ContentValues valores = getContentValues(obj);
+
+        String[] idVenta = {obj.getIdVenta()};
+
+        // Modificar venta
+        db.update(Tablas.VENTA, valores, EntradaVenta.ID_VENTA + " = ?", idVenta);
     }
 
     @Override

@@ -12,8 +12,11 @@
     <string name="OpcionConsultarVenta">Consultar Venta</string>
     <string name="OpcionEliminarVenta">Eliminar Venta</string>
     <string name="RealizarVenta">Realizar venta</string>
+    <string name="ActualizarVenta">Actualizar venta</string>
     <string name="MetodoPago">Método de pago:</string>
     <string name="CodigoVenta">Codigo de venta:</string>
+    <string name="CodigoDetalleVenta">Codigo de detalle de venta:</string>
+    <string name="CodigoDetalle">Codigo del detalle de venta:</string>
     <string name="CodigoV">Codigo de la venta</string>
     <string name="Articulo">Articulo:</string>
     <string name="Cantidad">Cantidad:</string>
@@ -24,6 +27,9 @@
     <string name="Nombre">Nombre:</string>
     <string name="Apellido">Apellido:</string>
     <string name="Guardar">Guardar</string>
+    <string name="Actualizar">Actualizar</string>
+    <string name="Consultar">Consultar</string>
+    <string name="Eliminar">Eliminar</string>
     <string name="Limpiar">Limpiar</string>
     <string name="NombreCliente">Nombre del cliente</string>
     <string name="ApellidoCliente">Apellido del cliente</string>

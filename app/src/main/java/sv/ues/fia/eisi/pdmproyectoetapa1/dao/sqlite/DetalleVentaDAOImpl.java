@@ -105,7 +105,20 @@ public class DetalleVentaDAOImpl implements DetalleVentaDAO {
 
     @Override
     public void modificar(DetalleVenta obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        // Verificar que el detalleventa, la venta y el cliente existen
+        if (!verificarIntegridad(obj, 2)) {
+            throw new DAOException("ArticuloDAO: El articulo, el proveedor o el tipo de articulo " +
+                    "no existen.");
+        }
+
+        SQLiteDatabase db = baseDatos.getWritableDatabase();
+
+        ContentValues valores = getContentValues(obj);
+
+        String[] idDetalleVenta = {obj.getIdDetalleVenta()};
+
+        // Modificar detalleVenta
+        db.update(Tablas.DETALLE_VENTA, valores, EntradaDetalleVenta.ID_DETALLE_VENTA + " = ?", idDetalleVenta);
     }
 
     @Override

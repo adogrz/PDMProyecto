@@ -166,12 +166,11 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         // TODO Crear tabla de receta
         // TODO Crear tabla de detalle receta
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "%s TEXT UNIQUE NOT NULL, %s INTEGER NOT NULL, %s REAL NOT NULL, %s TEXT UNIQUE NOT NULL," +
-                "%s TEXT UNIQUE NOT NULL)", Tablas.DETALLE_VENTA, BaseColumns._ID,
-                EntradaDetalleVenta.ID_DETALLE_VENTA, EntradaDetalleVenta.CANTIDAD_PRODUCTO_VENTA,
-                EntradaDetalleVenta.SUBTOTAL_VENTA,
-                EntradaDetalleVenta.ID_VENTA,
-                EntradaDetalleVenta.ID_ARTICULO));
+                        "%s TEXT UNIQUE NOT NULL, %s INTEGER NOT NULL, %s REAL NOT NULL, %s TEXT NOT NULL %S," +
+                        "%s TEXT NOT NULL %s)", Tablas.DETALLE_VENTA, BaseColumns._ID, EntradaDetalleVenta.ID_DETALLE_VENTA,
+                EntradaDetalleVenta.CANTIDAD_PRODUCTO_VENTA, EntradaDetalleVenta.SUBTOTAL_VENTA,
+                EntradaDetalleVenta.ID_VENTA, Referencias.ID_VENTA,
+                EntradaDetalleVenta.ID_ARTICULO, Referencias.ID_ARTICULO));
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL," +
                         "%s TEXT NOT NULL)", Tablas.CLIENTE, BaseColumns._ID,
@@ -206,11 +205,6 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         // Insertar datos de prueba en la tabla LOCAL
         insertarDatosLocales(db);
 
-        //Insertar datos de prueba en clientes
-        insertarDatosClientes(db);
-
-        //Insertar venta
-        //insertarDatosVentas(db);
 
     }
 

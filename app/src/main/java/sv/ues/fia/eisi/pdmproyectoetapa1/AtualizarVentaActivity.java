@@ -1,5 +1,7 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.Activity;
 
 import android.os.Bundle;
@@ -32,8 +34,7 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Venta;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DetalleVentaDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaDetalleVenta;
 
-
-public class AgregarVentaActivity extends Activity {
+public class AtualizarVentaActivity extends AppCompatActivity {
 
     EditText editCodigoCliente, editCodigoVenta, editCodigoDetalle, editCantidad, editNombreCliente, editApellidoCliente;
 
@@ -42,12 +43,7 @@ public class AgregarVentaActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agregar_venta);
-
-        ControlBaseDatos db=ControlBaseDatos.obtenerInstancia(AgregarVentaActivity.this);
-        ProveedorDAO proveedorDAO = db.getProveedorDAO();
-        TipoArticuloDAO tipoArticuloDAO = db.getTipoArticuloDAO();
-        ArticuloDAO articuloDAO = db.getArticuloDAO();
+        setContentView(R.layout.activity_atualizar_venta);
 
         editCodigoVenta = (EditText) findViewById(R.id.txt_codigoVenta);
         editCodigoDetalle = (EditText) findViewById(R.id.txt_codigoDetalle);
@@ -64,7 +60,7 @@ public class AgregarVentaActivity extends Activity {
     //Metodo para implementar el spinner de metodos de pago
     public void spinnerMetodosPagos(View v){
 
-        ControlBaseDatos db=ControlBaseDatos.obtenerInstancia(AgregarVentaActivity.this);
+        ControlBaseDatos db=ControlBaseDatos.obtenerInstancia(AtualizarVentaActivity.this);
         MetodoPagoDAO metodoPagoDAO = db.getMetodoPagoDAO();
 
         try {
@@ -76,13 +72,12 @@ public class AgregarVentaActivity extends Activity {
         } catch (DAOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     //Metodo para implementar el spinner de articulos
     public void spinnerArticulos(View v){
 
-        ControlBaseDatos db=ControlBaseDatos.obtenerInstancia(AgregarVentaActivity.this);
+        ControlBaseDatos db=ControlBaseDatos.obtenerInstancia(AtualizarVentaActivity.this);
         ArticuloDAO articuloDAO= db.getArticuloDAO();
 
         try {
@@ -94,17 +89,17 @@ public class AgregarVentaActivity extends Activity {
         } catch (DAOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
-    //Metodo para agregar una venta
+    //Metodo para actualizar una venta
     public void agregarVenta(View view) {
 
         //Se obtienen los datos de los campos de texto y verifica que no exista ningun error
         try {
 
             //Obteniendo la instancia de la base de datos
-            ControlBaseDatos controlBaseDatos = ControlBaseDatos.obtenerInstancia(AgregarVentaActivity.this);
+            ControlBaseDatos controlBaseDatos = ControlBaseDatos.obtenerInstancia(AtualizarVentaActivity.this);
+
             //Obteniendo las instancias de los DAO
             VentaDAO ventaDAO = controlBaseDatos.getVentaDAO();
             ClienteDAO clienteDAO = controlBaseDatos.getClienteDAO();
@@ -139,29 +134,30 @@ public class AgregarVentaActivity extends Activity {
             //Asignando los valores a la venta
             venta.setMontoTotalVenta(Double.parseDouble(montoTotal));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            venta.setFechaVenta(LocalDate.now().toString());
+                venta.setFechaVenta(LocalDate.now().toString());
             }
             venta.setIdCliente(codigoCliente);
             venta.setIdMetodoPago(idMetodoPago);
             venta.setIdVenta(codigoVenta);
 
             //Asignando los valores al detalle de la venta
+            detalleVenta.setIdDetalleVenta(idDetalleVenta);
             detalleVenta.setIdVenta(codigoVenta);
             detalleVenta.setIdArticulo(idArticulo);
-            detalleVenta.setIdDetalleVenta(idDetalleVenta);
             detalleVenta.setSubtotalVenta(Double.parseDouble(montoTotal));
             detalleVenta.setCantidadProductoVenta(Integer.parseInt(Cantidad));
 
             //Insertando los datos en la base de datos
-            clienteDAO.insertar(cliente);
-            ventaDAO.insertar(venta);
-            detalleVentaDAO.insertar(detalleVenta);
+            clienteDAO.modificar(cliente);
+            ventaDAO.modificar(venta);
+            detalleVentaDAO.modificar(detalleVenta);
             controlBaseDatos.cerrar();
 
-            Toast.makeText(AgregarVentaActivity.this, "Venta insertada correctamente.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AtualizarVentaActivity.this, "Venta actualizada correctamente.", Toast.LENGTH_SHORT).show();
         } catch (DAOException e) {
             e.printStackTrace();
-            Toast.makeText(AgregarVentaActivity.this, "Error al insertar el venta.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AtualizarVentaActivity.this, "Error al actualizar el venta.", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
