@@ -28,13 +28,6 @@
             android:name=".ArticuloMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".articulo.InsertarModificarArticuloActivity"
-            android:exported="false" />
-        <activity
-            android:name=".articulo.ArticuloDetalleActivity"
-            android:exported="false" />
-        <activity
-            android:name=".articulo.ArticulosActivity"
             android:name=".EliminarVentaActivity"
             android:exported="false" />
         <activity

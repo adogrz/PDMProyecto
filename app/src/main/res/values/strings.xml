@@ -16,10 +16,6 @@
     <string name="action_delete_articulo">Eliminar Artículo</string>
     <string name="field_error">Campo requerido</string>
     <string name="Ventas">Ventas</string>
-    <string name="Compras">Compras</string>
-    <string name="Medicamentos">Medicamentos</string>
-    <string name="RecetasMedicas">Recetas Medicas</string>
-    <string name="Articulos">Articulos</string>
     <string name="titulo_menu_articulos">Menú de Artículos</string>
     <string name="boton_consultar_articulo">Consultar Artículo</string>
     <string name="boton_insertar_articulo">Insertar Artículo</string>
@@ -35,7 +31,6 @@
     <string name="eliminar_articulo">Eliminar articulo</string>
     <string name="modificar_articulo_title">Modificar articulo</string>
     <string name="MenuPrincipal">Menu Farmacia/Libreria</string>
-    <string name="Ventas">Ventas</string>
     <string name="Compras">Compras</string>
     <string name="Medicamentos">Medicamentos</string>
     <string name="Articulos">Articulos</string>
