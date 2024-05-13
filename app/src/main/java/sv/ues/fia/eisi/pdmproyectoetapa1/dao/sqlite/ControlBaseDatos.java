@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LocalArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LocalDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ClienteDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DetalleVentaDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
@@ -21,8 +23,10 @@ public final class ControlBaseDatos {
     private BaseDatosFarmacia baseDatos;
     private TipoArticuloDAO tipoArticulos = null;
     private ProveedorDAO proveedores = null;
+    private LocalDAO locales = null;
     private ArticuloDAO articulos = null;
     private MedicamentoDAO medicamentos = null;
+    private LocalArticuloDAO localesArticulos = null;
     private VentaDAO venta = null;
     private ClienteDAO cliente = null;
     private MetodoPagoDAO metodoPago = null;
@@ -79,6 +83,17 @@ public final class ControlBaseDatos {
     }
 
     /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz LocalDAO.
+     * @return Instancia de la clase que implementa la interfaz LocalDAO.
+     */
+    public LocalDAO getLocalDAO() {
+        if (locales == null) {
+            locales = new LocalDAOImpl(baseDatos);
+        }
+        return locales;
+    }
+
+    /**
      * Método que obtiene la instancia de la clase que implementa la interfaz ArticuloDAO.
      * @return Instancia de la clase que implementa la interfaz ArticuloDAO.
      */
@@ -100,6 +115,13 @@ public final class ControlBaseDatos {
         return medicamentos;
     }
 
+    public LocalArticuloDAO getLocalArticuloDAO() {
+        if (localesArticulos == null) {
+            localesArticulos = new LocalArticuloDAOImpl(baseDatos);
+        }
+        return localesArticulos;
+    }
+
     /**
      * Método que obtiene la instancia de la clase que implementa la interfaz VentaDAO.
      * @return Instancia de la clase que implementa la interfaz VentaDAO.
@@ -115,7 +137,7 @@ public final class ControlBaseDatos {
      * Método que obtiene la instancia de la clase que implementa la interfaz ClienteDAO.
      * @return Instancia de la clase que implementa la interfaz ClienteDAO.
      */
-    public ClienteDAO getClienteDAO(){
+    public ClienteDAO getClienteDAO() {
         if(cliente == null){
             cliente = new ClienteDAOImpl(baseDatos);
         }

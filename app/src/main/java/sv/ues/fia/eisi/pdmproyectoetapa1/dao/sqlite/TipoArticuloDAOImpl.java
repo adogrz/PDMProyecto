@@ -24,17 +24,17 @@ public class TipoArticuloDAOImpl implements TipoArticuloDAO {
 
     @Override
     public String insertar(TipoArticulo obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
     }
 
     @Override
     public void modificar(TipoArticulo obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
     }
 
     @Override
     public void eliminar(TipoArticulo obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        throw new DAOException("No implementado");
     }
 
     /**

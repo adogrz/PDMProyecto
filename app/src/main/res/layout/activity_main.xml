@@ -48,6 +48,20 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_Ventas" />
 
     <Button
+        android:id="@+id/btn_Articulos"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:onClick="mostrarMenuArticulos"
+        android:text="@string/Articulos"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_Articulos" />
+
+    <Button
         android:id="@+id/brn_medicamentos"
         android:layout_width="290dp"
         android:layout_height="60dp"

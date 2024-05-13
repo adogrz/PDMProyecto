@@ -13,6 +13,28 @@
         android:theme="@style/Theme.PDMProyectoEtapa1"
         tools:targetApi="31">
         <activity
+            android:name=".EliminarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModificarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InsertarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConsultarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ArticuloMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".articulo.InsertarModificarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".articulo.ArticuloDetalleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".articulo.ArticulosActivity"
             android:name=".EliminarVentaActivity"
             android:exported="false" />
         <activity
