@@ -104,6 +104,7 @@ public class AtualizarVentaActivity extends AppCompatActivity {
             VentaDAO ventaDAO = controlBaseDatos.getVentaDAO();
             ClienteDAO clienteDAO = controlBaseDatos.getClienteDAO();
             DetalleVentaDAO detalleVentaDAO = controlBaseDatos.getDetalleVentaDAO();
+            ArticuloDAO articuloDAO = controlBaseDatos.getArticuloDAO();
 
             //Obteniendo la opcion seleccionada en los spinners
             Articulo articuloSeleccionado = (Articulo) articulo.getSelectedItem();
@@ -151,7 +152,6 @@ public class AtualizarVentaActivity extends AppCompatActivity {
             clienteDAO.modificar(cliente);
             ventaDAO.modificar(venta);
             detalleVentaDAO.modificar(detalleVenta);
-            controlBaseDatos.cerrar();
 
             Toast.makeText(AtualizarVentaActivity.this, "Venta actualizada correctamente.", Toast.LENGTH_SHORT).show();
         } catch (DAOException e) {

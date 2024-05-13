@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 import android.database.SQLException;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DAOException;
@@ -13,6 +15,7 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DetalleVentaDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.BaseDatosFarmacia.Tablas;
 import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.DetalleVenta;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaDetalleVenta;
+import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Venta;
 
 public class DetalleVentaDAOImpl implements DetalleVentaDAO {
 
@@ -123,17 +126,125 @@ public class DetalleVentaDAOImpl implements DetalleVentaDAO {
 
     @Override
     public void eliminar(DetalleVenta obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        if (!verificarIntegridad(obj, 3)) {
+            throw new DAOException("DetalleVentaDAO: El detalle no existe.");
+        }
+
+        SQLiteDatabase db = baseDatos.getWritableDatabase();
+
+        String whereClause = String.format("%s = ?", EntradaDetalleVenta.ID_DETALLE_VENTA);
+        String[] idDetalleVenta = {obj.getIdDetalleVenta()};
+
+        // Eliminar DetalleVenta
+        db.delete(Tablas.DETALLE_VENTA, whereClause, idDetalleVenta);
     }
 
     @Override
     public List<DetalleVenta> obtenerTodos() throws DAOException {
-        return null;
+        List<DetalleVenta> detalleVentas = new ArrayList<>();
+
+        SQLiteDatabase db = baseDatos.getReadableDatabase();
+        String sql = String.format("SELECT * FROM %s", Tablas.DETALLE_VENTA);
+
+        try (Cursor cursor = db.rawQuery(sql, null)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                return detalleVentas;
+            }
+
+            do {
+                DetalleVenta detalleVenta = new DetalleVenta();
+
+                int idDetalleVenta = cursor.getColumnIndex(EntradaDetalleVenta.ID_DETALLE_VENTA);
+                int idVenta = cursor.getColumnIndex(EntradaDetalleVenta.ID_VENTA);
+                int idArticulo = cursor.getColumnIndex(EntradaDetalleVenta.ID_ARTICULO);
+                int cantidadProductoVenta = cursor.getColumnIndex(EntradaDetalleVenta.CANTIDAD_PRODUCTO_VENTA);
+                int subtotalVenta = cursor.getColumnIndex(EntradaDetalleVenta.SUBTOTAL_VENTA);
+
+                if (idDetalleVenta == -1 || idVenta == -1 || idArticulo == -1 ||
+                        cantidadProductoVenta == -1 || subtotalVenta == -1) {
+                    throw new DAOException("Error al obtener los índices de las columnas.");
+                }
+
+                detalleVenta.setIdDetalleVenta(cursor.getString(idDetalleVenta));
+                detalleVenta.setIdVenta(cursor.getString(idVenta));
+                detalleVenta.setIdArticulo(cursor.getString(idArticulo));
+                detalleVenta.setCantidadProductoVenta(cursor.getInt(cantidadProductoVenta));
+                detalleVenta.setSubtotalVenta(cursor.getDouble(subtotalVenta));
+
+                detalleVentas.add(detalleVenta);
+
+            } while (cursor.moveToNext());
+        }
+
+        return detalleVentas;
     }
 
     @Override
     public DetalleVenta obtener(String id) throws DAOException {
-        return null;
+        SQLiteDatabase db = baseDatos.getReadableDatabase();
+        String selection = String.format("%s = ?", EntradaDetalleVenta.ID_DETALLE_VENTA);
+        String[] selectionArgs = {id};
+
+        try (Cursor cursor = db.query(Tablas.DETALLE_VENTA, null, selection, selectionArgs, null, null,
+                null)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                throw new DAOException("No se encontró el detalle de venta");
+            }
+
+            DetalleVenta detalleVenta = new DetalleVenta();
+
+            int idDetalleVenta = cursor.getColumnIndex(EntradaDetalleVenta.ID_DETALLE_VENTA);
+            int idVenta = cursor.getColumnIndex(EntradaDetalleVenta.ID_VENTA);
+            int idArticulo = cursor.getColumnIndex(EntradaDetalleVenta.ID_ARTICULO);
+            int cantidadProductoVenta = cursor.getColumnIndex(EntradaDetalleVenta.CANTIDAD_PRODUCTO_VENTA);
+            int subtotalVenta = cursor.getColumnIndex(EntradaDetalleVenta.SUBTOTAL_VENTA);
+
+            if (idDetalleVenta == -1 || idVenta == -1 || idArticulo == -1 ||
+                    cantidadProductoVenta == -1 || subtotalVenta == -1) {
+                throw new DAOException("Error al obtener los índices de las columnas.");
+            }
+
+            detalleVenta.setIdDetalleVenta(cursor.getString(idDetalleVenta));
+            detalleVenta.setIdVenta(cursor.getString(idVenta));
+            detalleVenta.setIdArticulo(cursor.getString(idArticulo));
+            detalleVenta.setCantidadProductoVenta(cursor.getInt(cantidadProductoVenta));
+            detalleVenta.setSubtotalVenta(cursor.getDouble(subtotalVenta));
+
+            return detalleVenta;
+        }
+    }
+
+    @Override
+    public DetalleVenta obtenerPorIdVenta(String idVenta) throws DAOException{
+        SQLiteDatabase db = baseDatos.getReadableDatabase();
+        String selection = String.format("%s = ?", EntradaDetalleVenta.ID_VENTA);
+        String[] selectionArgs = {idVenta};
+
+        try (Cursor cursor = db.query(Tablas.DETALLE_VENTA, null, selection, selectionArgs, null, null, null)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                throw new DAOException("No se encontró el detalle de venta");
+            }
+
+            DetalleVenta detalleVenta = new DetalleVenta();
+
+            int idDetalleVenta = cursor.getColumnIndex(EntradaDetalleVenta.ID_DETALLE_VENTA);
+            int idArticulo = cursor.getColumnIndex(EntradaDetalleVenta.ID_ARTICULO);
+            int cantidadProductoVenta = cursor.getColumnIndex(EntradaDetalleVenta.CANTIDAD_PRODUCTO_VENTA);
+            int subtotalVenta = cursor.getColumnIndex(EntradaDetalleVenta.SUBTOTAL_VENTA);
+
+            if (idDetalleVenta == -1 || idArticulo == -1 ||
+                    cantidadProductoVenta == -1 || subtotalVenta == -1) {
+                throw new DAOException("Error al obtener los índices de las columnas.");
+            }
+
+            detalleVenta.setIdDetalleVenta(cursor.getString(idDetalleVenta));
+            detalleVenta.setIdVenta(idVenta);
+            detalleVenta.setIdArticulo(cursor.getString(idArticulo));
+            detalleVenta.setCantidadProductoVenta(cursor.getInt(cantidadProductoVenta));
+            detalleVenta.setSubtotalVenta(cursor.getDouble(subtotalVenta));
+
+            return detalleVenta;
+        }
     }
 
 }

@@ -93,12 +93,12 @@ public class VentaDAOImpl implements VentaDAO {
 
         ContentValues valores = getContentValues(obj, idVenta);
 
-        // Insertar articulo
+        // Insertar venta
         try {
             db.insertOrThrow(Tablas.VENTA, null, valores);
             return idVenta;
         } catch (SQLException e) {
-            throw new DAOException("VentaDAO: Error al insertar una ventao: " + e.getMessage());
+            throw new DAOException("VentaDAO: Error al insertar una venta: " + e.getMessage());
         }
     }
 
@@ -106,7 +106,7 @@ public class VentaDAOImpl implements VentaDAO {
     public void modificar(Venta obj) throws DAOException {
         // Verificar que el cliente, el metodo de pago y la venta existan
         if (!verificarIntegridad(obj, 2)) {
-            throw new DAOException("ArticuloDAO: El articulo, el proveedor o el tipo de articulo " +
+            throw new DAOException("VentaDAO: El cliente, el metodo de pago o la venta" +
                     "no existen.");
         }
 
@@ -122,17 +122,124 @@ public class VentaDAOImpl implements VentaDAO {
 
     @Override
     public void eliminar(Venta obj) throws DAOException {
-        throw new UnsupportedOperationException("No implementado");
+        if (!verificarIntegridad(obj, 3)) {
+            throw new DAOException("VentaDAO: La venta no existe.");
+        }
+
+        SQLiteDatabase db = baseDatos.getWritableDatabase();
+
+        String whereClause = String.format("%s = ?", EntradaVenta.ID_VENTA);
+        String[] idVenta = {obj.getIdVenta()};
+
+        // Eliminar venta
+        db.delete(Tablas.VENTA, whereClause, idVenta);
     }
 
     @Override
     public List<Venta> obtenerTodos() throws DAOException {
-        return null;
+        List<Venta> ventas = new ArrayList<>();
+
+        SQLiteDatabase db = baseDatos.getReadableDatabase();
+        String sql = String.format("SELECT * FROM %s", Tablas.VENTA);
+
+        try (Cursor cursor = db.rawQuery(sql, null)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                return ventas;
+            }
+
+            do {
+                Venta venta = new Venta();
+
+                int idIndex = cursor.getColumnIndex(EntradaVenta.ID_VENTA);
+                int montoTotalIndex = cursor.getColumnIndex(EntradaVenta.MONTO_TOTAL_VENTA);
+                int fechaVentaIndex = cursor.getColumnIndex(EntradaVenta.FECHA_VENTA);
+                int idClienteIndex = cursor.getColumnIndex(EntradaVenta.ID_CLIENTE);
+                int idMetodoPagoIndex = cursor.getColumnIndex(EntradaVenta.ID_METODO_PAGO);
+
+                if (idIndex == -1 || montoTotalIndex == -1 || fechaVentaIndex == -1 ||
+                        idClienteIndex == -1 || idMetodoPagoIndex == -1) {
+                    throw new DAOException("Error al obtener los índices de las columnas.");
+                }
+
+                venta.setIdVenta(cursor.getString(idIndex));
+                venta.setMontoTotalVenta(cursor.getDouble(montoTotalIndex));
+                venta.setFechaVenta(cursor.getString(fechaVentaIndex));
+                venta.setIdCliente(cursor.getString(idClienteIndex));
+                venta.setIdMetodoPago(cursor.getString(idMetodoPagoIndex));
+
+                ventas.add(venta);
+            } while (cursor.moveToNext());
+        }
+
+        return ventas;
     }
 
     @Override
     public Venta obtener(String id) throws DAOException {
-        return null;
+        SQLiteDatabase db = baseDatos.getReadableDatabase();
+        String selection = String.format("%s = ?", EntradaVenta.ID_VENTA);
+        String[] selectionArgs = {id};
+
+        try (Cursor cursor = db.query(Tablas.VENTA, null, selection, selectionArgs, null, null,
+                null)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                throw new DAOException("No se encontró la venta");
+            }
+
+            Venta venta = new Venta();
+
+            int idIndex = cursor.getColumnIndex(EntradaVenta.ID_VENTA);
+            int montoTotalIndex = cursor.getColumnIndex(EntradaVenta.MONTO_TOTAL_VENTA);
+            int fechaVentaIndex = cursor.getColumnIndex(EntradaVenta.FECHA_VENTA);
+            int idClienteIndex = cursor.getColumnIndex(EntradaVenta.ID_CLIENTE);
+            int idMetodoPagoIndex = cursor.getColumnIndex(EntradaVenta.ID_METODO_PAGO);
+
+            if (idIndex == -1 || montoTotalIndex == -1 || fechaVentaIndex == -1 ||
+                    idClienteIndex == -1 || idMetodoPagoIndex == -1) {
+                throw new DAOException("Error al obtener los índices de las columnas.");
+            }
+
+            venta.setIdVenta(cursor.getString(idIndex));
+            venta.setMontoTotalVenta(cursor.getDouble(montoTotalIndex));
+            venta.setFechaVenta(cursor.getString(fechaVentaIndex));
+            venta.setIdCliente(cursor.getString(idClienteIndex));
+            venta.setIdMetodoPago(cursor.getString(idMetodoPagoIndex));
+
+            return venta;
+        }
+    }
+
+    public Venta obtenerIdVenta(String idVenta) throws DAOException{
+        SQLiteDatabase db = baseDatos.getReadableDatabase();
+        String selection = String.format("%s = ?", EntradaVenta.ID_VENTA);
+        String[] selectionArgs = {idVenta};
+
+        try (Cursor cursor = db.query(Tablas.VENTA, null, selection, selectionArgs, null, null, null)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                return null;
+            }
+
+            Venta venta = new Venta();
+
+            int idIndex = cursor.getColumnIndex(EntradaVenta.ID_VENTA);
+            int montoTotalIndex = cursor.getColumnIndex(EntradaVenta.MONTO_TOTAL_VENTA);
+            int fechaVentaIndex = cursor.getColumnIndex(EntradaVenta.FECHA_VENTA);
+            int idClienteIndex = cursor.getColumnIndex(EntradaVenta.ID_CLIENTE);
+            int idMetodoPagoIndex = cursor.getColumnIndex(EntradaVenta.ID_METODO_PAGO);
+
+            if (idIndex == -1 || montoTotalIndex == -1 || fechaVentaIndex == -1 ||
+                    idClienteIndex == -1 || idMetodoPagoIndex == -1) {
+                throw new DAOException("Error al obtener los índices de las columnas.");
+            }
+
+            venta.setIdVenta(cursor.getString(idIndex));
+            venta.setMontoTotalVenta(cursor.getDouble(montoTotalIndex));
+            venta.setFechaVenta(cursor.getString(fechaVentaIndex));
+            venta.setIdCliente(cursor.getString(idClienteIndex));
+            venta.setIdMetodoPago(cursor.getString(idMetodoPagoIndex));
+
+            return venta;
+        }
     }
 
 }

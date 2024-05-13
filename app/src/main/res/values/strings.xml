@@ -12,7 +12,6 @@
     <string name="OpcionConsultarVenta">Consultar Venta</string>
     <string name="OpcionEliminarVenta">Eliminar Venta</string>
     <string name="RealizarVenta">Realizar venta</string>
-    <string name="ActualizarVenta">Actualizar venta</string>
     <string name="MetodoPago">Método de pago:</string>
     <string name="CodigoVenta">Codigo de venta:</string>
     <string name="CodigoDetalleVenta">Codigo de detalle de venta:</string>

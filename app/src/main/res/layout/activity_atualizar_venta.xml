@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/baloo_tammudu"
-        android:text="@string/ActualizarVenta"
+        android:text="@string/OpcionActualizarVenta"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +116,7 @@
         app:layout_constraintVertical_bias="0.761" />
 
     <Button
-        android:id="@+id/btn_guardarVenta"
+        android:id="@+id/btn_consultar"
         android:layout_width="140dp"
         android:layout_height="50dp"
         android:fontFamily="@font/baloo_tammudu"
