@@ -132,7 +132,6 @@
         app:layout_constraintTop_toBottomOf="@+id/editFechaExpedicion"
         tools:ignore="Autofill,MissingConstraints" />
 
-
     <Spinner
         android:id="@+id/editFormaFarmaceutica"
         android:layout_width="225dp"

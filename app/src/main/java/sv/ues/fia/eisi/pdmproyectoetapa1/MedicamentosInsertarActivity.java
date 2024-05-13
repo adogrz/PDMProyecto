@@ -192,7 +192,7 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
         try {
             //Verificar si los campos están vacíos
             if (medicamentoId.isEmpty() || fechaExpedicion.isEmpty() || fechaExpiracion.isEmpty()) {
-                Toast.makeText(this, "Rellene todos los campos, por favor", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_SHORT).show();
                 return;
             }
 
