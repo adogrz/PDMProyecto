@@ -1,6 +1,5 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,7 +13,6 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.*;
 public final class BaseDatosFarmacia extends SQLiteOpenHelper {
     private static final String NOMBRE_BASE_DATOS = "proyectoEtapa1.s3db";
     private static final int VERSION_BASE_DATOS = 1;
-    private final Context contexto;
 
     /**
      * Interfaz que establece los nombres de las tablas de la base de datos.
@@ -71,13 +69,10 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Tablas.CLIENTE, EntradaCliente.ID_CLIENTE);
         String ID_VENTA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.VENTA, EntradaVenta.ID_VENTA);
-        String ID_DETALLE_VENTA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
-                Tablas.DETALLE_VENTA, EntradaDetalleVenta.ID_DETALLE_VENTA);
     }
 
     public BaseDatosFarmacia(Context context) {
         super(context, NOMBRE_BASE_DATOS, null, VERSION_BASE_DATOS);
-        this.contexto = context;
     }
 
     /**
@@ -367,7 +362,6 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
 
         db.execSQL(query.toString());
     }
-
     private void insertarDatosFormasFarmaceuticas(SQLiteDatabase db) {
         String[] formasFarmaceuticas = {"Tableta", "Cápsula", "Jarabe", "Suspensión", "Solución",
                 "Crema", "Gel", "Parche", "Supositorio", "Inyectable"};
@@ -390,50 +384,6 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
 
         db.execSQL(query.toString());
     }
-
-    private void insertarDatosClientes(SQLiteDatabase db) {
-        String[][] clientes = {
-                {"David", "Ortiz"}
-        };
-
-        StringBuilder query = new StringBuilder("INSERT INTO ");
-        query.append(Tablas.CLIENTE);
-        query.append(" (");
-        query.append(EntradaCliente.ID_CLIENTE);
-        query.append(", ");
-        query.append(EntradaCliente.NOMBRE_CLIENTE);
-        query.append(", ");
-        query.append(EntradaCliente.APELLIDO_CLIENTE);
-        query.append(") VALUES ");
-
-        for (int i = 0; i < clientes.length; i++) {
-            query.append(String.format("('%s', '%s', '%s')", EntradaCliente.generarIdCliente(),
-                    clientes[i][0], clientes[i][1]));
-            if (i < clientes.length - 1) {
-                query.append(", ");
-            }
-        }
-
-        db.execSQL(query.toString());
-    }
-
-
-    private void insertarDatosVentas(SQLiteDatabase db) {
-        String idVenta = EntradaVenta.generarIdVenta();
-        String idCliente = EntradaCliente.generarIdCliente();
-        String idMetodoPago = EntradaMetodoPago.generarIdMetodoPago();
-
-        ContentValues valores = new ContentValues();
-        valores.put(EntradaVenta.ID_VENTA, idVenta);
-        valores.put(EntradaVenta.MONTO_TOTAL_VENTA, "200");
-        valores.put(EntradaVenta.FECHA_VENTA, "2024-05-08");
-        valores.put(EntradaVenta.ID_CLIENTE, idCliente);
-        valores.put(EntradaVenta.ID_METODO_PAGO, idMetodoPago);
-
-        db.insert(Tablas.VENTA, null, valores);
-    }
-
-
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
