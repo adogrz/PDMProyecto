@@ -7,21 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaArticulo;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaProveedor;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaTipoArticulo;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaLaboratorio;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaViaAdministracion;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaFormaFarmaceutica;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaDepartamento;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaMunicipio;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaDistrito;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaDireccion;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaLocal;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaMetodoPago;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaCliente;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaVenta;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.EntradaMedicamento;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.FarmaciaContrato.*;
+import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.RecetaMedica;
 
 /**
  * Clase que administra la conexión a la base de datos SQLite y su estructura.
@@ -51,6 +38,9 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         String MEDICAMENTO = "medicamento";
         String CLIENTE = "cliente";
         String VENTA = "venta";
+        String RECETA_MEDICA = "receta_medica";
+        String DETALLE_RECETA = "detalle_receta";
+        String MEDICO = "medico";
     }
 
     /**
@@ -85,6 +75,10 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Tablas.CLIENTE, EntradaCliente.ID_CLIENTE);
        String ID_MEDICAMENTO = format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.MEDICAMENTO, EntradaMedicamento.ID_MEDICAMENTO);
+        String ID_RECETA_MEDICA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.RECETA_MEDICA, EntradaRecetaMedica.ID_RECETA_MEDICA);
+        String ID_MEDICO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.MEDICO, EntradaMedico.ID_MEDICO);
     }
 
     public BaseDatosFarmacia(Context context) {
@@ -144,8 +138,8 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 EntradaDistrito.NOMBRE_DISTRITO, EntradaDistrito.ID_MUNICIPIO,
                 Referencias.ID_MUNICIPIO));
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, " +
-                        "%s TEXT NOT NULL, %s TEXT NOT NULL %s)", Tablas.DIRECCION, BaseColumns._ID,
+                        "%s TEXT UNIQUE NOT NULL, %s TEXT, %s TEXT, %s TEXT, " +
+                        "%s TEXT, %s TEXT NOT NULL %s)", Tablas.DIRECCION, BaseColumns._ID,
                 EntradaDireccion.ID_DIRECCION, EntradaDireccion.COLONIA, EntradaDireccion.CALLE,
                 EntradaDireccion.PASAJE, EntradaDireccion.NUMERO, EntradaDireccion.ID_DISTRITO,
                 Referencias.ID_DISTRITO));
@@ -153,11 +147,12 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL %s)",
                 Tablas.LOCAL, BaseColumns._ID, EntradaLocal.ID_LOCAL, EntradaLocal.NOMBRE_LOCAL,
                 EntradaLocal.ID_DIRECCION, Referencias.ID_DIRECCION));
-//        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER AUTOINCREMENT, " +
-//                        "%s TEXT NOT NULL %s, %s TEXT NOT NULL %s, PRIMARY KEY (%s, %s, %s))",
-//                Tablas.LOCAL_ARTICULO, BaseColumns._ID, EntradaLocalArticulo.ID_LOCAL,
-//                Referencias.ID_LOCAL, EntradaLocalArticulo.ID_ARTICULO, Referencias.ID_ARTICULO,
-//                BaseColumns._ID, EntradaLocalArticulo.ID_LOCAL, EntradaLocalArticulo.ID_ARTICULO));
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER, %s TEXT NOT NULL %s, %s TEXT " +
+                        "NOT NULL %s, PRIMARY KEY (%s, %s, %s))",
+                Tablas.LOCAL_ARTICULO, BaseColumns._ID, EntradaLocalArticulo.ID_LOCAL,
+                Referencias.ID_LOCAL, EntradaLocalArticulo.ID_ARTICULO,
+                Referencias.ID_ARTICULO, BaseColumns._ID, EntradaLocalArticulo.ID_LOCAL,
+                EntradaLocalArticulo.ID_ARTICULO));
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL)", Tablas.METODO_PAGO,
                 BaseColumns._ID, EntradaMetodoPago.ID_METODO_PAGO, EntradaMetodoPago.TIPO_METODO_PAGO));
@@ -174,9 +169,9 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 BaseColumns._ID, EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA,
                 EntradaFormaFarmaceutica.TIPO_FORMA_FARMACEUTICA));
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "%s TEXT UNIQUE NOT NULL, %s REAL NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL %S," +
-                "%s TEXT NOT NULL %s)", Tablas.VENTA, BaseColumns._ID, EntradaVenta.ID_VENTA,
-                EntradaVenta.MONTO_TOTAL_VENTA, EntradaVenta.FECHA_VENTA,
+                        "%s TEXT UNIQUE NOT NULL, %s REAL NOT NULL, %s DATE NOT NULL, %s TEXT " +
+                        "NOT NULL %S, %s TEXT NOT NULL %s)", Tablas.VENTA, BaseColumns._ID,
+                EntradaVenta.ID_VENTA, EntradaVenta.MONTO_TOTAL_VENTA, EntradaVenta.FECHA_VENTA,
                 EntradaMetodoPago.ID_METODO_PAGO, Referencias.ID_METODO_PAGO,
                 EntradaVenta.ID_CLIENTE, Referencias.ID_CLIENTE));
         //tabla medicamento
@@ -195,10 +190,24 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL)", Tablas.CLIENTE,
                 BaseColumns._ID, EntradaCliente.ID_CLIENTE, EntradaCliente.NOMBRE_CLIENTE,
                 EntradaCliente.APELLIDO_CLIENTE));
-
-
-        // TODO Crear tabla de receta
-        // TODO Crear tabla de detalle receta
+        //tabla de medico
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL)",
+                Tablas.MEDICO, BaseColumns._ID, EntradaMedico.ID_MEDICO, EntradaMedico.NOMBRE_MEDICO,
+                EntradaMedico.APELLIDO_MEDICO, EntradaMedico.ESPECIALIDAD,
+                EntradaMedico.JVPM));
+        //tabla de receta
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT NOT NULL, %s INTEGER NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL %s)", Tablas.RECETA_MEDICA, BaseColumns._ID,
+                EntradaRecetaMedica.ID_RECETA_MEDICA, EntradaRecetaMedica.NUMERO_RECETA, EntradaRecetaMedica.FECHA_RECETA_MEDICA, EntradaRecetaMedica.ID_MEDICO, Referencias.ID_MEDICO));
+        //tabla de detalle receta
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s DATE NOT NULL, " +
+                        "%s DATE NOT NULL, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s)",
+                Tablas.DETALLE_RECETA, BaseColumns._ID, EntradaDetalleReceta.ID_DETALLE_RECETA,
+                EntradaDetalleReceta.PERIODICIDAD, EntradaDetalleReceta.DOSIS,
+                EntradaDetalleReceta.FECHA_INICIO_TRATAMIENTO, EntradaDetalleReceta.FECHA_FIN_TRATAMIENTO,
+                EntradaDetalleReceta.ID_RECETA_MEDICA, Referencias.ID_RECETA_MEDICA, EntradaDetalleReceta.ID_MEDICAMENTO, Referencias.ID_MEDICAMENTO));
         // TODO Crear tabla de detalle venta
         // TODO Crear tabla de venta
         // TODO Crear tabla de detalle compra
@@ -227,7 +236,8 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         // Insertar datos de prueba en la tabla FORMA_FARMACEUTICA
         insertarDatosFormasFarmaceuticas(db);
 
-        // TODO insetar locales
+        // Insertar datos de prueba en la tabla LOCAL
+        insertarDatosLocales(db);
     }
 
     private void insertarDatosProveedores(SQLiteDatabase db) {
@@ -278,6 +288,39 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         }
 
         db.execSQL(query.toString());
+    }
+
+    private void insertarDatosLocales(SQLiteDatabase db) {
+        String idDepartamento = EntradaDepartamento.generarIdDepartamento();
+        String idMunicipio = EntradaMunicipio.generarIdMunicipio();
+        String idDistrito = EntradaDistrito.generarIdDistrito();
+        String[] calles = {"Blvr. De Los Heroes", "C. Los Sisimiles", "Paseo General Escalón"};
+        String[] nombresLocales = {"Sucursal Metrocentro", "Sucursal Metrogalerias",
+                "Surcursal Galerias"};
+
+        db.execSQL(String.format("INSERT INTO %s (%s, %s) VALUES ('%s', '%s')", Tablas.DEPARTAMENTO,
+                EntradaDepartamento.ID_DEPARTAMENTO, EntradaDepartamento.NOMBRE_DEPARTAMENTO,
+                idDepartamento, "San Salvador"));
+        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s) VALUES ('%s', '%s', '%s')",
+                Tablas.MUNICIPIO, EntradaMunicipio.ID_MUNICIPIO, EntradaMunicipio.NOMBRE_MUNICIPIO,
+                EntradaMunicipio.ID_DEPARTAMENTO, idMunicipio, "San Salvador Centro",
+                idDepartamento));
+        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s) VALUES ('%s', '%s', '%s')",
+                Tablas.DISTRITO, EntradaDistrito.ID_DISTRITO, EntradaDistrito.NOMBRE_DISTRITO,
+                EntradaDistrito.ID_MUNICIPIO, idDistrito, "San Salvador", idMunicipio));
+
+        // Insertar las 3 direcciones y para cada una de las direcciones insertar un local
+        for (int i = 0; i < calles.length; i++) {
+            String idDireccion = EntradaDireccion.generarIdDireccion();
+            db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
+                    Tablas.DIRECCION, EntradaDireccion.ID_DIRECCION, EntradaDireccion.COLONIA,
+                    EntradaDireccion.CALLE, EntradaDireccion.PASAJE, EntradaDireccion.NUMERO,
+                    EntradaDireccion.ID_DISTRITO, idDireccion, "", calles[i], "", "", idDistrito));
+            db.execSQL(String.format("INSERT INTO %s (%s, %s, %s) VALUES ('%s', '%s', '%s')",
+                    Tablas.LOCAL, EntradaLocal.ID_LOCAL, EntradaLocal.NOMBRE_LOCAL,
+                    EntradaLocal.ID_DIRECCION, EntradaLocal.generarIdLocal(), nombresLocales[i],
+                    idDireccion));
+        }
     }
 
     private void insertarDatosMetodosPago(SQLiteDatabase db) {
