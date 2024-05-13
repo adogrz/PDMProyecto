@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class Medicamento {
     private String idMedicamento;
-    private Date fechaExpedicion;
-    private Date fechaExpiracion;
-    private Boolean requiereRecetaMedica;
+    private String fechaExpedicion;
+    private String fechaExpiracion;
+    private String requiereRecetaMedica;
     private String idArticulo;
     private String idFormaFarmaceutica;
     private String idViaAdministracion;
@@ -15,8 +15,8 @@ public class Medicamento {
     public Medicamento() {
     }
 
-    public Medicamento(String idMedicamento, Date fechaExpedicion, Date fechaExpiracion,
-                       Boolean requiereRecetaMedica, String idArticulo, String idFormaFarmaceutica,
+    public Medicamento(String idMedicamento, String fechaExpedicion, String fechaExpiracion,
+                       String requiereRecetaMedica, String idArticulo, String idFormaFarmaceutica,
                        String idViaAdministracion, String idLaboratorio) {
         this.idMedicamento = idMedicamento;
         this.fechaExpedicion = fechaExpedicion;
@@ -36,27 +36,27 @@ public class Medicamento {
         this.idMedicamento = idMedicamento;
     }
 
-    public Date getFechaExpedicion() {
+    public String getFechaExpedicion() {
         return fechaExpedicion;
     }
 
-    public void setFechaExpedicion(Date fechaExpedicion) {
+    public void setFechaExpedicion(String fechaExpedicion) {
         this.fechaExpedicion = fechaExpedicion;
     }
 
-    public Date getFechaExpiracion() {
+    public String getFechaExpiracion() {
         return fechaExpiracion;
     }
 
-    public void setFechaExpiracion(Date fechaExpiracion) {
+    public void setFechaExpiracion(String fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
 
-    public Boolean getRequiereRecetaMedica() {
+    public String getRequiereRecetaMedica() {
         return requiereRecetaMedica;
     }
 
-    public void setRequiereRecetaMedica(Boolean requiereRecetaMedica) {
+    public void setRequiereRecetaMedica(String requiereRecetaMedica) {
         this.requiereRecetaMedica = requiereRecetaMedica;
     }
 
@@ -86,6 +86,11 @@ public class Medicamento {
 
     public String getIdLaboratorio() {
         return idLaboratorio;
+    }
+
+    @Override
+    public String toString() {
+        return idMedicamento;
     }
 
     public void setIdLaboratorio(String idLaboratorio) {

@@ -12,6 +12,13 @@ public class FarmaciaContrato {
         String TELEFONO_PROVEEDOR = "telefono_proveedor";
     }
 
+    public interface ColumnasRecetaMedica{
+        String ID_RECETA_MEDICA = "id_receta_medica";
+        String NUMERO_RECETA = "numero_receta";
+        String FECHA_RECETA_MEDICA = "fecha_receta_medica";
+        String ID_MEDICO = "id_medico";
+    }
+
     public interface ColumnasTipoArticulo {
         String ID_TIPO_ARTICULO = "id_tipo_articulo";
         String NOMBRE_TIPO_ARTICULO = "nombre_tipo_articulo";
@@ -108,6 +115,23 @@ public class FarmaciaContrato {
         String ID_CLIENTE = "id_cliente";
         String ID_METODO_PAGO = "id_metodo_pago";
     }
+    public interface ColumnasDetalleReceta{
+        String ID_DETALLE_RECETA = "id_detalle_receta";
+        String PERIODICIDAD = "periodicidad";
+        String DOSIS = "dosis";
+        String FECHA_INICIO_TRATAMIENTO = "fecha_inicio_tratamiento";
+        String FECHA_FIN_TRATAMIENTO = "fecha_fin_tratamiento";
+        String ID_RECETA_MEDICA = "id_receta_medica";
+        String ID_MEDICAMENTO = "id_medicamento";
+    }
+    public interface ColumnasMedico{
+        String ID_MEDICO = "id_medico";
+        String NOMBRE_MEDICO = "nombre_medico";
+        String APELLIDO_MEDICO = "apellido_medico";
+        String ESPECIALIDAD = "especialidad";
+        String JVPM = "jvpm";
+    }
+
 
     public interface ColumnasDetalleVenta {
         String ID_DETALLE_VENTA = "id_detalle_venta";
@@ -207,6 +231,21 @@ public class FarmaciaContrato {
     public static class EntradaVenta implements ColumnasVenta {
         public static String generarIdVenta() {
             return "VEN-" + UUID.randomUUID().toString();
+        }
+    }
+    public static class EntradaRecetaMedica implements ColumnasRecetaMedica {
+        public static String generarIdRecetaMedica() {
+            return "REC-" + UUID.randomUUID().toString();
+        }
+    }
+    public static class EntradaDetalleReceta implements ColumnasDetalleReceta {
+        public static String generarIdDetalleReceta() {
+            return "DET-" + UUID.randomUUID().toString();
+        }
+    }
+    public static class EntradaMedico implements ColumnasMedico {
+        public static String generarIdMedico() {
+            return "DOC-" + UUID.randomUUID().toString();
         }
     }
 

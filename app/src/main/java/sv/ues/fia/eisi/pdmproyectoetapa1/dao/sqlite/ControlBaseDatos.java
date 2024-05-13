@@ -4,14 +4,27 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DetalleRecetaDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicoDAO;
+
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LocalArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LocalDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ClienteDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DetalleVentaDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MetodoPagoDAO;
+
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.RecetaMedicaDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
+
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ViaAdministracionDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LaboratorioDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.FormaFarmaceuticaDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ClienteDAO;
+
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.VentaDAO;
 
 /**
@@ -26,6 +39,19 @@ public final class ControlBaseDatos {
     private LocalDAO locales = null;
     private ArticuloDAO articulos = null;
     private MedicamentoDAO medicamentos = null;
+    private RecetaMedicaDAO recetas = null;
+    private DetalleRecetaDAO detallesReceta = null;
+    private MedicoDAO medicos = null;
+
+    private ViaAdministracionDAO viaAdministracion = null;
+
+    private LaboratorioDAO laboratorio = null;
+
+    private FormaFarmaceuticaDAO formaFarmaceutica = null;
+
+
+    private ClienteDAO clientes = null;
+
     private LocalArticuloDAO localesArticulos = null;
     private VentaDAO venta = null;
     private ClienteDAO cliente = null;
@@ -76,7 +102,7 @@ public final class ControlBaseDatos {
      * @return Instancia de la clase que implementa la interfaz ProveedorDAO.
      */
     public ProveedorDAO getProveedorDAO() {
-        if (proveedores == null) {
+       if (proveedores == null) {
             proveedores = new ProveedorDAOImpl(baseDatos);
         }
         return proveedores;
@@ -104,17 +130,51 @@ public final class ControlBaseDatos {
         return articulos;
     }
 
+
+
     /**
      * Método que obtiene la instancia de la clase que implementa la interfaz MedicamentoDAO.
      * @return Instancia de la clase que implementa la interfaz MedicamentoDAO.
      */
-    public MedicamentoDAO getMedicamentoDAO() {
-        if (medicamentos == null) {
-            medicamentos = new MedicamentoDAOImpl(baseDatos);
+
+    public MedicamentoDAO getMedicamentosDAO(){
+        if(medicamentos == null){
+            medicamentos=new MedicamentoDAOImpl(baseDatos);
         }
         return medicamentos;
     }
 
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz ViaAdministracionDAO.
+     * @return Instancia de la clase que implementa la interfaz ViaAdministracionDAO.
+     *  */
+    public  ViaAdministracionDAO getViaAdministracionDAO(){
+        if(viaAdministracion == null){
+            viaAdministracion = new ViaAdministracionDAOImpl(baseDatos);
+        }
+        return viaAdministracion;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz LaboratorioDAO.
+     * @return Instancia de la clase que implementa la interfaz LaboratorioDAO.
+     */
+    public LaboratorioDAO getLaboratorioDAO(){
+        if(laboratorio == null){
+            laboratorio = new LaboratorioDAOImpl(baseDatos);
+        }
+        return laboratorio;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz FormaFarmaceuticaDAO.
+     * @return Instancia de la clase que implementa la interfaz FormaFarmaceuticaDAO.
+     */
+    public FormaFarmaceuticaDAO getFormaFarmaceuticaDAO(){
+        if(formaFarmaceutica == null){
+            formaFarmaceutica = new FormaFarmaceuticaDAOImpl(baseDatos);
+        }
+        return formaFarmaceutica;
     public LocalArticuloDAO getLocalArticuloDAO() {
         if (localesArticulos == null) {
             localesArticulos = new LocalArticuloDAOImpl(baseDatos);
@@ -137,6 +197,40 @@ public final class ControlBaseDatos {
      * Método que obtiene la instancia de la clase que implementa la interfaz ClienteDAO.
      * @return Instancia de la clase que implementa la interfaz ClienteDAO.
      */
+
+    public ClienteDAO getClienteDAO() {
+        if (clientes == null) {
+            clientes = new ClienteDAOImpl(baseDatos);
+        }
+        return clientes;
+    }
+
+     /* Método que obtiene la instancia de la clase que implementa la interfaz RecetaMedicaDAO.
+     * @return Instancia de la clase que implementa la interfaz RecetaMedicaDAO.
+     */
+    public RecetaMedicaDAO getRecetaMedicaDAO() {
+        if (recetas == null) {
+            recetas = new RecetaMedicaDAOImpl(baseDatos);
+        }
+        return recetas;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz DetalleRecetaDAO.
+     * @return Instancia de la clase que implementa la interfaz DetalleRecetaDAO.
+     */
+    public DetalleRecetaDAO getDetalleRecetaDAO() {
+        if (detallesReceta == null) {
+            detallesReceta = new DetalleRecetaDAOImpl(baseDatos);
+        }
+        return detallesReceta;
+    }
+    public MedicoDAO getMedicoDAO() {
+        if (medicos == null) {
+            medicos = new MedicoDAOImpl(baseDatos);
+        }
+        return medicos;
+
     public ClienteDAO getClienteDAO() {
         if(cliente == null){
             cliente = new ClienteDAOImpl(baseDatos);
@@ -164,5 +258,6 @@ public final class ControlBaseDatos {
             detalleVenta = new DetalleVentaDAOImpl(baseDatos);
         }
         return detalleVenta;
+
     }
 }

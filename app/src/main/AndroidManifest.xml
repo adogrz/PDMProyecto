@@ -13,6 +13,33 @@
         android:theme="@style/Theme.PDMProyectoEtapa1"
         tools:targetApi="31">
         <activity
+            android:name=".RecetasEliminarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecetasActualizarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecetasConsultarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecetasInsertarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuRecetaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuMedicamentos"
+            android:exported="false" />
+        <activity
+            android:name=".MedicamentosActualizarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MedicamentosInsertarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MedicamentosInsertarActivity"
+            android:exported="false"
+            tools:ignore="DuplicateActivity" />
             android:name=".EliminarArticuloActivity"
             android:exported="false" />
         <activity

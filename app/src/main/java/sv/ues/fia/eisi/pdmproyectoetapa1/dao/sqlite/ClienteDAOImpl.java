@@ -1,13 +1,18 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite;
 
+import android.database.Cursor;
 import java.util.List;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
+
+import android.database.sqlite.SQLiteDatabase;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ClienteDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DAOException;
 import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Cliente;
@@ -39,6 +44,8 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public String insertar(Cliente obj) throws DAOException {
+
+        throw new DAOException("No implementado");
         SQLiteDatabase db = baseDatos.getWritableDatabase();
 
         String idCliente = obj.getIdCliente();
@@ -57,6 +64,8 @@ public class ClienteDAOImpl implements ClienteDAO {
     @Override
     public void modificar(Cliente obj) throws DAOException {
 
+        throw new DAOException("No implementado");
+
         SQLiteDatabase db = baseDatos.getWritableDatabase();
 
         ContentValues valores = getContentValues(obj);
@@ -69,6 +78,8 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public void eliminar(Cliente obj) throws DAOException {
+
+        throw new DAOException("No implementado");
 
         SQLiteDatabase db = baseDatos.getWritableDatabase();
 
