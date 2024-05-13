@@ -3,6 +3,7 @@ package sv.ues.fia.eisi.pdmproyectoetapa1.modelo;
 public class ViaAdministracion {
     private String idViaAdministracion;
     private String viaAdministracion;
+    private String viaAdministracionCustom;
 
     public ViaAdministracion() {
     }
@@ -30,9 +31,8 @@ public class ViaAdministracion {
 
     @Override
     public String toString() {
-        return idViaAdministracion +
-                " - "
-                + viaAdministracion;
+        this.viaAdministracionCustom=this.viaAdministracionCustom= viaAdministracion;
+        return viaAdministracionCustom;
     }
 
 

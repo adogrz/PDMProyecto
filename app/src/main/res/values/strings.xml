@@ -15,11 +15,12 @@
     <string name="title_activity_medicamentos_eliminar">MedicamentosEliminarActivity</string>
     <string name="title_activity_medicamentos_actualizar">MedicamentosActualizarActivity</string>
 
+    <!--Menu de Medicamentos-->
     <string name="medicamentos_menu">Funcion a Ejecutar el Medicamento</string>
-    <string name="insertar_registro">Insertar Registro</string>
-    <string name="consultar_registro">Consultar Registro</string>
-    <string name="eliminar_registro">Eliminar Registro</string>
-    <string name="actualizar_registro">Actualizar Registro</string>
+    <string name="insertar_medicamento">Insertar medicamento</string>
+    <string name="consultar_medicamento">Consultar medicamento</string>
+    <string name="eliminar_medicamento">Eliminar medicamento</string>
+    <string name="actualizar_medicamento">Actualizar medicamento</string>
 
     <!--Atributos de la tabla articulos-->
     <string name="nombre_articulo">Nombre Articulo</string>
@@ -42,6 +43,9 @@
 
 
     <!--Atributos de la tabla medicamentos-->
+    <string name="nombre_medicamento">Medicamento</string>
+    <string name="fecha_expi_medicamento">Fecha Expiracion</string>
+    <string name="fecha_expe_medicamento">Fecha Expedicion</string>
     <string name="fecha_expedicion_medicamento">Fecha Expedicion</string>
     <string name="fecha_experacion_medicamento">Fecha Expiracion</string>
     <string name="requiere_receta_medica">Receta Medica</string>
@@ -56,6 +60,13 @@
 
 
     <!--Atributos de las llaves foraneas-->
+    <string name="id_proveedor">Proveedor</string>
+    <string name="id_medicamento">ID_Medicamento</string>
+    <string name="medicamento_id">ID_Medicamento</string>
+    <string name="id_laboratorio">Laboratorio</string>
+    <string name="id_forma_farmaceutica">Forma Farmaceutica</string>
+    <string name="id_via_administracion">Via Administracion</string>
+    <string name="id_articulo">Articulo</string>
     <string name="id_proveedor">Id Proveedor</string>
     <string name="id_medicamento">Id Medicamento</string>
     <string name="id_laboratorio">Id Laboratorio</string>

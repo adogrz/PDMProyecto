@@ -48,8 +48,7 @@ public final class ControlBaseDatos {
     private LaboratorioDAO laboratorio = null;
 
     private FormaFarmaceuticaDAO formaFarmaceutica = null;
-
-
+  
     private ClienteDAO clientes = null;
 
     private LocalArticuloDAO localesArticulos = null;
@@ -58,7 +57,7 @@ public final class ControlBaseDatos {
     private MetodoPagoDAO metodoPago = null;
     private DetalleVentaDAO detalleVenta = null;
 
-    private ControlBaseDatos(Context contexto) {
+    public ControlBaseDatos(Context contexto) {
         if (baseDatos == null) {
             baseDatos = new BaseDatosFarmacia(contexto);
         }
@@ -258,6 +257,7 @@ public final class ControlBaseDatos {
             detalleVenta = new DetalleVentaDAOImpl(baseDatos);
         }
         return detalleVenta;
+
 
     }
 }

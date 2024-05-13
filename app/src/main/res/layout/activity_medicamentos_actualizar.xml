@@ -2,8 +2,244 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/editRecta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MedicamentosActualizarActivity">
+
+
+    <TextView
+        android:id="@+id/actulizarmen"
+        android:layout_width="256dp"
+        android:layout_height="41dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/actualizar_medicamento"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.606"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/viaAdmin"
+        android:layout_width="164dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/tipo_via_administracion"
+        app:layout_constraintEnd_toStartOf="@+id/editViaAdministracionAct"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicam"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/medicam"
+        android:layout_width="164dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/nombre_medicamento"
+        app:layout_constraintEnd_toStartOf="@+id/editViaAdministracionAct"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idMeca"
+        tools:ignore="MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/editArticuloAct"
+        android:layout_width="222dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:scrollbarSize="16dp"
+        android:scrollbarStyle="outsideOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.625"
+        app:layout_constraintStart_toEndOf="@+id/idMeca"
+        app:layout_constraintTop_toTopOf="@+id/idMedAct"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
+
+    <Spinner
+        android:id="@+id/editViaAdministracionAct"
+        android:layout_width="231dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="12dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:scrollbarSize="16dp"
+        android:scrollbarStyle="outsideOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editArticuloAct"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/formaFarmaA"
+        android:layout_width="159dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/tipo_forma_farmaceutica"
+        app:layout_constraintEnd_toStartOf="@+id/editFormaFarmaceuticaAct"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viaAdmin"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/laboratorioA"
+        android:layout_width="161dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/nombre_laboratorio"
+        app:layout_constraintEnd_toStartOf="@+id/editLaboratorioAct"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/formaFarmaA"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editFechaExpedicionAct"
+        android:layout_width="181dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:hint="YYYY-DD-MM"
+        android:inputType="text"
+        android:maxLength="10"
+        android:minHeight="48dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/laboratorioA"
+        tools:ignore="Autofill,MissingConstraints,SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/editFechaExpiracionAct"
+        android:layout_width="185dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:hint="YYYY-DD-MM"
+        android:inputType="text"
+        android:maxLength="10"
+        android:minHeight="48dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editFechaExpedicionAct"
+        tools:ignore="Autofill,MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/editFormaFarmaceuticaAct"
+        android:layout_width="225dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:scrollbarSize="16dp"
+        android:scrollbarStyle="outsideOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editViaAdministracionAct" />
+
+    <Spinner
+        android:id="@+id/editLaboratorioAct"
+        android:layout_width="225dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:scrollbarSize="16dp"
+        android:scrollbarStyle="outsideOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editFormaFarmaceuticaAct" />
+
+    <Button
+        android:id="@+id/actualizarM"
+        android:layout_width="120dp"
+        android:layout_height="51dp"
+        android:text="@string/actualizar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.852"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/idMeca"
+        android:layout_width="157dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="88dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/medicamento_id"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="102dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/requiere_receta_medica"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editLaboratorioAct"
+        tools:ignore="MissingConstraints" />
+
+    <Switch
+        android:id="@+id/editRecetaMedicaAct"
+        android:layout_width="74dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="60dp"
+        android:minHeight="48dp"
+        android:text="Si"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.657"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/editLaboratorioAct"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="120dp"
+        android:layout_height="17dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/fecha_expedicion_medicamento"
+        app:layout_constraintBottom_toTopOf="@+id/editFechaExpedicionAct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/laboratorioA"
+        app:layout_constraintVertical_bias="0.714" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="112dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/fecha_expi_medicamento"
+        app:layout_constraintBottom_toTopOf="@+id/editFechaExpiracionAct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editFechaExpedicionAct"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Spinner
+        android:id="@+id/idMedAct"
+        android:layout_width="222dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="88dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/idMeca"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
