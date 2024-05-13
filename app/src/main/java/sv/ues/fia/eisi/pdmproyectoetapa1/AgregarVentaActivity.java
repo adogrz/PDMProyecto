@@ -147,14 +147,18 @@ public class AgregarVentaActivity extends Activity {
 
         //Se obtienen los datos de los campos de texto y verifica que no exista ningun error
         try {
-            //Insertando los datos en la base de datos
-            clienteDAO.insertar(cliente);
-            ventaDAO.insertar(venta);
-
+            if (codigoVenta.isEmpty() || codigoCliente.isEmpty() || idDetalleVenta.isEmpty() || Cantidad.isEmpty()) {
+                Toast.makeText(AgregarVentaActivity.this, "Por favor llene todos los campos.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             //Verificando si el articulo seleccionado tiene stock suficiente
             if (articuloSeleccionado.getStock() < Integer.parseInt(Cantidad)) {
                 Toast.makeText(AgregarVentaActivity.this, "No hay stock suficiente para realizar la venta.", Toast.LENGTH_SHORT).show();
                 return;
+            }else {
+                //Insertando los datos en la base de datos
+                clienteDAO.insertar(cliente);
+                ventaDAO.insertar(venta);
             }
             detalleVentaDAO.insertar(detalleVenta);
 
@@ -166,5 +170,14 @@ public class AgregarVentaActivity extends Activity {
         } catch (DAOException e) {
             Toast.makeText(AgregarVentaActivity.this, "Error al insertar el venta.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void limpiarCampos(View view) {
+        editCodigoVenta.setText("");
+        editCodigoDetalle.setText("");
+        editCodigoCliente.setText("");
+        editNombreCliente.setText("");
+        editApellidoCliente.setText("");
+        editCantidad.setText("");
     }
 }

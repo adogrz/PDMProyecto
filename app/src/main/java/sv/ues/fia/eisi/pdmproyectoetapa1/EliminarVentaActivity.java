@@ -55,4 +55,8 @@ public class EliminarVentaActivity extends AppCompatActivity {
         }
 
     }
+
+    public void limpiar(View v){
+        editCodigoVenta.setText("");
+    }
 }

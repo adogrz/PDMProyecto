@@ -122,6 +122,8 @@ public class AtualizarVentaActivity extends AppCompatActivity {
             String Cantidad = editCantidad.getText().toString();
             String montoTotal = String.valueOf(precioArticulo * Double.parseDouble(Cantidad));
 
+
+
             //Creando las instancias de los objetos
             Cliente cliente = new Cliente();
             Venta venta = new Venta();
@@ -148,6 +150,11 @@ public class AtualizarVentaActivity extends AppCompatActivity {
             detalleVenta.setSubtotalVenta(Double.parseDouble(montoTotal));
             detalleVenta.setCantidadProductoVenta(Integer.parseInt(Cantidad));
 
+            if (codigoVenta.isEmpty() || codigoCliente.isEmpty() || nombreCliente.isEmpty() || ApellidoCliente.isEmpty() || Cantidad.isEmpty()) {
+                Toast.makeText(AtualizarVentaActivity.this, "Por favor, rellene todos los campos.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             //Insertando los datos en la base de datos
             clienteDAO.modificar(cliente);
             ventaDAO.modificar(venta);
@@ -158,6 +165,15 @@ public class AtualizarVentaActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(AtualizarVentaActivity.this, "Error al actualizar el venta.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void limpiarCampos(View view) {
+        editCodigoVenta.setText("");
+        editCodigoDetalle.setText("");
+        editCodigoCliente.setText("");
+        editNombreCliente.setText("");
+        editApellidoCliente.setText("");
+        editCantidad.setText("");
     }
 
 }

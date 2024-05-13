@@ -29,25 +29,10 @@
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.178"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.957"
-        tools:ignore="TextSizeCheck" />
-
-    <Button
-        android:id="@+id/btn_limpiarVenta"
-        android:layout_width="125dp"
-        android:layout_height="50dp"
-        android:fontFamily="@font/baloo_tammudu"
-        android:text="@string/Limpiar"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.779"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.957"
+        app:layout_constraintVertical_bias="0.958"
         tools:ignore="TextSizeCheck" />
 
     <TextView
@@ -268,7 +253,7 @@
     <EditText
         android:id="@+id/txt_codigoDetalle"
         android:layout_width="139dp"
-        android:layout_height="36dp"
+        android:layout_height="48dp"
         android:cursorVisible="false"
         android:ems="10"
         android:enabled="false"
