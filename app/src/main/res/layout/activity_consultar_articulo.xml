@@ -1,10 +1,166 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/consular_articulo_activity"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ConsultarArticuloActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvTituloConsultarArticulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/consultar_articulo"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvIdArticulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/id_articulo"
+        android:layout_below="@id/tvTituloConsultarArticulo"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"/>
+
+    <EditText
+        android:id="@+id/etNombreArticulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tvIdArticulo"
+        android:layout_alignBaseline="@id/tvIdArticulo"
+        android:layout_marginStart="8dp"
+        android:hint="@string/id_articulo"
+        android:inputType="text"
+        android:layout_marginEnd="16dp"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/btnMostrarDatos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mostrar_datos"
+        android:layout_below="@id/etNombreArticulo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"/>
+
+    <TextView
+        android:id="@+id/tvNombreLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nombre_articulo"
+        android:layout_below="@id/btnMostrarDatos"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tvNombreArticulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tvNombreLabel"
+        android:layout_alignBaseline="@id/tvNombreLabel"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/tvPrecioUnitarioArticuloLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/precio_unitario_label"
+        android:layout_below="@id/tvNombreLabel"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tvPrecioUnitario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tvPrecioUnitarioArticuloLabel"
+        android:layout_alignBaseline="@id/tvPrecioUnitarioArticuloLabel"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/tvStockArticuloLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stock_label"
+        android:layout_below="@id/tvPrecioUnitarioArticuloLabel"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tvStock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tvStockArticuloLabel"
+        android:layout_alignBaseline="@id/tvStockArticuloLabel"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/tvDescripcionArticuloLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/descripcion_articulo"
+        android:layout_below="@id/tvStockArticuloLabel"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tvDescripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tvDescripcionArticuloLabel"
+        android:layout_alignBaseline="@id/tvDescripcionArticuloLabel"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/tvTipoArticuloLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tipo_articulo_articulo"
+        android:layout_below="@id/tvDescripcionArticuloLabel"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tvTipoArticulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tvTipoArticuloLabel"
+        android:layout_alignBaseline="@id/tvTipoArticuloLabel"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/tvLocalArticuloLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/local_articulo"
+        android:layout_below="@id/tvTipoArticuloLabel"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tvLocalArticulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tvLocalArticuloLabel"
+        android:layout_alignBaseline="@id/tvLocalArticuloLabel"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/tvProveedorArticuloLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/proveedor_articulo"
+        android:layout_below="@id/tvLocalArticuloLabel"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tvProveedorArticulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tvProveedorArticuloLabel"
+        android:layout_alignBaseline="@id/tvProveedorArticuloLabel"
+        android:layout_marginStart="8dp" />
+</RelativeLayout>
