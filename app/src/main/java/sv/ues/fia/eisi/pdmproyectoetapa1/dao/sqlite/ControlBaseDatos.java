@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LocalArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LocalDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
@@ -21,6 +22,7 @@ public final class ControlBaseDatos {
     private LocalDAO locales = null;
     private ArticuloDAO articulos = null;
     private MedicamentoDAO medicamentos = null;
+    private LocalArticuloDAO localesArticulos = null;
 
     private ControlBaseDatos(Context contexto) {
         if (baseDatos == null) {
@@ -103,5 +105,13 @@ public final class ControlBaseDatos {
             medicamentos = new MedicamentoDAOImpl(baseDatos);
         }
         return medicamentos;
+    }
+
+    public LocalArticuloDAO getLocalArticuloDAO() {
+        if (localesArticulos == null) {
+            localesArticulos = new LocalArticuloDAOImpl(baseDatos);
+        }
+
+        return localesArticulos;
     }
 }
