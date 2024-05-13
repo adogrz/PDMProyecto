@@ -4,9 +4,13 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ClienteDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DetalleVentaDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MetodoPagoDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.VentaDAO;
 
 /**
  * Clase auxiliar que implementa {@link BaseDatosFarmacia} para llevar a cabo la conexión a la base
@@ -19,6 +23,10 @@ public final class ControlBaseDatos {
     private ProveedorDAO proveedores = null;
     private ArticuloDAO articulos = null;
     private MedicamentoDAO medicamentos = null;
+    private VentaDAO venta = null;
+    private ClienteDAO cliente = null;
+    private MetodoPagoDAO metodoPago = null;
+    private DetalleVentaDAO detalleVenta = null;
 
     private ControlBaseDatos(Context contexto) {
         if (baseDatos == null) {
@@ -90,5 +98,49 @@ public final class ControlBaseDatos {
             medicamentos = new MedicamentoDAOImpl(baseDatos);
         }
         return medicamentos;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz VentaDAO.
+     * @return Instancia de la clase que implementa la interfaz VentaDAO.
+     */
+    public VentaDAO getVentaDAO() {
+        if (venta == null) {
+            venta = new VentaDAOImpl(baseDatos);
+        }
+        return venta;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz ClienteDAO.
+     * @return Instancia de la clase que implementa la interfaz ClienteDAO.
+     */
+    public ClienteDAO getClienteDAO(){
+        if(cliente == null){
+            cliente = new ClienteDAOImpl(baseDatos);
+        }
+        return cliente;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz MetodoPagoDAO.
+     * @return Instancia de la clase que implementa la interfaz MetodoPagoDAO.
+     */
+    public MetodoPagoDAO getMetodoPagoDAO() {
+        if (metodoPago == null) {
+            metodoPago = new MetodoPagoDAOImpl(baseDatos);
+        }
+        return metodoPago;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz DetalleVentaDAO.
+     * @return Instancia de la clase que implementa la interfaz DetalleventaDAO.
+     */
+    public DetalleVentaDAO getDetalleVentaDAO() {
+        if (detalleVenta == null) {
+            detalleVenta = new DetalleVentaDAOImpl(baseDatos);
+        }
+        return detalleVenta;
     }
 }
