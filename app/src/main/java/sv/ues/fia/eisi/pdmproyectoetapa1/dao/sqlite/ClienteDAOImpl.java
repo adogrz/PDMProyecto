@@ -39,7 +39,6 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public String insertar(Cliente obj) throws DAOException {
-
         SQLiteDatabase db = baseDatos.getWritableDatabase();
 
         String idCliente = obj.getIdCliente();
