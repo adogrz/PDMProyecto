@@ -5,8 +5,6 @@ import android.annotation.SuppressLint;
 
 import android.os.Bundle;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -42,7 +40,7 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
 
     EditText medicamentoid,fechaExpedicionS, fechaExperacionS;
     Spinner articuloMedicamento,formaFarmaceutica,viaAdministracion,laboratorio;
-    Button guardarMedicamento;
+    Button guardarMedicamento,limpiarMedicamento;
 
     Switch recetaMedicaS;
 
@@ -61,16 +59,26 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
         formaFarmaceutica = findViewById(R.id.editFormaFarmaceutica);
         viaAdministracion = findViewById(R.id.editViaAdministracion);
         laboratorio = findViewById(R.id.editLaboratorio);
-        guardarMedicamento = findViewById(R.id.btnInsertarMedicamento);
+        guardarMedicamento = findViewById(R.id.insertarM);
+        limpiarMedicamento = findViewById(R.id.btnLimpiarMedicamento);
         //Llenado de los spinner
         spinnerArticuloM();
         spinnerViadministracion();
         spinnerFormaFarmaceutica();
         spinnerLaboratorio();
+
+        //Guardar medicamento
         guardarMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 insertarMedicamento();
+            }
+        });
+        //Limpiar campos
+        limpiarMedicamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limpiarCampos(v);
             }
         });
 
@@ -209,6 +217,13 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
         } catch (DAOException e) {
             Toast.makeText(this, "Error al insertar el medicamento", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void limpiarCampos(View v) {
+        medicamentoid.setText("");
+        fechaExpedicionS.setText("");
+        fechaExperacionS.setText("");
+        recetaMedicaS.setChecked(false);
     }
 
 

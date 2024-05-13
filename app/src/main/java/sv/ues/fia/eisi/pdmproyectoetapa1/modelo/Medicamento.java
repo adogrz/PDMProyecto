@@ -12,6 +12,8 @@ public class Medicamento {
     private String idViaAdministracion;
     private String idLaboratorio;
 
+    private String idMedicamentoCustom;
+
     public Medicamento() {
     }
 
@@ -91,4 +93,11 @@ public class Medicamento {
     public void setIdLaboratorio(String idLaboratorio) {
         this.idLaboratorio = idLaboratorio;
     }
+
+    @Override
+   public String toString(){
+        this.idMedicamentoCustom=this.idMedicamentoCustom=this.idMedicamento;
+        return this.idMedicamentoCustom;
+    }
+
 }

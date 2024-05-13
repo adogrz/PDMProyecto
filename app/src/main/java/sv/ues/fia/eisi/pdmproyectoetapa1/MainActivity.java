@@ -95,19 +95,6 @@ public class MainActivity extends AppCompatActivity {
            Toast.makeText(MainActivity.this,"Error al insertar articulo",Toast.LENGTH_SHORT).show();
         }*/
 
-        textView = findViewById(R.id.textViewPrueba);
 
-        ControlBaseDatos controlBaseDatos = ControlBaseDatos.obtenerInstancia(MainActivity.this);
-        ProveedorDAO proveedorDAO = controlBaseDatos.getProveedorDAO();
-
-        try {
-            List<Proveedor> proveedores = proveedorDAO.obtenerTodos();
-            Proveedor primerProveedor = proveedores.get(1);
-            Proveedor proveedorEncontrado = proveedorDAO.obtener(primerProveedor.getIdProveedor());
-            textView.setText(proveedorEncontrado.getNombre());
-            Toast.makeText(MainActivity.this, "Proveedores obtenidos correctamente.", Toast.LENGTH_SHORT).show();
-        } catch (DAOException e) {
-            Toast.makeText(MainActivity.this, "Error al obtener los proveedores.", Toast.LENGTH_SHORT).show();
-        }
     }
 }

@@ -155,7 +155,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editFormaFarmaceutica" />
 
     <Button
-        android:id="@+id/btnInsertarMedicamento"
+        android:id="@+id/insertarM"
         android:layout_width="107dp"
         android:layout_height="55dp"
         android:text="@string/insertar"
