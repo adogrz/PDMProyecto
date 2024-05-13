@@ -33,4 +33,5 @@
     <string name="mostrar_datos">Mostrar datos</string>
     <string name="eliminar_articulo_title">Eliminar articulo</string>
     <string name="eliminar_articulo">Eliminar articulo</string>
+    <string name="modificar_articulo_title">Modificar articulo</string>
 </resources>
