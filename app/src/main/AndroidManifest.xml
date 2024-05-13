@@ -40,6 +40,35 @@
             android:name=".MedicamentosInsertarActivity"
             android:exported="false"
             tools:ignore="DuplicateActivity" />
+            android:name=".EliminarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModificarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InsertarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConsultarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ArticuloMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EliminarVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConsultarVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AtualizarVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuVentasActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

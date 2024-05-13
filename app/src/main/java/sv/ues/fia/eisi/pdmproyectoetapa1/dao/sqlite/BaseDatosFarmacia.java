@@ -16,7 +16,6 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.RecetaMedica;
 public final class BaseDatosFarmacia extends SQLiteOpenHelper {
     private static final String NOMBRE_BASE_DATOS = "proyectoEtapa1.s3db";
     private static final int VERSION_BASE_DATOS = 1;
-    private final Context contexto;
 
     /**
      * Interfaz que establece los nombres de las tablas de la base de datos.
@@ -41,6 +40,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         String RECETA_MEDICA = "receta_medica";
         String DETALLE_RECETA = "detalle_receta";
         String MEDICO = "medico";
+        String DETALLE_VENTA = "detalle_venta";
     }
 
     /**
@@ -81,11 +81,13 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Tablas.MEDICO, EntradaMedico.ID_MEDICO);
         String ID_DETALLE_RECETA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.DETALLE_RECETA, EntradaDetalleReceta.ID_DETALLE_RECETA);
+
+        String ID_VENTA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.VENTA, EntradaVenta.ID_VENTA);
     }
 
     public BaseDatosFarmacia(Context context) {
         super(context, NOMBRE_BASE_DATOS, null, VERSION_BASE_DATOS);
-        this.contexto = context;
     }
 
     /**
@@ -171,10 +173,10 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 BaseColumns._ID, EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA,
                 EntradaFormaFarmaceutica.TIPO_FORMA_FARMACEUTICA));
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "%s TEXT UNIQUE NOT NULL, %s REAL NOT NULL, %s DATE NOT NULL, %s TEXT " +
-                        "NOT NULL %S, %s TEXT NOT NULL %s)", Tablas.VENTA, BaseColumns._ID,
-                EntradaVenta.ID_VENTA, EntradaVenta.MONTO_TOTAL_VENTA, EntradaVenta.FECHA_VENTA,
-                EntradaMetodoPago.ID_METODO_PAGO, Referencias.ID_METODO_PAGO,
+                "%s TEXT UNIQUE NOT NULL, %s REAL NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL %S," +
+                "%s TEXT NOT NULL %s)", Tablas.VENTA, BaseColumns._ID, EntradaVenta.ID_VENTA,
+                EntradaVenta.MONTO_TOTAL_VENTA, EntradaVenta.FECHA_VENTA,
+                EntradaVenta.ID_METODO_PAGO, Referencias.ID_METODO_PAGO,
                 EntradaVenta.ID_CLIENTE, Referencias.ID_CLIENTE));
         //tabla medicamento
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -212,6 +214,20 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 EntradaDetalleReceta.ID_RECETA_MEDICA, Referencias.ID_RECETA_MEDICA, EntradaDetalleReceta.ID_MEDICAMENTO, Referencias.ID_MEDICAMENTO));
         // TODO Crear tabla de detalle venta
         // TODO Crear tabla de venta
+        // TODO Crear tabla de medicamento
+        // TODO Crear tabla de receta
+        // TODO Crear tabla de detalle receta
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT UNIQUE NOT NULL, %s INTEGER NOT NULL, %s REAL NOT NULL, %s TEXT NOT NULL %S," +
+                        "%s TEXT NOT NULL %s)", Tablas.DETALLE_VENTA, BaseColumns._ID, EntradaDetalleVenta.ID_DETALLE_VENTA,
+                EntradaDetalleVenta.CANTIDAD_PRODUCTO_VENTA, EntradaDetalleVenta.SUBTOTAL_VENTA,
+                EntradaDetalleVenta.ID_VENTA, Referencias.ID_VENTA,
+                EntradaDetalleVenta.ID_ARTICULO, Referencias.ID_ARTICULO));
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL," +
+                        "%s TEXT NOT NULL)", Tablas.CLIENTE, BaseColumns._ID,
+                EntradaCliente.ID_CLIENTE, EntradaCliente.NOMBRE_CLIENTE,
+                EntradaCliente.APELLIDO_CLIENTE));
         // TODO Crear tabla de detalle compra
         // TODO Crear tabla de compra
 
@@ -240,6 +256,8 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
 
         // Insertar datos de prueba en la tabla LOCAL
         insertarDatosLocales(db);
+
+
     }
 
     private void insertarDatosProveedores(SQLiteDatabase db) {
@@ -326,7 +344,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
     }
 
     private void insertarDatosMetodosPago(SQLiteDatabase db) {
-        String[] metodosPago = {"Efectivo", "Tarjeta de crédito", "Tarjeta de débito",
+        String[] metodosPago = {"Efectivo", "Tarjeta de credito", "Tarjeta de debito",
                 "Transferencia bancaria", "Bitcoin"};
         StringBuilder query = new StringBuilder("INSERT INTO ");
 
@@ -395,7 +413,6 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
 
         db.execSQL(query.toString());
     }
-
     private void insertarDatosFormasFarmaceuticas(SQLiteDatabase db) {
         String[] formasFarmaceuticas = {"Tableta", "Cápsula", "Jarabe", "Suspensión", "Solución",
                 "Crema", "Gel", "Parche", "Supositorio", "Inyectable"};
@@ -421,10 +438,13 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(format("DROP TABLE IF EXISTS %s", Tablas.ARTICULO));
-        db.execSQL(format("DROP TABLE IF EXISTS %s", Tablas.PROVEEDOR));
-        db.execSQL(format("DROP TABLE IF EXISTS %s", Tablas.TIPO_ARTICULO));
 
+        db.execSQL(String.format("DROP TABLE IF EXISTS %s", Tablas.ARTICULO));
+        db.execSQL(String.format("DROP TABLE IF EXISTS %s", Tablas.PROVEEDOR));
+        db.execSQL(String.format("DROP TABLE IF EXISTS %s", Tablas.TIPO_ARTICULO));
+        db.execSQL(String.format("DROP TABLE IF EXISTS %s", Tablas.CLIENTE));
+        db.execSQL(String.format("DROP TABLE IF EXIST %s", Tablas.VENTA));
+        db.execSQL(String.format("DROP TABLE IF EXIST %s", Tablas.METODO_PAGO));
         onCreate(db);
     }
 }

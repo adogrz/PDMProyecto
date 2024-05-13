@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">PDMProyectoEtapa1</string>
 
-
     <!--CRUD GENERAL-->
     <string name="Ventas">Ventas</string>
     <string name="Compras">Compras</string>
@@ -90,4 +89,65 @@
     <string name="actualizarRecetaMedica">Actualizar Datos de la Receta</string>
     <string name="btn_actualizarReceta">Actualizar Receta</string>
     <string name="consultaMedicamentoReceta">Medicamento:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="stock_label">Stock:</string>
+    <string name="precio_unitario_label">Precio Unitario:</string>
+    <string name="titulo_vista_articulos">Articulos</string>
+    <string name="nombre_articulo">Nombre:</string>
+    <string name="precio_unitario_articulo">Precio unitario:</string>
+    <string name="descripcion_articulo">Descripción:</string>
+    <string name="stock_articulo">Stock:</string>
+    <string name="tipo_articulo">Tipo:</string>
+    <string name="local_articulo">Local:</string>
+    <string name="proveedor_articulo">Proveedor:</string>
+    <string name="action_edit_articulo">Editar artículo</string>
+    <string name="action_delete_articulo">Eliminar Artículo</string>
+    <string name="field_error">Campo requerido</string>
+    <string name="Ventas">Ventas</string>
+    <string name="titulo_menu_articulos">Menú de Artículos</string>
+    <string name="boton_consultar_articulo">Consultar Artículo</string>
+    <string name="boton_insertar_articulo">Insertar Artículo</string>
+    <string name="boton_modificar_articulo">Modificar Artículo</string>
+    <string name="boton_eliminar_articulo">Eliminar Artículo</string>
+    <string name="insertar_articulo_label">Insertar Artículo</string>
+    <string name="id_articulo">Id Artículo:</string>
+    <string name="tipo_articulo_articulo">Tipo articulo:</string>
+    <string name="insertar_un_nuevo_articulo">Insertar un nuevo articulo</string>
+    <string name="consultar_articulo">Consultar Artículo</string>
+    <string name="mostrar_datos">Mostrar datos</string>
+    <string name="eliminar_articulo_title">Eliminar articulo</string>
+    <string name="eliminar_articulo">Eliminar articulo</string>
+    <string name="modificar_articulo_title">Modificar articulo</string>
+    <string name="MenuPrincipal">Menu Farmacia/Libreria</string>
+    <string name="Compras">Compras</string>
+    <string name="Medicamentos">Medicamentos</string>
+    <string name="Articulos">Articulos</string>
+    <string name="RecetasMedicas">Recetas Medicas</string>
+    <string name="MenuVenta">Ventas</string>
+    <string name="OpcionAgregarVenta">Agregar Venta</string>
+    <string name="OpcionActualizarVenta">Actualizar Venta</string>
+    <string name="OpcionConsultarVenta">Consultar Venta</string>
+    <string name="OpcionEliminarVenta">Eliminar Venta</string>
+    <string name="RealizarVenta">Realizar venta</string>
+    <string name="MetodoPago">Método de pago:</string>
+    <string name="CodigoVenta">Codigo de venta:</string>
+    <string name="CodigoDetalleVenta">Codigo de detalle de venta:</string>
+    <string name="CodigoDetalle">Codigo del detalle de venta:</string>
+    <string name="CodigoV">Codigo de la venta</string>
+    <string name="Articulo">Articulo:</string>
+    <string name="Cantidad">Cantidad:</string>
+    <string name="CantidadVenta">Cantidad</string>
+    <string name="DatosCliente">Datos del Cliente</string>
+    <string name="CodigoCliente">Codigo:</string>
+    <string name="Codigo">Codigo del cliente</string>
+    <string name="Nombre">Nombre:</string>
+    <string name="Apellido">Apellido:</string>
+    <string name="Guardar">Guardar</string>
+    <string name="Actualizar">Actualizar</string>
+    <string name="Consultar">Consultar</string>
+    <string name="Eliminar">Eliminar</string>
+    <string name="Limpiar">Limpiar</string>
+    <string name="NombreCliente">Nombre del cliente</string>
+    <string name="ApellidoCliente">Apellido del cliente</string>
 </resources>

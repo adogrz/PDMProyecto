@@ -3,16 +3,17 @@ package sv.ues.fia.eisi.pdmproyectoetapa1.modelo;
 public class Articulo {
     private String idArticulo;
     private String nombre;
-    private Double precioUnitario;
+    private double precioUnitario;
     private int stock;
     private String descripcion;
     private String idProveedor;
     private String idTipoArticulo;
+    private String articuloCustom;
 
     public Articulo() {
     }
 
-    public Articulo(String idArticulo, String nombre, Double precioUnitario, int stock,
+    public Articulo(String idArticulo, String nombre, double precioUnitario, int stock,
                     String descripcion, String idProveedor, String idTipoArticulo) {
         this.idArticulo = idArticulo;
         this.nombre = nombre;
@@ -39,11 +40,10 @@ public class Articulo {
         this.nombre = nombre;
     }
 
-    public Double getPrecioUnitario() {
+    public double getPrecioUnitario() {
         return precioUnitario;
     }
-
-    public void setPrecioUnitario(Double precioUnitario) {
+    public void setPrecioUnitario(double precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
 
@@ -77,5 +77,10 @@ public class Articulo {
 
     public void setIdTipoArticulo(String idTipoArticulo) {
         this.idTipoArticulo = idTipoArticulo;
+    }
+
+    public String toString() {
+        articuloCustom = nombre;
+        return articuloCustom;
     }
 }

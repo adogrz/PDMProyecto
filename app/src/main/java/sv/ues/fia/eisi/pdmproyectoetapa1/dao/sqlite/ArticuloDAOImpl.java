@@ -92,7 +92,8 @@ public class ArticuloDAOImpl implements ArticuloDAO {
 
     @Override
     public String insertar(Articulo obj) throws DAOException {
-        // Verificar que el articulo, el proveedor y el tipo de articulo existan
+
+        // Verificar que al insertar un nuevo articulo, el proveedor y el tipo de articulo existan
         if (verificarIntegridad(obj, 1)) {
             throw new DAOException("ArticuloDAO: No se pueden insertar un articulo con un " +
                     "proveedor o tipo de articulo no existente.");
