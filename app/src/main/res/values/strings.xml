@@ -31,4 +31,6 @@
     <string name="insertar_un_nuevo_articulo">Insertar un nuevo articulo</string>
     <string name="consultar_articulo">Consultar Artículo</string>
     <string name="mostrar_datos">Mostrar datos</string>
+    <string name="eliminar_articulo_title">Eliminar articulo</string>
+    <string name="eliminar_articulo">Eliminar articulo</string>
 </resources>
