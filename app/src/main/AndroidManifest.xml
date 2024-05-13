@@ -38,7 +38,8 @@
             android:exported="false" />
         <activity
             android:name=".MedicamentosInsertarActivity"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="DuplicateActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
