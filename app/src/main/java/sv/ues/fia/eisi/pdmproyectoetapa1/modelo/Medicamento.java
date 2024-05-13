@@ -88,6 +88,11 @@ public class Medicamento {
         return idLaboratorio;
     }
 
+    @Override
+    public String toString() {
+        return idMedicamento;
+    }
+
     public void setIdLaboratorio(String idLaboratorio) {
         this.idLaboratorio = idLaboratorio;
     }

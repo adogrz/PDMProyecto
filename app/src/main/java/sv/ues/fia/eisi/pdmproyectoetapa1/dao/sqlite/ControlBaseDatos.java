@@ -39,7 +39,6 @@ public final class ControlBaseDatos {
 
     private FormaFarmaceuticaDAO formaFarmaceutica = null;
 
-    private ProveedorDAO proveedores = null;
 
     private ClienteDAO clientes = null;
 
@@ -162,8 +161,9 @@ public final class ControlBaseDatos {
             clientes = new ClienteDAOImpl(baseDatos);
         }
         return clientes;
+    }
 
-     * Método que obtiene la instancia de la clase que implementa la interfaz RecetaMedicaDAO.
+     /* Método que obtiene la instancia de la clase que implementa la interfaz RecetaMedicaDAO.
      * @return Instancia de la clase que implementa la interfaz RecetaMedicaDAO.
      */
     public RecetaMedicaDAO getRecetaMedicaDAO() {

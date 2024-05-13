@@ -121,8 +121,8 @@ public class FarmaciaContrato {
         String DOSIS = "dosis";
         String FECHA_INICIO_TRATAMIENTO = "fecha_inicio_tratamiento";
         String FECHA_FIN_TRATAMIENTO = "fecha_fin_tratamiento";
-        String ID_MEDICAMENTO = "id_medicamento";
         String ID_RECETA_MEDICA = "id_receta_medica";
+        String ID_MEDICAMENTO = "id_medicamento";
     }
     public interface ColumnasMedico{
         String ID_MEDICO = "id_medico";

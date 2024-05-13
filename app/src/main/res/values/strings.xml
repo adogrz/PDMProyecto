@@ -63,4 +63,31 @@
     <string name="id_forma_farmaceutica">Id Forma Farmaceutica</string>
     <string name="id_via_administracion">Id Via Administracion</string>
     <string name="id_articulo">Id Articulo</string>
+
+    <!--Recetas Medicas-->
+    <string name="InsertarRecetaMedica">Insertar Receta Medica</string>
+    <string name="numeroReceta">Numero de Receta: </string>
+    <string name="editNumeroReceta">Ingresar numero de receta</string>
+    <string name="fechaReceta">Fecha de Receta</string>
+    <string name="fechaExpedicion">Fecha de Expedicion</string>
+    <string name="detallesMedico">Detalles del Medico</string>
+    <string name="nombreMedico">"Nombre del Medico: "</string>
+    <string name="apellidoMedico">"Apellido del Medico: "</string>
+    <string name="especialidadMedico">"Especialidad: "</string>
+    <string name="jvpmMedico">"JVPM: "</string>
+    <string name="detallesReceta">Detalle de la Receta</string>
+    <string name="dosisReceta">"Dosis: "</string>
+    <string name="periodicidadReceta">"Periodicidad: "</string>
+    <string name="fechaInicioTratamiento">"Fecha de inicio: "</string>
+    <string name="fechaFinTratamiento">"Fecha de Finalizacion: "</string>
+    <string name="idRecetaMedica">id de la Receta: </string>
+    <string name="idMedico">"id Medico: "</string>
+    <string name="idDetalleReceta">"id Detalle Receta: "</string>
+    <string name="btn_eliminarReceta">Eliminar Receta</string>
+    <string name="btnConsultarRecetas">Consultar Receta</string>
+    <string name="RecetaMedicas">Receta Medica</string>
+    <string name="editarRecetaMedica">Editar Receta Medica</string>
+    <string name="actualizarRecetaMedica">Actualizar Datos de la Receta</string>
+    <string name="btn_actualizarReceta">Actualizar Receta</string>
+    <string name="consultaMedicamentoReceta">Medicamento:</string>
 </resources>

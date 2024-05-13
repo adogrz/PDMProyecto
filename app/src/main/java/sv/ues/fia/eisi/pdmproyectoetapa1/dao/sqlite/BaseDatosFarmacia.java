@@ -79,6 +79,8 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Tablas.RECETA_MEDICA, EntradaRecetaMedica.ID_RECETA_MEDICA);
         String ID_MEDICO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.MEDICO, EntradaMedico.ID_MEDICO);
+        String ID_DETALLE_RECETA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.DETALLE_RECETA, EntradaDetalleReceta.ID_DETALLE_RECETA);
     }
 
     public BaseDatosFarmacia(Context context) {
@@ -198,11 +200,11 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 EntradaMedico.JVPM));
         //tabla de receta
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "%s TEXT NOT NULL, %s INTEGER NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL %s)", Tablas.RECETA_MEDICA, BaseColumns._ID,
+                        "%s TEXT UNIQUE NOT NULL, %s INTEGER NOT NULL, %s DATE NOT NULL, %s TEXT NOT NULL %s)", Tablas.RECETA_MEDICA, BaseColumns._ID,
                 EntradaRecetaMedica.ID_RECETA_MEDICA, EntradaRecetaMedica.NUMERO_RECETA, EntradaRecetaMedica.FECHA_RECETA_MEDICA, EntradaRecetaMedica.ID_MEDICO, Referencias.ID_MEDICO));
         //tabla de detalle receta
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "%s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s DATE NOT NULL, " +
+                        "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s DATE NOT NULL, " +
                         "%s DATE NOT NULL, %s TEXT NOT NULL %s, %s TEXT NOT NULL %s)",
                 Tablas.DETALLE_RECETA, BaseColumns._ID, EntradaDetalleReceta.ID_DETALLE_RECETA,
                 EntradaDetalleReceta.PERIODICIDAD, EntradaDetalleReceta.DOSIS,

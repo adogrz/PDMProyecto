@@ -40,6 +40,11 @@ public class RecetaMedica {
         this.idMedico = idMedico;
     }
 
+    @Override
+    public String toString() {
+        return idReceta;
+    }
+
     public RecetaMedica(String idReceta, String numeroReceta, String fechaReceta, String idMedico) {
         this.idReceta = idReceta;
         this.numeroReceta = numeroReceta;
