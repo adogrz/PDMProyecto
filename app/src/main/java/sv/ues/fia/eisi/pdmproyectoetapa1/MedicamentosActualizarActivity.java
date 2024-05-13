@@ -55,7 +55,6 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
         viaAdministracion = findViewById(R.id.editViaAdministracionAct);
         laboratorio = findViewById(R.id.editLaboratorioAct);
         actualizarMedicamento = findViewById(R.id.actualizarM);
-        limpiarMedicamento = findViewById(R.id.btConsultar);
         //Spinners
         SpinnerMedicamento();
         spinnerArticuloM();
