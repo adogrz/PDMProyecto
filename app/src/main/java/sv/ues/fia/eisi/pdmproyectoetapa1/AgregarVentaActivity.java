@@ -150,6 +150,12 @@ public class AgregarVentaActivity extends Activity {
             //Insertando los datos en la base de datos
             clienteDAO.insertar(cliente);
             ventaDAO.insertar(venta);
+
+            //Verificando si el articulo seleccionado tiene stock suficiente
+            if (articuloSeleccionado.getStock() < Integer.parseInt(Cantidad)) {
+                Toast.makeText(AgregarVentaActivity.this, "No hay stock suficiente para realizar la venta.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             detalleVentaDAO.insertar(detalleVenta);
 
             articuloSeleccionado.setStock(articuloSeleccionado.getStock() - Integer.parseInt(Cantidad));
