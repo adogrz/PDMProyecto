@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_insertar_articulo"
     android:layout_width="match_parent"
@@ -12,129 +10,150 @@
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="@string/insertar_articulo_label"
         android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewIdArticuloHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewTitle"
+        android:layout_marginTop="16dp"
+        android:text="@string/id_articulo"
+        android:textSize="16sp"
+        android:textColor="#A9A9A9"/>
 
     <EditText
         android:id="@+id/editTextIdArticulo"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:autofillHints=""
-        android:hint="@string/id_articulo"
+        android:layout_below="@id/textViewIdArticuloHint"
+        android:layout_marginTop="8dp"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/textViewNombreArticuloHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextIdArticulo"
+        android:layout_marginTop="16dp"
+        android:text="@string/nombre_articulo"
+        android:textSize="16sp"
+        android:textColor="#A9A9A9"/>
 
     <EditText
         android:id="@+id/editTextNombreArticulo"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:autofillHints=""
-        android:hint="@string/nombre_articulo"
+        android:layout_below="@id/textViewNombreArticuloHint"
+        android:layout_marginTop="8dp"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextIdArticulo" />
+        android:autofillHints=""
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/textViewPrecioUnitarioArticuloHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextNombreArticulo"
+        android:layout_marginTop="16dp"
+        android:text="@string/precio_unitario_articulo"
+        android:textSize="16sp"
+        android:textColor="#A9A9A9"/>
 
     <EditText
         android:id="@+id/editTextPrecioUnitarioArticulo"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:autofillHints=""
-        android:hint="@string/precio_unitario_articulo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/textViewPrecioUnitarioArticuloHint"
+        android:layout_marginTop="8dp"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNombreArticulo" />
+        android:autofillHints=""
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/textViewDescripcionArticuloHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextPrecioUnitarioArticulo"
+        android:layout_marginTop="16dp"
+        android:text="@string/descripcion_articulo"
+        android:textSize="16sp"
+        android:textColor="#A9A9A9"/>
 
     <EditText
         android:id="@+id/editTextDescripcionArticulo"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:autofillHints=""
-        android:hint="@string/descripcion_articulo"
+        android:layout_below="@id/textViewDescripcionArticuloHint"
+        android:layout_marginTop="8dp"
         android:inputType="textMultiLine"
         android:minLines="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPrecioUnitarioArticulo" />
+        android:autofillHints="" />
 
     <TextView
-        android:id="@+id/textViewProveedorHint"
+        android:id="@+id/textViewProveedorArticuloHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_below="@id/editTextDescripcionArticulo"
+        android:layout_marginTop="16dp"
         android:text="@string/proveedor_articulo"
-        android:textColor="#A9A9A9"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="389dp" />
+        android:textColor="#A9A9A9"/>
 
     <Spinner
         android:id="@+id/spinnerProveedorArticulo"
-        android:layout_width="259dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerTipoArticuloArticulo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
-        app:layout_constraintStart_toEndOf="@+id/textViewProveedorHint" />
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/textViewProveedorArticuloHint"
+        android:layout_marginTop="8dp"/>
 
     <TextView
         android:id="@+id/textViewTipoArticuloHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerProveedorArticulo"
+        android:layout_marginTop="16dp"
         android:text="@string/tipo_articulo_articulo"
-        android:textColor="#A9A9A9"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerTipoArticuloArticulo"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="475dp" />
+        android:textColor="#A9A9A9"/>
 
     <Spinner
         android:id="@+id/spinnerTipoArticuloArticulo"
-        android:layout_width="261dp"
-        android:layout_height="65dp"
-        android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerLocalArticulo"
-        tools:layout_editor_absoluteX="120dp" />
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/textViewTipoArticuloHint"
+        android:layout_marginTop="8dp"/>
 
     <TextView
-        android:id="@+id/textViewLocalHint"
+        android:id="@+id/textViewLocalArticuloHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerTipoArticuloArticulo"
+        android:layout_marginTop="16dp"
         android:text="@string/local_articulo"
-        android:textColor="#A9A9A9"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerLocalArticulo"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="555dp" />
+        android:textColor="#A9A9A9"/>
 
     <Spinner
         android:id="@+id/spinnerLocalArticulo"
-        android:layout_width="257dp"
-        android:layout_height="52dp"
-        tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="541dp" />
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/textViewLocalArticuloHint"
+        android:layout_marginTop="8dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabGuardarActiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:contentDescription="@string/insertar_un_nuevo_articulo"
-        android:src="@android:drawable/ic_menu_save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:src="@android:drawable/ic_menu_save"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

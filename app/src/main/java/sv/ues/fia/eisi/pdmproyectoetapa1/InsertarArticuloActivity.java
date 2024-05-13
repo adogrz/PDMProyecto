@@ -3,7 +3,6 @@ package sv.ues.fia.eisi.pdmproyectoetapa1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -13,14 +12,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-import sv.ues.fia.eisi.pdmproyectoetapa1.adapter.CustomSpinnerAdapter;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DAOException;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LocalDAO;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
-import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.sqlite.ControlBaseDatos;
 import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Articulo;
 import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Local;
+import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.LocalArticulo;
 import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.Proveedor;
 import sv.ues.fia.eisi.pdmproyectoetapa1.modelo.TipoArticulo;
 
@@ -47,12 +43,7 @@ public class InsertarArticuloActivity extends AppCompatActivity {
 
         llenarSpinners();
 
-        botGuardarArticulo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                insertarArticulo();
-            }
-        });
+        botGuardarArticulo.setOnClickListener(v -> insertarArticulo());
     }
 
     private void llenarSpinners() {
@@ -69,11 +60,11 @@ public class InsertarArticuloActivity extends AppCompatActivity {
         }
 
         ArrayAdapter<Proveedor> proveedorAdapter = new ArrayAdapter<>(InsertarArticuloActivity.this,
-                android.R.layout.simple_spinner_item, proveedores);
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, proveedores);
         ArrayAdapter<TipoArticulo> tipoArticuloAdapter = new ArrayAdapter<>(InsertarArticuloActivity.this,
-                android.R.layout.simple_spinner_item, tiposArticulo);
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, tiposArticulo);
         ArrayAdapter<Local> localAdapter = new ArrayAdapter<>(InsertarArticuloActivity.this,
-                android.R.layout.simple_spinner_item, locales);
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, locales);
 
         // Setup
         spinnerProveedor.setAdapter(proveedorAdapter);
@@ -103,9 +94,13 @@ public class InsertarArticuloActivity extends AppCompatActivity {
                 Double.parseDouble(precioArticulo), 0, descripcionArticulo,
                 proveedor.getIdProveedor(), tipoArticulo.getId());
 
+        // Crear el objeto LocalArticulo
+        LocalArticulo localArticulo = new LocalArticulo(local.getIdLocal(), idArticulo);
+
         // Insertar el objeto Articulo
         try {
             cBD.getArticuloDAO().insertar(articulo);
+            cBD.getLocalArticuloDAO().insertar(localArticulo);
             Toast.makeText(InsertarArticuloActivity.this, "Artículo insertado correctamente",
                     Toast.LENGTH_SHORT).show();
             finish();
