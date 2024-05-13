@@ -5,6 +5,7 @@ public class Proveedor {
     private String nombre;
     private String telefono;
 
+
     public Proveedor() {
     }
 
@@ -37,4 +38,6 @@ public class Proveedor {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+
 }

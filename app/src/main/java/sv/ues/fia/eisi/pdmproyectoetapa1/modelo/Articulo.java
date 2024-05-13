@@ -8,6 +8,7 @@ public class Articulo {
     private String descripcion;
     private String idProveedor;
     private String idTipoArticulo;
+    private String  articuloCustom;
 
     public Articulo() {
     }
@@ -77,5 +78,11 @@ public class Articulo {
 
     public void setIdTipoArticulo(String idTipoArticulo) {
         this.idTipoArticulo = idTipoArticulo;
+    }
+
+    @Override
+    public String toString() {
+        this.articuloCustom=this.articuloCustom=this.nombre;
+        return articuloCustom;
     }
 }

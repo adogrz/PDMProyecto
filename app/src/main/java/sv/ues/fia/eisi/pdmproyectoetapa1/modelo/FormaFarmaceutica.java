@@ -3,6 +3,7 @@ package sv.ues.fia.eisi.pdmproyectoetapa1.modelo;
 public class FormaFarmaceutica {
     private String idFormaFarmaceutica;
     private String formaFarmaceutica;
+    private String formaFarmaceuticaCustom;
 
     public FormaFarmaceutica() {
     }
@@ -30,6 +31,7 @@ public class FormaFarmaceutica {
 
     @Override
     public String toString() {
-        return idFormaFarmaceutica + " - " + formaFarmaceutica;
+        this.formaFarmaceuticaCustom=this.formaFarmaceuticaCustom= formaFarmaceutica;
+        return formaFarmaceuticaCustom;
     }
 }

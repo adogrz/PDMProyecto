@@ -3,6 +3,7 @@ package sv.ues.fia.eisi.pdmproyectoetapa1.modelo;
 public class Laboratorio {
     private String idLaboratorio;
     private String nombreLaboratorio;
+    private String laboratorioCustom;
 
     public Laboratorio() {
     }
@@ -30,6 +31,7 @@ public class Laboratorio {
 
     @Override
     public String toString() {
-        return idLaboratorio + " - " + nombreLaboratorio;
+        this.laboratorioCustom=this.laboratorioCustom= nombreLaboratorio;
+        return laboratorioCustom;
     }
 }

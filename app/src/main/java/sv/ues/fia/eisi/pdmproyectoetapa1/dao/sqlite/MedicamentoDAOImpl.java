@@ -116,7 +116,7 @@ public class MedicamentoDAOImpl implements MedicamentoDAO {
         SQLiteDatabase db=baseDatos.getWritableDatabase();
 
         //Generar Pk
-        String idMedicamento= EntradaMedicamento.generarIdMedicamento();
+        String idMedicamento= obj.getIdMedicamento();
         ContentValues values= getContentValues(obj,idMedicamento);
 
         //Insertar Medicamento
