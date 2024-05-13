@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dip"
+    android:stretchColumns="1" >
+    <!-- Primera fila de la tabla para el titulo -->
+    <TableRow>
+        <TextView
+            android:text="@string/RecetasMedicas"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:layout_span="1"
+            android:gravity="center_horizontal"
+            android:padding="10dip"
+            android:textStyle="bold" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/idRecetaMedica"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/editIdRecetaMedica"
+            android:layout_width="fill_parent"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+    </TableRow>
+    <TableRow>
+
+        <TextView
+            android:text="@string/numeroReceta"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editNumeroReceta"
+            android:layout_width="fill_parent"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/fechaReceta"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editFechaReceta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="AAAA-MM-DD"
+            android:importantForAutofill="no"
+            android:inputType="date"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/detallesMedico"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:layout_span="1"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:textStyle="bold"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/idMedico"
+            android:textSize="20sp"/>
+        <EditText
+            android:id="@+id/editIdMedico"
+            android:layout_width="fill_parent"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/nombreMedico"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editNombreMedico"
+            android:layout_width="fill_parent"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/apellidoMedico"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/editApellidoMedico"
+            android:layout_width="fill_parent"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/especialidadMedico"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/editEspecialidadMedico"
+            android:layout_width="fill_parent"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/jvpmMedico"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/editJVPM"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/detallesReceta"
+            android:textSize="20sp"
+            android:layout_span="1"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:textStyle="bold" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/idDetalleReceta"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/editIdDetalleReceta"
+            android:layout_width="fill_parent"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/Medicamentos"
+            android:textSize="20sp" />
+        <Spinner
+            android:id="@+id/spinnerMedicamentos"
+            android:layout_width="fill_parent"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck"
+            />
+    </TableRow>
+     <TableRow>
+        <TextView
+            android:text="@string/dosisReceta"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/editDosisReceta"
+            android:layout_width="fill_parent"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck"
+            />
+     </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/periodicidadReceta"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/editPeriodicidadReceta"
+            android:layout_width="fill_parent"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/fechaInicioTratamiento"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/editFechaInicioTratamiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="AAAA-MM-DD"
+            android:importantForAutofill="no"
+            android:inputType="date"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/fechaFinTratamiento"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/editFechaFinTratamiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="AAAA-MM-DD"
+            android:importantForAutofill="no"
+            android:inputType="date"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck"
+            />
+    </TableRow>
+    <TableRow>
+        <Button
+            android:id="@+id/btn_insertarReceta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/InsertarRecetaMedica"
+            android:textSize="20sp"
+            android:layout_span="2"
+            android:gravity="center_horizontal"
+            android:padding="10dip"
+            android:textStyle="bold" />
+    </TableRow>
+
+</TableLayout>
+</ScrollView>

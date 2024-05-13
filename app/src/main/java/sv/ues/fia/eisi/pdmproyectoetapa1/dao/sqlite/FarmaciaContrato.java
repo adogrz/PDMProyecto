@@ -121,8 +121,8 @@ public class FarmaciaContrato {
         String DOSIS = "dosis";
         String FECHA_INICIO_TRATAMIENTO = "fecha_inicio_tratamiento";
         String FECHA_FIN_TRATAMIENTO = "fecha_fin_tratamiento";
-        String ID_MEDICAMENTO = "id_medicamento";
         String ID_RECETA_MEDICA = "id_receta_medica";
+        String ID_MEDICAMENTO = "id_medicamento";
     }
     public interface ColumnasMedico{
         String ID_MEDICO = "id_medico";
@@ -131,6 +131,16 @@ public class FarmaciaContrato {
         String ESPECIALIDAD = "especialidad";
         String JVPM = "jvpm";
     }
+
+
+    public interface ColumnasDetalleVenta {
+        String ID_DETALLE_VENTA = "id_detalle_venta";
+        String CANTIDAD_PRODUCTO_VENTA = "cantidad_producto_venta";
+        String SUBTOTAL_VENTA = "subtotal_venta";
+        String ID_VENTA = "id_venta";
+        String ID_ARTICULO = "id_articulo";
+    }
+
     public static class EntradaProveedor implements ColumnasProveedor {
         public static String generarIdProveedor() {
             return "PROV-" + UUID.randomUUID().toString();
@@ -237,6 +247,10 @@ public class FarmaciaContrato {
         public static String generarIdMedico() {
             return "DOC-" + UUID.randomUUID().toString();
         }
+    }
+
+    public static class EntradaDetalleVenta implements ColumnasDetalleVenta{
+        public static String generarIdDetalleVenta(){return  "DET_VEN-" + UUID.randomUUID().toString();}
     }
 
     private FarmaciaContrato() {

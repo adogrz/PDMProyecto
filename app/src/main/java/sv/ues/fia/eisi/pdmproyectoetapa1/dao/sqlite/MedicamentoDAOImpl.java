@@ -106,7 +106,8 @@ public class MedicamentoDAOImpl implements MedicamentoDAO {
 
     @Override
     public String insertar(Medicamento obj) throws DAOException {
-        //Verificar que al insertar medicamento,
+
+       //Verificar que al insertar medicamento,
         // el articulo, la forma farmaceutica, la via de administracion y el laboratorio existan
         if (verificarIntegridad(obj, 1)) {
             throw new DAOException("MedicamentoDAO: No se puede insertar un medicamento con un " +

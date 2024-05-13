@@ -7,16 +7,25 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DetalleRecetaDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicoDAO;
+
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LocalArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LocalDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ClienteDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.DetalleVentaDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MedicamentoDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.MetodoPagoDAO;
+
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.RecetaMedicaDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.TipoArticuloDAO;
+
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ViaAdministracionDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.LaboratorioDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.FormaFarmaceuticaDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ProveedorDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.dao.ClienteDAO;
 
-
+import sv.ues.fia.eisi.pdmproyectoetapa1.dao.VentaDAO;
 
 /**
  * Clase auxiliar que implementa {@link BaseDatosFarmacia} para llevar a cabo la conexión a la base
@@ -27,6 +36,7 @@ public final class ControlBaseDatos {
     private BaseDatosFarmacia baseDatos;
     private TipoArticuloDAO tipoArticulos = null;
     private ProveedorDAO proveedores = null;
+    private LocalDAO locales = null;
     private ArticuloDAO articulos = null;
     private MedicamentoDAO medicamentos = null;
     private RecetaMedicaDAO recetas = null;
@@ -38,8 +48,14 @@ public final class ControlBaseDatos {
     private LaboratorioDAO laboratorio = null;
 
     private FormaFarmaceuticaDAO formaFarmaceutica = null;
+  
     private ClienteDAO clientes = null;
 
+    private LocalArticuloDAO localesArticulos = null;
+    private VentaDAO venta = null;
+    private ClienteDAO cliente = null;
+    private MetodoPagoDAO metodoPago = null;
+    private DetalleVentaDAO detalleVenta = null;
 
     public ControlBaseDatos(Context contexto) {
         if (baseDatos == null) {
@@ -89,6 +105,17 @@ public final class ControlBaseDatos {
             proveedores = new ProveedorDAOImpl(baseDatos);
         }
         return proveedores;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz LocalDAO.
+     * @return Instancia de la clase que implementa la interfaz LocalDAO.
+     */
+    public LocalDAO getLocalDAO() {
+        if (locales == null) {
+            locales = new LocalDAOImpl(baseDatos);
+        }
+        return locales;
     }
 
     /**
@@ -147,6 +174,22 @@ public final class ControlBaseDatos {
             formaFarmaceutica = new FormaFarmaceuticaDAOImpl(baseDatos);
         }
         return formaFarmaceutica;
+    public LocalArticuloDAO getLocalArticuloDAO() {
+        if (localesArticulos == null) {
+            localesArticulos = new LocalArticuloDAOImpl(baseDatos);
+        }
+        return localesArticulos;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz VentaDAO.
+     * @return Instancia de la clase que implementa la interfaz VentaDAO.
+     */
+    public VentaDAO getVentaDAO() {
+        if (venta == null) {
+            venta = new VentaDAOImpl(baseDatos);
+        }
+        return venta;
     }
 
     /**
@@ -159,5 +202,62 @@ public final class ControlBaseDatos {
             clientes = new ClienteDAOImpl(baseDatos);
         }
         return clientes;
+    }
+
+     /* Método que obtiene la instancia de la clase que implementa la interfaz RecetaMedicaDAO.
+     * @return Instancia de la clase que implementa la interfaz RecetaMedicaDAO.
+     */
+    public RecetaMedicaDAO getRecetaMedicaDAO() {
+        if (recetas == null) {
+            recetas = new RecetaMedicaDAOImpl(baseDatos);
+        }
+        return recetas;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz DetalleRecetaDAO.
+     * @return Instancia de la clase que implementa la interfaz DetalleRecetaDAO.
+     */
+    public DetalleRecetaDAO getDetalleRecetaDAO() {
+        if (detallesReceta == null) {
+            detallesReceta = new DetalleRecetaDAOImpl(baseDatos);
+        }
+        return detallesReceta;
+    }
+    public MedicoDAO getMedicoDAO() {
+        if (medicos == null) {
+            medicos = new MedicoDAOImpl(baseDatos);
+        }
+        return medicos;
+
+    public ClienteDAO getClienteDAO() {
+        if(cliente == null){
+            cliente = new ClienteDAOImpl(baseDatos);
+        }
+        return cliente;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz MetodoPagoDAO.
+     * @return Instancia de la clase que implementa la interfaz MetodoPagoDAO.
+     */
+    public MetodoPagoDAO getMetodoPagoDAO() {
+        if (metodoPago == null) {
+            metodoPago = new MetodoPagoDAOImpl(baseDatos);
+        }
+        return metodoPago;
+    }
+
+    /**
+     * Método que obtiene la instancia de la clase que implementa la interfaz DetalleVentaDAO.
+     * @return Instancia de la clase que implementa la interfaz DetalleventaDAO.
+     */
+    public DetalleVentaDAO getDetalleVentaDAO() {
+        if (detalleVenta == null) {
+            detalleVenta = new DetalleVentaDAOImpl(baseDatos);
+        }
+        return detalleVenta;
+
+
     }
 }

@@ -17,6 +17,22 @@
             android:exported="false" />
         <activity
             android:name=".MedicamentosConsultarActivity"
+            android:name=".RecetasEliminarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecetasActualizarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecetasConsultarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecetasInsertarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuRecetaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuMedicamentos"
             android:exported="false" />
         <activity
             android:name=".MedicamentosActualizarActivity"
@@ -29,6 +45,36 @@
             android:exported="false" />
         <activity
             android:name=".MedicamentosInsertarActivity"
+            android:exported="false"
+            tools:ignore="DuplicateActivity" />
+            android:name=".EliminarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModificarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InsertarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConsultarArticuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ArticuloMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EliminarVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConsultarVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AtualizarVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuVentasActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
