@@ -91,7 +91,7 @@ public class InsertarArticuloActivity extends AppCompatActivity {
 
         // Crear el objeto Articulo
         Articulo articulo = new Articulo(idArticulo, nombreArticulo,
-                Double.parseDouble(precioArticulo), 0, descripcionArticulo,
+                Double.parseDouble(precioArticulo), 100, descripcionArticulo,
                 proveedor.getIdProveedor(), tipoArticulo.getId());
 
         // Crear el objeto LocalArticulo
