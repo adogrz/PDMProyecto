@@ -15,7 +15,7 @@ public class MedicamentoDAOImpl implements MedicamentoDAO {
 
     @Override
     public String insertar(Medicamento obj) throws DAOException {
-        return null;
+        throw new UnsupportedOperationException("No implementado");
     }
 
     @Override

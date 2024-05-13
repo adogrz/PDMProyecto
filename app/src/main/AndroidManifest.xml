@@ -35,6 +35,19 @@
             android:exported="false" />
         <activity
             android:name=".articulo.ArticulosActivity"
+            android:name=".EliminarVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConsultarVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AtualizarVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuVentasActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
