@@ -78,12 +78,9 @@ public class LaboratorioDAOImpl implements LaboratorioDAO {
 
         String selection = String.format("%s=?", EntradaLaboratorio.ID_LABORATORIO);
         String[] selectionArgs = {id};
-        String[] columnas = {
-                EntradaLaboratorio.ID_LABORATORIO,
-                EntradaLaboratorio.NOMBRE_LABORATORIO
-        };
 
-        try (Cursor cursor = db.query(Tablas.LABORATORIO, columnas, selection, selectionArgs, null, null, null)) {
+
+        try (Cursor cursor = db.query(Tablas.LABORATORIO, null, selection, selectionArgs, null, null, null)) {
             if (cursor == null || !cursor.moveToFirst()) {
                 throw new DAOException("No se ha encontro el laboratorio");
             }
@@ -92,7 +89,7 @@ public class LaboratorioDAOImpl implements LaboratorioDAO {
             int idIndex = cursor.getColumnIndex(EntradaLaboratorio.ID_LABORATORIO);
             int nombreIndex = cursor.getColumnIndex(EntradaLaboratorio.NOMBRE_LABORATORIO);
 
-            if (idIndex != -1 || nombreIndex != -1) {
+            if (idIndex == -1 || nombreIndex == -1) {
                 throw new DAOException("Error al obtener los índices de las columnas.");
             }
 

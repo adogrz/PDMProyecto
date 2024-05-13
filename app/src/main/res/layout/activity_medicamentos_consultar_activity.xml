@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/editConsul"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MedicamentosConsultarActivity">
+
+
+    <TextView
+        android:id="@+id/ExpiCon"
+        android:layout_width="136dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/baloo_tammudu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/consulM"
+        android:layout_width="256dp"
+        android:layout_height="41dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/consultar_medicamento"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.606"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/viaAdmin"
+        android:layout_width="177dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/tipo_via_administracion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicam"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/medicam"
+        android:layout_width="143dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/nombre_medicamento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idMeca"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/formaFarmaA"
+        android:layout_width="142dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/tipo_forma_farmaceutica"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viaAdmin"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/laboratorioA"
+        android:layout_width="161dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/nombre_laboratorio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/formaFarmaA"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btConsultar"
+        android:layout_width="143dp"
+        android:layout_height="44dp"
+        android:text="@string/consultar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.211"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/idMeca"
+        android:layout_width="157dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="88dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/medicamento_id"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="102dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="204dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/requiere_receta_medica"
+        app:layout_constraintEnd_toStartOf="@+id/RequiereCon"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LabCon"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="128dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/fecha_expedicion_medicamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/laboratorioA" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="131dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/fecha_expi_medicamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.092"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ExpedCon" />
+
+    <TextView
+        android:id="@+id/medicamentoCon"
+        android:layout_width="220dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="72dp"
+        android:fontFamily="@font/baloo_tammudu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toEndOf="@+id/medicam"
+        app:layout_constraintTop_toBottomOf="@+id/idConMedicamento"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/ViaAdmC"
+        android:layout_width="208dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/baloo_tammudu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintStart_toEndOf="@+id/viaAdmin"
+        app:layout_constraintTop_toBottomOf="@+id/medicamentoCon"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/FormaFCon"
+        android:layout_width="195dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/baloo_tammudu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.661"
+        app:layout_constraintStart_toEndOf="@+id/formaFarmaA"
+        app:layout_constraintTop_toBottomOf="@+id/ViaAdmC"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/LabCon"
+        android:layout_width="202dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/baloo_tammudu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.625"
+        app:layout_constraintStart_toEndOf="@+id/laboratorioA"
+        app:layout_constraintTop_toBottomOf="@+id/FormaFCon"
+        app:layout_constraintVertical_bias="0.01"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/RequiereCon"
+        android:layout_width="66dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/baloo_tammudu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LabCon"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/ExpedCon"
+        android:layout_width="133dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/baloo_tammudu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/idConMedicamento"
+        android:layout_width="215dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="88dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:hint="@string/id_medicamento"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintStart_toEndOf="@+id/idMeca"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

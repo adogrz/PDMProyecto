@@ -38,13 +38,10 @@ public final class ControlBaseDatos {
     private LaboratorioDAO laboratorio = null;
 
     private FormaFarmaceuticaDAO formaFarmaceutica = null;
-
-    private ProveedorDAO proveedores = null;
-
     private ClienteDAO clientes = null;
 
 
-    private ControlBaseDatos(Context contexto) {
+    public ControlBaseDatos(Context contexto) {
         if (baseDatos == null) {
             baseDatos = new BaseDatosFarmacia(contexto);
         }
@@ -162,31 +159,5 @@ public final class ControlBaseDatos {
             clientes = new ClienteDAOImpl(baseDatos);
         }
         return clientes;
-
-     * Método que obtiene la instancia de la clase que implementa la interfaz RecetaMedicaDAO.
-     * @return Instancia de la clase que implementa la interfaz RecetaMedicaDAO.
-     */
-    public RecetaMedicaDAO getRecetaMedicaDAO() {
-        if (recetas == null) {
-            recetas = new RecetaMedicaDAOImpl(baseDatos);
-        }
-        return recetas;
-    }
-
-    /**
-     * Método que obtiene la instancia de la clase que implementa la interfaz DetalleRecetaDAO.
-     * @return Instancia de la clase que implementa la interfaz DetalleRecetaDAO.
-     */
-    public DetalleRecetaDAO getDetalleRecetaDAO() {
-        if (detallesReceta == null) {
-            detallesReceta = new DetalleRecetaDAOImpl(baseDatos);
-        }
-        return detallesReceta;
-    }
-    public MedicoDAO getMedicoDAO() {
-        if (medicos == null) {
-            medicos = new MedicoDAOImpl(baseDatos);
-        }
-        return medicos;
     }
 }

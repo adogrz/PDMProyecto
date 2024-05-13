@@ -72,12 +72,9 @@ public class ViaAdministracionDAOImpl implements ViaAdministracionDAO {
 
        String selection = String.format("%s=?", EntradaViaAdministracion.ID_VIA_ADMINISTRACION);
        String[] selectionArgs = {id};
-       String[] columnas={
-              EntradaViaAdministracion.ID_VIA_ADMINISTRACION,
-              EntradaViaAdministracion.TIPO_VIA_ADMINISTRACION
-         };
 
-       try(Cursor cursor = db.query(Tablas.VIA_ADMINISTRACION,columnas,selection,selectionArgs,null,null,null)) {
+
+       try(Cursor cursor = db.query(Tablas.VIA_ADMINISTRACION,null,selection,selectionArgs,null,null,null)) {
            if (cursor == null || !cursor.moveToFirst()) {
                throw new DAOException("No se encontró la vía de administración");
            }

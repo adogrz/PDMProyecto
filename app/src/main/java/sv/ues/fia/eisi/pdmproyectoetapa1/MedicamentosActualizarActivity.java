@@ -1,8 +1,6 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1;
 
 
-import android.annotation.SuppressLint;
-
 import android.os.Bundle;
 
 import android.view.View;
@@ -57,7 +55,7 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
         viaAdministracion = findViewById(R.id.editViaAdministracionAct);
         laboratorio = findViewById(R.id.editLaboratorioAct);
         actualizarMedicamento = findViewById(R.id.actualizarM);
-        limpiarMedicamento = findViewById(R.id.limpiarM);
+        limpiarMedicamento = findViewById(R.id.btConsultar);
         //Spinners
         SpinnerMedicamento();
         spinnerArticuloM();
@@ -73,12 +71,7 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
             }
         });
         //Acción del botón limpiar
-        limpiarMedicamento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                limpiarCampos(v);
-            }
-        });
+
 
     }
 
@@ -231,11 +224,7 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
 
 
     }
-    public void limpiarCampos(View v) {
-        fechaExpedicionS.setText("");
-        fechaExperacionS.setText("");
-        recetaMedicaS.setChecked(false);
-    }
+
 
 
 }

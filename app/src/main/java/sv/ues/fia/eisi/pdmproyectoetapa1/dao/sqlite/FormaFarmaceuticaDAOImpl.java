@@ -73,12 +73,9 @@ public class FormaFarmaceuticaDAOImpl implements FormaFarmaceuticaDAO {
 
         String selection = String.format("%s = ?", EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA);
         String[] selectionArgs = {id};
-        String[] columnas = {
-                EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA,
-                EntradaFormaFarmaceutica.TIPO_FORMA_FARMACEUTICA
-        };
 
-        try(Cursor cursor=db.query(Tablas.FORMA_FARMACEUTICA,columnas,selection,selectionArgs,null,
+
+        try(Cursor cursor=db.query(Tablas.FORMA_FARMACEUTICA,null,selection,selectionArgs,null,
                 null,null)) {
 
             if(cursor == null || !cursor.moveToFirst()) {
@@ -89,7 +86,7 @@ public class FormaFarmaceuticaDAOImpl implements FormaFarmaceuticaDAO {
             int idIndex = cursor.getColumnIndex((EntradaFormaFarmaceutica.ID_FORMA_FARMACEUTICA));
             int formaIndex = cursor.getColumnIndex(EntradaFormaFarmaceutica.TIPO_FORMA_FARMACEUTICA);
 
-            if (idIndex != -1 || formaIndex == -1) {
+            if (idIndex == -1 || formaIndex == -1) {
                 throw new DAOException("Error al obtener los índices de las columnas.");
             }
             formaFarmaceutica.setIdFormaFarmaceutica(cursor.getString(idIndex));

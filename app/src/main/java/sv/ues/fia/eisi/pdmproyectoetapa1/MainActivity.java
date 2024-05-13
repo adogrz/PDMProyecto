@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         LaboratorioDAO laboratorioDAO=db.getLaboratorioDAO();
 
 
-   /*   try {
+   /* try {
            List<Proveedor> proveedores=proveedorDAO.obtenerTodos();
             List<TipoArticulo> tipoArticulos=tipoArticuloDAO.obtenerTodos();
             List<Articulo> articulos=articuloDAO.obtenerTodos();
@@ -80,15 +80,15 @@ public class MainActivity extends AppCompatActivity {
 
             String idProveedor=proveedores.get(1).getIdProveedor();
             String idTipoArticulo=tipoArticulos.get(0).getId();
-            String idArticulo=articuloDAO.obtenerTodos().get(0).getIdArticulo();
+           // String idArticulo=articuloDAO.obtenerTodos().get(0).getIdArticulo();
             String idLaboratorio=laboratorios.get(0).getIdLaboratorio();
             String idViaAdministracion=viaAdministracionDAO.obtenerTodos().get(0).getIdViaAdministracion();
             String idFormaFarmaceutica=formaFarmaceuticaDAO.obtenerTodos().get(0).getIdFormaFarmaceutica();
 
 
-          medicamentoDAO.insertar(new Medicamento("MED-001","2021-01-01","2021-01-01","Si",idArticulo,idFormaFarmaceutica,idViaAdministracion,idLaboratorio));
-            //articuloDAO.insertar(new Articulo("ART-001","Virogrip",0.70,10,"Para resfriados",idProveedor,idTipoArticulo));
-           // articuloDAO.modificar(new Articulo("ART-003","Virogrip",0.70,10,"Para resfriados",idProveedor,idTipoArticulo));
+          //medicamentoDAO.insertar(new Medicamento("MED-001","2021-01-01","2021-01-01","Si",idArticulo,idFormaFarmaceutica,idViaAdministracion,idLaboratorio));
+            articuloDAO.insertar(new Articulo("ART-002","Broncol",3.50,10,"tratamiento para la bronquitis",idProveedor,idTipoArticulo));
+           // articuloDAO.modificar(new Articulo("ART-002","Virogrip",0.70,10,"Para resfriados",idProveedor,idTipoArticulo));
 
             Toast.makeText(MainActivity.this,"Articulo insertado",Toast.LENGTH_SHORT).show();
         }catch (DAOException e){
