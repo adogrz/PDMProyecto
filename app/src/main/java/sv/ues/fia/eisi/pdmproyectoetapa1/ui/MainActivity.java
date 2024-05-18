@@ -10,24 +10,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import sv.ues.fia.eisi.pdmproyectoetapa1.R;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.ui.articulo.ArticuloMenuActivity;
+import sv.ues.fia.eisi.pdmproyectoetapa1.ui.compra.MenuCompraActivity;
 import sv.ues.fia.eisi.pdmproyectoetapa1.ui.medicamento.MenuMedicamentos;
 import sv.ues.fia.eisi.pdmproyectoetapa1.ui.recetamedica.MenuRecetaActivity;
 import sv.ues.fia.eisi.pdmproyectoetapa1.ui.venta.MenuVentasActivity;
 
 public class MainActivity extends AppCompatActivity {
-    Button btonMenuVenta, btonMenuArticulo, btonMenuMedicamento, btonMenuRecetaMedica;
+    Button btonMenuVenta, btnMenuCompra, btonMenuArticulo, btonMenuMedicamento, btonMenuRecetaMedica;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btonMenuVenta = findViewById(R.id.btn_Ventas);
+        btnMenuCompra = findViewById(R.id.btn_Compras);
         btonMenuArticulo = findViewById(R.id.btn_menu_articulos);
         btonMenuMedicamento = findViewById(R.id.btn_menu_medicamentos);
         btonMenuRecetaMedica = findViewById(R.id.btn_recetaMedica);
 
         // Asignar listeners a los botones
         btonMenuVenta.setOnClickListener(v -> navigateToActivity(MenuVentasActivity.class));
+        btnMenuCompra.setOnClickListener(v -> navigateToActivity(MenuCompraActivity.class));
         btonMenuArticulo.setOnClickListener(v -> navigateToActivity(ArticuloMenuActivity.class));
         btonMenuMedicamento.setOnClickListener(v -> navigateToActivity(MenuMedicamentos.class));
         btonMenuRecetaMedica.setOnClickListener(v -> navigateToActivity(MenuRecetaActivity.class));

@@ -15,6 +15,13 @@
     <string name="title_activity_medicamentos_eliminar">MedicamentosEliminarActivity</string>
     <string name="title_activity_medicamentos_actualizar">MedicamentosActualizarActivity</string>
 
+    <!--  Menú de compras  -->
+    <string name="txtMenuComp">Menú de compras</string>
+    <string name="btnInsertarComp">Insertar compra</string>
+    <string name="btnConsultarComp">Consultar compra</string>
+    <string name="btnEliminarComp">Eliminar compra</string>
+    <string name="btnActualizarComp">Actualizar compra</string>
+
     <!-- Menú de Medicamentos -->
     <string name="medicamentos_menu">Función a Ejecutar el Medicamento</string>
     <string name="insertar_medicamento">Insertar medicamento</string>
