@@ -5,7 +5,7 @@
     android:id="@+id/editConsul"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MedicamentosEliminarActivity">
+    tools:context=".ui.medicamento.MedicamentosEliminarActivity">
 
 
     <TextView
@@ -17,7 +17,7 @@
         android:text="@string/eliminar_medicamento"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.683"
+        app:layout_constraintHorizontal_bias="0.612"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,10 +28,10 @@
         android:text="@string/eliminar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintHorizontal_bias="0.563"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42"
+        app:layout_constraintVertical_bias="0.418"
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
@@ -42,21 +42,22 @@
         android:fontFamily="@font/baloo_tammudu"
         android:text="@string/medicamento_id"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_id_medicamento"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintHorizontal_bias="0.072"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <Spinner
-        android:id="@+id/idMeEl"
-        android:layout_width="241dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="16dp"
+    <EditText
+        android:id="@+id/et_id_medicamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="488dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idMecaE"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
-
-
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

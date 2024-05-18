@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="limpiarCampos"
-    tools:context=".AgregarVentaActivity">
+    tools:context=".ui.venta.AgregarVentaActivity">
 
     <TextView
         android:id="@+id/textView"

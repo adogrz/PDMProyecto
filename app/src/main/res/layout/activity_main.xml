@@ -5,55 +5,26 @@
     android:id="@+id/editRecta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-
-    <TextView
-        android:id="@+id/actmenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/baloo_tammudu"
-        android:text="Menu Farmacia/Libreria"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.054" />
+    tools:context=".ui.MainActivity">
 
     <Button
         android:id="@+id/btn_Ventas"
         android:layout_width="290dp"
         android:layout_height="60dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/baloo_tammudu"
         android:text="@string/Ventas"
         android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.265" />
+        app:layout_constraintTop_toBottomOf="@+id/actmenu" />
 
     <Button
-        android:id="@+id/btn_Compras"
+        android:id="@+id/btn_menu_medicamentos"
         android:layout_width="290dp"
         android:layout_height="60dp"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/baloo_tammudu"
-        android:text="@string/Compras"
-        android:textSize="19sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Ventas" />
-
-    <Button
-        android:id="@+id/btn_Medicamentos"
-        android:layout_width="290dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/baloo_tammudu"
         android:text="@string/Medicamentos"
         android:textSize="19sp"
@@ -62,92 +33,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_Compras" />
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.056" />
-
-    <Button
-        android:id="@+id/btn_Ventas"
-        android:layout_width="290dp"
-        android:layout_height="60dp"
-        android:fontFamily="@font/baloo_tammudu"
-        android:text="@string/Ventas"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.356" />
-
-    <Button
-        android:id="@+id/btn_compras"
-        android:layout_width="290dp"
-        android:layout_height="60dp"
-        android:fontFamily="@font/baloo_tammudu"
-        android:text="@string/Compras"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47" />
-
-    <Button
-        android:id="@+id/btn_Articulos"
-        android:layout_width="290dp"
-        android:layout_height="60dp"
-        android:fontFamily="@font/baloo_tammudu"
-        android:onClick="mostrarMenuArticulos"
-        android:text="@string/Articulos"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.242" />
-
-    <Button
-        android:id="@+id/brn_medicamentos"
-        android:layout_width="290dp"
-        android:layout_height="60dp"
-        android:fontFamily="@font/baloo_tammudu"
-        android:text="@string/Medicamentos"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.588" />
-
     <Button
         android:id="@+id/btn_recetaMedica"
         android:layout_width="290dp"
         android:layout_height="60dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/baloo_tammudu"
         android:text="@string/RecetasMedicas"
         android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/brn_medicamentos"
-        app:layout_constraintVertical_bias="0.101" />
-
+        app:layout_constraintTop_toBottomOf="@+id/btn_menu_articulos" />
 
     <Button
-        android:id="@+id/btn_RecetaMedica"
+        android:id="@+id/btn_menu_articulos"
         android:layout_width="290dp"
         android:layout_height="60dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/baloo_tammudu"
-        android:text="@string/RecetasMedicas"
+        android:onClick="mostrarMenuArticulos"
+        android:text="@string/Articulos"
         android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Medicamentos"
-        app:layout_constraintVertical_bias="0.154" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_menu_medicamentos" />
+
+    <Button
+        android:id="@+id/btn_Compras"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="@string/Compras"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_Ventas" />
+
+    <TextView
+        android:id="@+id/actmenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/baloo_tammudu"
+        android:text="Menu Farmacia/Libreria"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

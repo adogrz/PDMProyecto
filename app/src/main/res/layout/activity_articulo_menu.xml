@@ -24,7 +24,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/buttonConsultar"
+            android:id="@+id/btn_consultar_articulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -32,7 +32,7 @@
             android:text="@string/boton_consultar_articulo" />
 
         <Button
-            android:id="@+id/buttonInsertar"
+            android:id="@+id/btn_insertar_articulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -40,7 +40,7 @@
             android:text="@string/boton_insertar_articulo" />
 
         <Button
-            android:id="@+id/buttonModificar"
+            android:id="@+id/btn_modificar_articulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -48,7 +48,7 @@
             android:text="@string/boton_modificar_articulo" />
 
         <Button
-            android:id="@+id/buttonEliminar"
+            android:id="@+id/btn_eliminar_articulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
