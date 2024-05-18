@@ -115,6 +115,7 @@ public class FarmaciaContrato {
         String ID_CLIENTE = "id_cliente";
         String ID_METODO_PAGO = "id_metodo_pago";
     }
+
     public interface ColumnasDetalleReceta{
         String ID_DETALLE_RECETA = "id_detalle_receta";
         String PERIODICIDAD = "periodicidad";
@@ -124,6 +125,7 @@ public class FarmaciaContrato {
         String ID_RECETA_MEDICA = "id_receta_medica";
         String ID_MEDICAMENTO = "id_medicamento";
     }
+
     public interface ColumnasMedico{
         String ID_MEDICO = "id_medico";
         String NOMBRE_MEDICO = "nombre_medico";
@@ -132,12 +134,26 @@ public class FarmaciaContrato {
         String JVPM = "jvpm";
     }
 
-
     public interface ColumnasDetalleVenta {
         String ID_DETALLE_VENTA = "id_detalle_venta";
         String CANTIDAD_PRODUCTO_VENTA = "cantidad_producto_venta";
         String SUBTOTAL_VENTA = "subtotal_venta";
         String ID_VENTA = "id_venta";
+        String ID_ARTICULO = "id_articulo";
+    }
+
+    public interface ColumnasCompra {
+        String ID_COMPRA = "id_compra";
+        String FECHA_COMPRA = "fecha_compra";
+        String MONTO_TOTAL_COMPRA = "monto_total_compra";
+        String ID_PROVEEDOR = "id_proveedor";
+    }
+
+    public interface ColumnasDetalleCompra {
+        String ID_DETALLE_COMPRA = "id_detalle_compra";
+        String CANTIDAD_PRODUCTO_COMPRA = "cantidad_producto_compra";
+        String SUBTOTAL_COMPRA = "subtotal_compra";
+        String ID_COMPRA = "id_compra";
         String ID_ARTICULO = "id_articulo";
     }
 
@@ -221,14 +237,26 @@ public class FarmaciaContrato {
 
     public static class EntradaVenta implements ColumnasVenta {
     }
+
     public static class EntradaRecetaMedica implements ColumnasRecetaMedica {
     }
+
     public static class EntradaDetalleReceta implements ColumnasDetalleReceta {
     }
+
     public static class EntradaMedico implements ColumnasMedico {
     }
 
     public static class EntradaDetalleVenta implements ColumnasDetalleVenta{
+    }
+
+    public static class EntradaCompra implements ColumnasCompra {
+    }
+
+    public static class EntradaDetalleCompra implements ColumnasDetalleCompra {
+        public static String generarIdDetalleCompra() {
+            return "DC-" + UUID.randomUUID().toString();
+        }
     }
 
     private FarmaciaContrato() {
