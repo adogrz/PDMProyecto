@@ -93,7 +93,16 @@ public class CompraDAOImpl implements CompraDAO {
 
     @Override
     public void eliminar(Compra obj) throws DAOException {
+        // Verificar que al eliminar una compra, la compra exista
+        if (verificarIntegridad(obj, 3)) {
+            throw new DAOException("Error al eliminar la compra. La compra no existe.");
+        }
 
+        String[] whereArgs = {obj.getIdCompra()};
+
+        try (SQLiteDatabase db = baseDatos.getWritableDatabase()) {
+            db.delete(Tablas.COMPRA, EntradaCompra.ID_COMPRA + " = ?", whereArgs);
+        }
     }
 
     @Override
