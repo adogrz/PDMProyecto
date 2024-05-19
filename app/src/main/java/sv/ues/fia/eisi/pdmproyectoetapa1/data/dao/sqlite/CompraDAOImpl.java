@@ -78,7 +78,17 @@ public class CompraDAOImpl implements CompraDAO {
 
     @Override
     public void modificar(Compra obj) throws DAOException {
+        // Verificar que al modificar una compra, la compra y el proveedor existan
+        if (verificarIntegridad(obj, 2)) {
+            throw new DAOException("Error al modificar la compra. La compra o el proveedor no existen.");
+        }
 
+        ContentValues valores = getContentValues(obj);
+        String[] whereArgs = {obj.getIdCompra()};
+
+        try (SQLiteDatabase db = baseDatos.getWritableDatabase()) {
+            db.update(Tablas.COMPRA, valores, EntradaCompra.ID_COMPRA + " = ?", whereArgs);
+        }
     }
 
     @Override
