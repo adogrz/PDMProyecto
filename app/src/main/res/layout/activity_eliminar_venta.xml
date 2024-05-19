@@ -39,13 +39,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/CodigoV"
         android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#546E7A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.92"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.269" />
+        app:layout_constraintVertical_bias="0.269"
+        tools:ignore="LabelFor"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/btn_eliminar"
