@@ -121,7 +121,6 @@
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:fontFamily="@font/baloo_tammudu"
-        android:onClick="agregarVenta"
         android:text="@string/Guardar"
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
