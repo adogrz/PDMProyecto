@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.CompraDAO;
@@ -107,7 +108,36 @@ public class CompraDAOImpl implements CompraDAO {
 
     @Override
     public List<Compra> obtenerTodos() throws DAOException {
-        return null;
+        List<Compra> compras = new ArrayList<>();
+        String consulta = "SELECT * FROM " + Tablas.COMPRA;
+
+        try (SQLiteDatabase db = baseDatos.getReadableDatabase();
+             Cursor cursor = db.rawQuery(consulta, null)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                return compras;
+            }
+
+            do {
+                Compra compra = new Compra();
+                int idIndex = cursor.getColumnIndex(EntradaCompra.ID_COMPRA);
+                int fechaIndex = cursor.getColumnIndex(EntradaCompra.FECHA_COMPRA);
+                int montoIndex = cursor.getColumnIndex(EntradaCompra.MONTO_TOTAL_COMPRA);
+                int idProveedorIndex = cursor.getColumnIndex(EntradaCompra.ID_PROVEEDOR);
+
+                if (idIndex == -1 || fechaIndex == -1 || montoIndex == -1 || idProveedorIndex == -1) {
+                    throw new DAOException("Error al leer los datos de la compra.");
+                }
+
+                compra.setIdCompra(cursor.getString(idIndex));
+                compra.setFechaCompra(cursor.getString(fechaIndex));
+                compra.setMontoTotal(cursor.getDouble(montoIndex));
+                compra.setIdProveedor(cursor.getString(idProveedorIndex));
+
+                compras.add(compra);
+            } while (cursor.moveToNext());
+        }
+
+        return compras;
     }
 
     @Override
