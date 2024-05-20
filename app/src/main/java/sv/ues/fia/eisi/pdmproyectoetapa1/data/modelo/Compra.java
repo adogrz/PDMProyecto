@@ -3,7 +3,7 @@ package sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo;
 public class Compra {
     private String idCompra;
     private String fechaCompra;
-    private double montoTotal;
+    private double montoTotal = 0;
     private String idProveedor;
 
     public Compra() {
@@ -12,7 +12,6 @@ public class Compra {
     public Compra(String idCompra, String fechaCompra, String idProveedor) {
         this.idCompra = idCompra;
         this.fechaCompra = fechaCompra;
-        this.montoTotal = 0;
         this.idProveedor = idProveedor;
     }
 
