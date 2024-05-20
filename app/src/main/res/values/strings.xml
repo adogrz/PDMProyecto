@@ -22,6 +22,14 @@
     <string name="btnEliminarComp">Eliminar compra</string>
     <string name="btnActualizarComp">Actualizar compra</string>
 
+    <!--  Registro de compra  -->
+    <string name="txtInsertarComp">Insertar compra</string>
+    <string name="etIdComp">ID Compra</string>
+    <string name="txtProv">Proveedor</string>
+    <string name="txtArt">Artículo</string>
+    <string name="etCantidad">Cantidad</string>
+    <string name="btnRegistrarComp">Registrar</string>
+
     <!-- Menú de Medicamentos -->
     <string name="medicamentos_menu">Función a Ejecutar el Medicamento</string>
     <string name="insertar_medicamento">Insertar medicamento</string>
