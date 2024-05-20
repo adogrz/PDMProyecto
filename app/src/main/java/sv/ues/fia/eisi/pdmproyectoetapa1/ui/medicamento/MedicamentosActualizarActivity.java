@@ -86,11 +86,17 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
         public void spinnerArticuloM() {
             ControlBaseDatos db = ControlBaseDatos.obtenerInstancia(MedicamentosActualizarActivity.this);
             ArticuloDAO articuloDAO = db.getArticuloDAO();
-
+            List<Articulo> articuloList;
             try {
                 String idTipoArticulo = db.getTipoArticuloDAO().obtenerTodos().get(0).getId();
                 // Obtener todos los artículos
-                List<Articulo> articuloList = articuloDAO.obtenerTodos();
+                articuloList = articuloDAO.obtenerTodos();
+                // Verificar si la lista de artículos está vacía
+                if (articuloList.isEmpty()) {
+                    Toast.makeText(this, "No hay artículos de tipo medicamento registrados", Toast.LENGTH_SHORT).show();
+                    finish();
+                    return;
+                }
 
                 // Filtrar solo los artículos de tipo "medicamento"
                 List<Articulo> articulosMedicamento = new ArrayList<>();

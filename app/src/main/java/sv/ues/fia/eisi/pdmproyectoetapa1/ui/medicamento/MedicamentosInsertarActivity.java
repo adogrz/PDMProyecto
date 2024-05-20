@@ -72,12 +72,17 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
     public void spinnerArticuloM() {
         ControlBaseDatos db = ControlBaseDatos.obtenerInstancia(MedicamentosInsertarActivity.this);
         ArticuloDAO articuloDAO = db.getArticuloDAO();
-
+        List<Articulo> articuloList;
         try {
             String idTipoArticulo =db.getTipoArticuloDAO().obtenerTodos().get(0).getId();
             // Obtener todos los artículos
-            List<Articulo> articuloList = articuloDAO.obtenerTodos();
-
+             articuloList = articuloDAO.obtenerTodos();
+            // Verificar si la lista de artículos está vacía
+             if (articuloList.isEmpty()) {
+                 Toast.makeText(this, "No hay artículos de tipo medicamento registrados", Toast.LENGTH_SHORT).show();
+                 finish();
+                 return;
+             }
             // Filtrar solo los artículos de tipo "medicamento"
             List<Articulo> articulosMedicamento = new ArrayList<>();
             for (Articulo articulo : articuloList) {
@@ -85,6 +90,7 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
                     articulosMedicamento.add(articulo);
                 }
             }
+
             // Crear el adaptador con la lista filtrada
             ArrayAdapter<Articulo> adapterArticulo = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, articulosMedicamento);
 
