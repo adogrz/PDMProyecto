@@ -155,4 +155,5 @@
     <string name="consultar_receta_medica">Consultar receta médica</string>
     <string name="modificar_receta_medica">Modificar receta médica</string>
     <string name="eliminar_receta_medica">Eliminar receta médica</string>
+    <string name="id_articulo_label">Id articulo</string>
 </resources>

@@ -14,9 +14,6 @@ import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.R;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.DAOException;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.LocalDAO;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.ProveedorDAO;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.TipoArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.sqlite.ControlBaseDatos;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Articulo;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Local;
@@ -93,7 +90,7 @@ public class InsertarArticuloActivity extends AppCompatActivity {
         Local local = (Local) spinnerLocal.getSelectedItem();
 
         // Validar que los campos no estén vacíos
-        if (idArticulo.isEmpty() || nombreArticulo.isEmpty() || descripcionArticulo.isEmpty() || precioArticulo.isEmpty()) {
+        if (idArticulo.isEmpty() || nombreArticulo.isEmpty() || precioArticulo.isEmpty()) {
             Toast.makeText(InsertarArticuloActivity.this, "Por favor, rellene todos los campos",
                     Toast.LENGTH_SHORT).show();
             return;
@@ -101,8 +98,8 @@ public class InsertarArticuloActivity extends AppCompatActivity {
 
         // Crear el objeto Articulo
         Articulo articulo = new Articulo(idArticulo, nombreArticulo,
-                Double.parseDouble(precioArticulo), 100, descripcionArticulo,
-                proveedor.getIdProveedor(), tipoArticulo.getId());
+                Double.parseDouble(precioArticulo), descripcionArticulo, proveedor.getIdProveedor(),
+                tipoArticulo.getId());
 
         // Crear el objeto LocalArticulo
         LocalArticulo localArticulo = new LocalArticulo(local.getIdLocal(), idArticulo);

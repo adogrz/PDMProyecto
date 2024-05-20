@@ -11,7 +11,7 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.sqlite.FarmaciaContrato.*;
  * Clase que administra la conexión a la base de datos SQLite y su estructura.
  */
 public final class BaseDatosFarmacia extends SQLiteOpenHelper {
-    private static final String NOMBRE_BASE_DATOS = "proyectoEtapa1.s3db";
+    private static final String NOMBRE_BASE_DATOS = "proyectoEtapa1.db";
     private static final int VERSION_BASE_DATOS = 1;
 
     /**
@@ -118,7 +118,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         // Crear la tabla ARTICULO
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s REAL NOT NULL, %s INTEGER " +
-                        "NOT NULL CHECK(%s>=0), %s TEXT NOT NULL, %s TEXT NOT NULL %s, %s TEXT " +
+                        "NOT NULL CHECK(%s>=0), %s TEXT, %s TEXT NOT NULL %s, %s TEXT " +
                         "NOT NULL %s)", Tablas.ARTICULO, BaseColumns._ID, EntradaArticulo.ID_ARTICULO,
                 EntradaArticulo.NOMBRE_ARTICULO, EntradaArticulo.PRECIO_UNITARIO_ARTICULO,
                 EntradaArticulo.STOCK_ARTICULO, EntradaArticulo.STOCK_ARTICULO,

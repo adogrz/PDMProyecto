@@ -22,9 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewTitle"
         android:layout_marginTop="16dp"
-        android:text="@string/id_articulo"
+        android:text="@string/id_articulo_label"
+        android:textColor="#A9A9A9"
         android:textSize="16sp"
-        android:textColor="#A9A9A9"/>
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/editTextIdArticulo"
@@ -32,8 +33,9 @@
         android:layout_height="48dp"
         android:layout_below="@id/textViewIdArticuloHint"
         android:layout_marginTop="8dp"
+        android:autofillHints=""
         android:inputType="text"
-        android:autofillHints="" />
+        tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewNombreArticuloHint"
@@ -42,8 +44,9 @@
         android:layout_below="@id/editTextIdArticulo"
         android:layout_marginTop="16dp"
         android:text="@string/nombre_articulo"
+        android:textColor="#A9A9A9"
         android:textSize="16sp"
-        android:textColor="#A9A9A9"/>
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/editTextNombreArticulo"
@@ -51,9 +54,9 @@
         android:layout_height="48dp"
         android:layout_below="@id/textViewNombreArticuloHint"
         android:layout_marginTop="8dp"
-        android:inputType="text"
         android:autofillHints=""
-        tools:ignore="LabelFor" />
+        android:inputType="text"
+        tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewPrecioUnitarioArticuloHint"
@@ -62,8 +65,9 @@
         android:layout_below="@id/editTextNombreArticulo"
         android:layout_marginTop="16dp"
         android:text="@string/precio_unitario_articulo"
+        android:textColor="#A9A9A9"
         android:textSize="16sp"
-        android:textColor="#A9A9A9"/>
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/editTextPrecioUnitarioArticulo"
@@ -71,9 +75,9 @@
         android:layout_height="48dp"
         android:layout_below="@id/textViewPrecioUnitarioArticuloHint"
         android:layout_marginTop="8dp"
-        android:inputType="numberDecimal"
         android:autofillHints=""
-        tools:ignore="LabelFor" />
+        android:inputType="numberDecimal"
+        tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewDescripcionArticuloHint"
@@ -82,8 +86,9 @@
         android:layout_below="@id/editTextPrecioUnitarioArticulo"
         android:layout_marginTop="16dp"
         android:text="@string/descripcion_articulo"
+        android:textColor="#A9A9A9"
         android:textSize="16sp"
-        android:textColor="#A9A9A9"/>
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/editTextDescripcionArticulo"
@@ -91,9 +96,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewDescripcionArticuloHint"
         android:layout_marginTop="8dp"
+        android:autofillHints=""
         android:inputType="textMultiLine"
         android:minLines="3"
-        android:autofillHints="" />
+        tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewProveedorArticuloHint"
@@ -102,8 +108,9 @@
         android:layout_below="@id/editTextDescripcionArticulo"
         android:layout_marginTop="16dp"
         android:text="@string/proveedor_articulo"
+        android:textColor="#A9A9A9"
         android:textSize="16sp"
-        android:textColor="#A9A9A9"/>
+        tools:ignore="TextContrastCheck" />
 
     <Spinner
         android:id="@+id/spinnerProveedorArticulo"
@@ -119,8 +126,9 @@
         android:layout_below="@id/spinnerProveedorArticulo"
         android:layout_marginTop="16dp"
         android:text="@string/tipo_articulo_articulo"
+        android:textColor="#A9A9A9"
         android:textSize="16sp"
-        android:textColor="#A9A9A9"/>
+        tools:ignore="TextContrastCheck" />
 
     <Spinner
         android:id="@+id/spinnerTipoArticuloArticulo"
@@ -136,15 +144,17 @@
         android:layout_below="@id/spinnerTipoArticuloArticulo"
         android:layout_marginTop="16dp"
         android:text="@string/local_articulo"
+        android:textColor="#A9A9A9"
         android:textSize="16sp"
-        android:textColor="#A9A9A9"/>
+        tools:ignore="TextContrastCheck" />
 
     <Spinner
         android:id="@+id/spinnerLocalArticulo"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_below="@id/textViewLocalArticuloHint"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabGuardarActiculo"
