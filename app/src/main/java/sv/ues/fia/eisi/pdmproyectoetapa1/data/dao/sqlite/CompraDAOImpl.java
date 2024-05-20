@@ -142,6 +142,33 @@ public class CompraDAOImpl implements CompraDAO {
 
     @Override
     public Compra obtener(String id) throws DAOException {
-        return null;
+        String selection = EntradaCompra.ID_COMPRA + " = ?";
+        String[] selectionArgs = {id};
+
+        try (SQLiteDatabase db = baseDatos.getReadableDatabase();
+             Cursor cursor = db.query(Tablas.COMPRA, null, selection, selectionArgs, null, null,
+                     null)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                throw new DAOException("No se ha encontrado la compra.");
+            }
+
+            Compra compra = new Compra();
+
+            int idIndex = cursor.getColumnIndex(EntradaCompra.ID_COMPRA);
+            int fechaIndex = cursor.getColumnIndex(EntradaCompra.FECHA_COMPRA);
+            int montoIndex = cursor.getColumnIndex(EntradaCompra.MONTO_TOTAL_COMPRA);
+            int idProveedorIndex = cursor.getColumnIndex(EntradaCompra.ID_PROVEEDOR);
+
+            if (idIndex == -1 || fechaIndex == -1 || montoIndex == -1 || idProveedorIndex == -1) {
+                throw new DAOException("Error al leer los datos de la compra.");
+            }
+
+            compra.setIdCompra(cursor.getString(idIndex));
+            compra.setFechaCompra(cursor.getString(fechaIndex));
+            compra.setMontoTotal(cursor.getDouble(montoIndex));
+            compra.setIdProveedor(cursor.getString(idProveedorIndex));
+
+            return compra;
+        }
     }
 }

@@ -9,10 +9,10 @@ public class Compra {
     public Compra() {
     }
 
-    public Compra(String idCompra, String fechaCompra, double montoTotal, String idProveedor) {
+    public Compra(String idCompra, String fechaCompra, String idProveedor) {
         this.idCompra = idCompra;
         this.fechaCompra = fechaCompra;
-        this.montoTotal = montoTotal;
+        this.montoTotal = 0;
         this.idProveedor = idProveedor;
     }
 
