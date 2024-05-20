@@ -154,6 +154,37 @@ public class DetalleCompraDAOImpl implements DetalleCompraDAO {
 
     @Override
     public DetalleCompra obtenerPorIdCompra(String idCompra) throws DAOException {
-        throw new DAOException("Método no implementado");
+        String seleccion = EntradaDetalleCompra.ID_COMPRA + " = ?";
+        String[] whereArgs = {idCompra};
+
+        try (SQLiteDatabase db = baseDatos.getReadableDatabase();
+             Cursor cursor = db.query(Tablas.DETALLE_COMPRA, null, seleccion, whereArgs, null, null,
+                     null)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                throw new DAOException("No se encontró el detalle de compra");
+            }
+
+            int idIndex = cursor.getColumnIndex(EntradaDetalleCompra.ID_DETALLE_COMPRA);
+            int cantidadIndex = cursor.getColumnIndex(EntradaDetalleCompra.CANTIDAD_PRODUCTO_COMPRA);
+            int subtotalIndex = cursor.getColumnIndex(EntradaDetalleCompra.SUBTOTAL_COMPRA);
+            int idCompraIndex = cursor.getColumnIndex(EntradaDetalleCompra.ID_COMPRA);
+            int idArticuloIndex = cursor.getColumnIndex(EntradaDetalleCompra.ID_ARTICULO);
+
+            if (idIndex == -1 || cantidadIndex == -1 || subtotalIndex == -1
+                    || idCompraIndex == -1 || idArticuloIndex == -1) {
+                throw new DAOException("Error al leer los datos de la base de datos");
+            }
+
+            DetalleCompra detalleCompra = new DetalleCompra();
+            detalleCompra.setIdDetalleCompra(cursor.getString(idIndex));
+            detalleCompra.setCantidadArticulo(cursor.getInt(cantidadIndex));
+            detalleCompra.setSubtotalCompra(cursor.getDouble(subtotalIndex));
+            detalleCompra.setIdCompra(cursor.getString(idCompraIndex));
+            detalleCompra.setIdArticulo(cursor.getString(idArticuloIndex));
+
+            return detalleCompra;
+        } catch (SQLException e) {
+            throw new DAOException("Error al consultar detalles de compra");
+        }
     }
 }
