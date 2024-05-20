@@ -85,7 +85,21 @@ public class DetalleCompraDAOImpl implements DetalleCompraDAO {
 
     @Override
     public void modificar(DetalleCompra obj) throws DAOException {
+        if (verficarIntegridad(obj, 2)) {
+            throw new DAOException("Error al modificar detalle de compra: La compra, el " +
+                    "artículo o el detalle de compra no existen");
+        }
 
+        ContentValues valores = getContentValues(obj);
+        String id = obj.getIdDetalleCompra();
+        String[] whereArgs = {id};
+
+        try (SQLiteDatabase db = baseDatos.getWritableDatabase()) {
+            db.update(Tablas.DETALLE_COMPRA, valores, EntradaDetalleCompra.ID_DETALLE_COMPRA + " = ?",
+                    whereArgs);
+        } catch (SQLException e) {
+            throw new DAOException("Error al modificar detalle de compra");
+        }
     }
 
     @Override
