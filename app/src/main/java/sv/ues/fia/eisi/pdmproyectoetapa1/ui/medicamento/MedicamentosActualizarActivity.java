@@ -1,6 +1,7 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.ui.medicamento;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import android.widget.ArrayAdapter;
@@ -36,8 +37,9 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
 
     EditText fechaExpedicionS, fechaExperacionS;
     Spinner medicamentoid,articuloMedicamento,formaFarmaceutica,viaAdministracion,laboratorio;
-    Button actualizarMedicamento, limpiarMedicamento;
+    Button actualizarMedicamento;
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch recetaMedicaS;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -182,29 +184,27 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
 
         //Creando un nuevo objeto de tipo Medicamento
         Medicamento medicamento=new Medicamento();
-
-        //Asignando los valores al objeto
-        medicamento.setIdMedicamento(medicamentoSeleccionado.getIdMedicamento());
-        medicamento.setFechaExpedicion(fechaExpedicion);
-        medicamento.setFechaExpiracion(fechaExpiracion);
-        medicamento.setRequiereRecetaMedica(recetaRequerida ? "Si" : "No"); // Asignando el valor de la receta según el estado del Switch
-        medicamento.setIdArticulo(articuloSeleccionado.getIdArticulo());
-        medicamento.setIdFormaFarmaceutica(formaFarmaceuticaSeleccionada.getIdFormaFarmaceutica());
-        medicamento.setIdViaAdministracion(viaAdministracionSeleccionada.getIdViaAdministracion());
-        medicamento.setIdLaboratorio(laboratorioSeleccionado.getIdLaboratorio());
-
+        //Verificar si los campos estan vacios
+        if(fechaExpedicion.isEmpty() || fechaExpiracion.isEmpty()) {
+            Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //Verificar si la fecha de expedición es menor a la fecha de expiración
+        if (fechaExpedicion.compareTo(fechaExpiracion) > 0) {
+            Toast.makeText(this, "La fecha de expedición no puede ser mayor a la fecha de expiración", Toast.LENGTH_SHORT).show();
+            return;
+        }
         try{
-            //Verificar si los campos estan vacios
-            if(fechaExpedicion.isEmpty() || fechaExpiracion.isEmpty()) {
-                Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            //Verificar si la fecha de expedición es menor a la fecha de expiración
-            if (fechaExpedicion.compareTo(fechaExpiracion) > 0) {
-                Toast.makeText(this, "La fecha de expedición no puede ser mayor a la fecha de expiración", Toast.LENGTH_SHORT).show();
-                return;
-            }
 
+            //Asignando los valores al objeto
+            medicamento.setIdMedicamento(medicamentoSeleccionado.getIdMedicamento());
+            medicamento.setFechaExpedicion(fechaExpedicion);
+            medicamento.setFechaExpiracion(fechaExpiracion);
+            medicamento.setRequiereRecetaMedica(recetaRequerida ? "Si" : "No"); // Asignando el valor de la receta según el estado del Switch
+            medicamento.setIdArticulo(articuloSeleccionado.getIdArticulo());
+            medicamento.setIdFormaFarmaceutica(formaFarmaceuticaSeleccionada.getIdFormaFarmaceutica());
+            medicamento.setIdViaAdministracion(viaAdministracionSeleccionada.getIdViaAdministracion());
+            medicamento.setIdLaboratorio(laboratorioSeleccionado.getIdLaboratorio());
             //Actualizar el medicamento
             medicamentoDAO.modificar(medicamento);
             Toast.makeText(this, "Medicamento actualizado", Toast.LENGTH_SHORT).show();
@@ -213,8 +213,8 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
         }
 
 
-    }
 
+    }
 
 
 }
