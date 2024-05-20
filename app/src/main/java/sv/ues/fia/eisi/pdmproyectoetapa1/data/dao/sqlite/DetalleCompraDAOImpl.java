@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.DAOException;
@@ -109,7 +110,41 @@ public class DetalleCompraDAOImpl implements DetalleCompraDAO {
 
     @Override
     public List<DetalleCompra> obtenerTodos() throws DAOException {
-        return null;
+        List<DetalleCompra> detalleCompras = new ArrayList<>();
+        String consulta = "SELECT * FROM " + Tablas.DETALLE_COMPRA;
+
+        try (SQLiteDatabase db = baseDatos.getReadableDatabase();
+             Cursor cursor = db.rawQuery(consulta, null)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                return detalleCompras;
+            }
+
+            do {
+                int idIndex = cursor.getColumnIndex(EntradaDetalleCompra.ID_DETALLE_COMPRA);
+                int cantidadIndex = cursor.getColumnIndex(EntradaDetalleCompra.CANTIDAD_PRODUCTO_COMPRA);
+                int subtotalIndex = cursor.getColumnIndex(EntradaDetalleCompra.SUBTOTAL_COMPRA);
+                int idCompraIndex = cursor.getColumnIndex(EntradaDetalleCompra.ID_COMPRA);
+                int idArticuloIndex = cursor.getColumnIndex(EntradaDetalleCompra.ID_ARTICULO);
+
+                if (idIndex == -1 || cantidadIndex == -1 || subtotalIndex == -1
+                        || idCompraIndex == -1 || idArticuloIndex == -1) {
+                    throw new DAOException("Error al leer los datos de la base de datos");
+                }
+
+                DetalleCompra detalleCompra = new DetalleCompra();
+                detalleCompra.setIdDetalleCompra(cursor.getString(idIndex));
+                detalleCompra.setCantidadArticulo(cursor.getInt(cantidadIndex));
+                detalleCompra.setSubtotalCompra(cursor.getDouble(subtotalIndex));
+                detalleCompra.setIdCompra(cursor.getString(idCompraIndex));
+                detalleCompra.setIdArticulo(cursor.getString(idArticuloIndex));
+
+                detalleCompras.add(detalleCompra);
+            } while (cursor.moveToNext());
+        } catch (SQLException e) {
+            throw new DAOException("Error al consultar detalles de compra");
+        }
+
+        return detalleCompras;
     }
 
     @Override
