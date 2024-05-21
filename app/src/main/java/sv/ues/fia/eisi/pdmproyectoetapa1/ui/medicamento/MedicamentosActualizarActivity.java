@@ -71,8 +71,15 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
     public void SpinnerMedicamento(){
         ControlBaseDatos db=ControlBaseDatos.obtenerInstancia(MedicamentosActualizarActivity.this);
        MedicamentoDAO medicamentoDAO =db.getMedicamentosDAO();
+        List<Medicamento> medicamentosList;
        try {
-              List<Medicamento> medicamentosList = medicamentoDAO.obtenerTodos();
+              medicamentosList = medicamentoDAO.obtenerTodos();
+              //Verificar si la lista de medicamentos está vacía
+              if (medicamentosList.isEmpty()) {
+                  Toast.makeText(this, "No hay medicamentos registrados", Toast.LENGTH_SHORT).show();
+                  finish();
+                  return;
+              }
               ArrayAdapter<Medicamento> adapterMedicamento = new ArrayAdapter<>(this,
                       androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, medicamentosList);
 
@@ -91,19 +98,18 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
                 String idTipoArticulo = db.getTipoArticuloDAO().obtenerTodos().get(0).getId();
                 // Obtener todos los artículos
                 articuloList = articuloDAO.obtenerTodos();
-                // Verificar si la lista de artículos está vacía
-                if (articuloList.isEmpty()) {
-                    Toast.makeText(this, "No hay artículos de tipo medicamento registrados", Toast.LENGTH_SHORT).show();
-                    finish();
-                    return;
-                }
-
                 // Filtrar solo los artículos de tipo "medicamento"
                 List<Articulo> articulosMedicamento = new ArrayList<>();
                 for (Articulo articulo : articuloList) {
                     if (articulo.getIdTipoArticulo().equals(idTipoArticulo)) {
                         articulosMedicamento.add(articulo);
                     }
+                }
+                // Verificar si la lista de artículos está vacía
+                if (articulosMedicamento.isEmpty()) {
+                    Toast.makeText(this, "No hay artículos de tipo medicamento registrados", Toast.LENGTH_SHORT).show();
+                    finish();
+                    return;
                 }
                 // Crear el adaptador con la lista filtrada
                 ArrayAdapter<Articulo> adapterArticulo = new ArrayAdapter<>(this,
