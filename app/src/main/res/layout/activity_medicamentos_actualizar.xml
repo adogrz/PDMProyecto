@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.606"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
 
     <TextView
         android:id="@+id/viaAdmin"
@@ -31,7 +32,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicam"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,TextSizeCheck" />
 
     <TextView
         android:id="@+id/medicam"
@@ -44,7 +45,7 @@
         app:layout_constraintHorizontal_bias="0.217"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idMeca"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,TextSizeCheck" />
 
     <Spinner
         android:id="@+id/editArticuloAct"
@@ -84,7 +85,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viaAdmin"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,TextSizeCheck" />
 
     <TextView
         android:id="@+id/laboratorioA"
@@ -97,7 +98,7 @@
         app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/formaFarmaA"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,TextSizeCheck" />
 
     <EditText
         android:id="@+id/editFechaExpedicionAct"
@@ -114,7 +115,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/laboratorioA"
-        tools:ignore="Autofill,MissingConstraints,SpeakableTextPresentCheck" />
+        tools:ignore="Autofill,HardcodedText,MissingConstraints,SpeakableTextPresentCheck,DuplicateSpeakableTextCheck,TextContrastCheck" />
 
     <EditText
         android:id="@+id/editFechaExpiracionAct"
@@ -131,7 +132,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editFechaExpedicionAct"
-        tools:ignore="Autofill,MissingConstraints" />
+        tools:ignore="Autofill,HardcodedText,MissingConstraints,TextContrastCheck" />
 
     <Spinner
         android:id="@+id/editFormaFarmaceuticaAct"
@@ -177,7 +178,8 @@
         android:text="@string/medicamento_id"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
 
     <TextView
         android:id="@+id/textView"
@@ -189,7 +191,7 @@
         android:text="@string/requiere_receta_medica"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editLaboratorioAct"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,TextSizeCheck" />
 
     <Switch
         android:id="@+id/editRecetaMedicaAct"
@@ -202,7 +204,7 @@
         app:layout_constraintHorizontal_bias="0.657"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/editLaboratorioAct"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="HardcodedText,TouchTargetSizeCheck,UseSwitchCompatOrMaterialXml" />
 
     <TextView
         android:id="@+id/textView2"
@@ -215,7 +217,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/laboratorioA"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintVertical_bias="0.714"
+        tools:ignore="TextSizeCheck" />
 
     <TextView
         android:id="@+id/textView3"
@@ -229,7 +232,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editFechaExpedicionAct"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="TextSizeCheck" />
 
     <Spinner
         android:id="@+id/idMedAct"

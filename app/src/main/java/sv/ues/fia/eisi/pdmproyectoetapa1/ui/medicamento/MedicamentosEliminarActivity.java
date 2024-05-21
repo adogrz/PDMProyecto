@@ -1,13 +1,12 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.ui.medicamento;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.R;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.DAOException;
@@ -35,23 +34,17 @@ public class MedicamentosEliminarActivity extends AppCompatActivity {
         MedicamentoDAO medicamentoDAO = db.getMedicamentosDAO();
         String idMedicamento = eMedicamentos.getText().toString();
 
+        // Verificar que el campo no esté vacío
+        if (idMedicamento.isEmpty()) {
+            Toast.makeText(this, "Ingrese un ID de medicamento", Toast.LENGTH_SHORT).show();
+            return;
+        }
         try {
-            // Verificar que el campo no esté vacío
-            if (idMedicamento.isEmpty()) {
-                Toast.makeText(this, "Ingrese un ID de medicamento", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
             // Obtener el medicamento de la base de datos
             Medicamento medicamento = medicamentoDAO.obtener(idMedicamento);
+            medicamentoDAO.eliminar(medicamento);
+            Toast.makeText(this, "Medicamento eliminado", Toast.LENGTH_SHORT).show();
 
-            // Verificar si el medicamento existe antes de intentar eliminarlo
-            if (medicamento != null) {
-                medicamentoDAO.eliminar(medicamento);
-                Toast.makeText(this, "Medicamento eliminado", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "El medicamento con ID " + idMedicamento + " no existe", Toast.LENGTH_SHORT).show();
-            }
         } catch (DAOException e) {
             e.printStackTrace();
             Toast.makeText(this, "Error al eliminar medicamento", Toast.LENGTH_SHORT).show();

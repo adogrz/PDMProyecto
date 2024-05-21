@@ -2,17 +2,11 @@ package sv.ues.fia.eisi.pdmproyectoetapa1.ui.medicamento;
 
 
 import android.annotation.SuppressLint;
-
 import android.os.Bundle;
-
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-
 import android.widget.EditText;
-
 import android.widget.Spinner;
-
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -26,14 +20,14 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.ArticuloDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.DAOException;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.FormaFarmaceuticaDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.LaboratorioDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.MedicamentoDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.ViaAdministracionDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.sqlite.ControlBaseDatos;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Articulo;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.FormaFarmaceutica;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Laboratorio;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.ViaAdministracion;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.MedicamentoDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Medicamento;
+import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.ViaAdministracion;
 
 
 
@@ -41,11 +35,11 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
 
     EditText medicamentoid,fechaExpedicionS, fechaExperacionS;
     Spinner articuloMedicamento,formaFarmaceutica,viaAdministracion,laboratorio;
-    Button guardarMedicamento,limpiarMedicamento;
+    Button guardarMedicamento;
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch recetaMedicaS;
 
-    ControlBaseDatos helper;
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +63,7 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
         spinnerLaboratorio();
 
         //Guardar medicamento
-        guardarMedicamento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                insertarMedicamento();
-            }
-        });
+        guardarMedicamento.setOnClickListener(v -> insertarMedicamento());
 
 
     }
@@ -83,12 +72,17 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
     public void spinnerArticuloM() {
         ControlBaseDatos db = ControlBaseDatos.obtenerInstancia(MedicamentosInsertarActivity.this);
         ArticuloDAO articuloDAO = db.getArticuloDAO();
-
+        List<Articulo> articuloList;
         try {
             String idTipoArticulo =db.getTipoArticuloDAO().obtenerTodos().get(0).getId();
             // Obtener todos los artículos
-            List<Articulo> articuloList = articuloDAO.obtenerTodos();
-
+             articuloList = articuloDAO.obtenerTodos();
+            // Verificar si la lista de artículos está vacía
+             if (articuloList.isEmpty()) {
+                 Toast.makeText(this, "No hay artículos de tipo medicamento registrados", Toast.LENGTH_SHORT).show();
+                 finish();
+                 return;
+             }
             // Filtrar solo los artículos de tipo "medicamento"
             List<Articulo> articulosMedicamento = new ArrayList<>();
             for (Articulo articulo : articuloList) {
@@ -96,6 +90,7 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
                     articulosMedicamento.add(articulo);
                 }
             }
+
             // Crear el adaptador con la lista filtrada
             ArrayAdapter<Articulo> adapterArticulo = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, articulosMedicamento);
 
@@ -182,28 +177,27 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
         //Creando las instancias de los objetos
         Medicamento medicamento = new Medicamento();
 
-        //Asignando los valores a los objetos
-        medicamento.setIdMedicamento(medicamentoId);
-        medicamento.setFechaExpedicion(fechaExpedicion);
-        medicamento.setFechaExpiracion(fechaExpiracion);
-        medicamento.setRequiereRecetaMedica(recetaRequerida ? "Si" : "No"); // Asignando el valor de la receta según el estado del Switch
-        medicamento.setIdArticulo(articuloSeleccionado.getIdArticulo());
-        medicamento.setIdFormaFarmaceutica(formaFarmaceuticaSeleccionada.getIdFormaFarmaceutica());
-        medicamento.setIdViaAdministracion(viaAdministracionSeleccionada.getIdViaAdministracion());
-        medicamento.setIdLaboratorio(laboratorioSeleccionado.getIdLaboratorio());
+        //Verificar si los campos están vacíos
+        if (medicamentoId.isEmpty() || fechaExpedicion.isEmpty() || fechaExpiracion.isEmpty()) {
+            Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        //Verificar si la fecha de expedición es menor a la fecha de expiración
+        if (fechaExpedicion.compareTo(fechaExpiracion) > 0) {
+            Toast.makeText(this, "La fecha de expiracion no puede ser menor a la fecha de expedicion", Toast.LENGTH_SHORT).show();
+            return;
+        }
         try {
-            //Verificar si los campos están vacíos
-            if (medicamentoId.isEmpty() || fechaExpedicion.isEmpty() || fechaExpiracion.isEmpty()) {
-                Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            //Verificar si la fecha de expedición es menor a la fecha de expiración
-            if (fechaExpedicion.compareTo(fechaExpiracion) > 0) {
-                Toast.makeText(this, "La fecha de expedición no puede ser mayor a la fecha de expiración", Toast.LENGTH_SHORT).show();
-                return;
-            }
+            //Asignando los valores a los objetos
+            medicamento.setIdMedicamento(medicamentoId);
+            medicamento.setFechaExpedicion(fechaExpedicion);
+            medicamento.setFechaExpiracion(fechaExpiracion);
+            medicamento.setRequiereRecetaMedica(recetaRequerida ? "Si" : "No"); // Asignando el valor de la receta según el estado del Switch
+            medicamento.setIdArticulo(articuloSeleccionado.getIdArticulo());
+            medicamento.setIdFormaFarmaceutica(formaFarmaceuticaSeleccionada.getIdFormaFarmaceutica());
+            medicamento.setIdViaAdministracion(viaAdministracionSeleccionada.getIdViaAdministracion());
+            medicamento.setIdLaboratorio(laboratorioSeleccionado.getIdLaboratorio());
             //Insertando el medicamento
             medicamentoDAO.insertar(medicamento);
             Toast.makeText(this, "Medicamento insertado correctamente", Toast.LENGTH_SHORT).show();
@@ -212,12 +206,10 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
         } catch (DAOException e) {
             Toast.makeText(this, "Error al insertar el medicamento", Toast.LENGTH_SHORT).show();
         }
+
+
+
     }
-
-
-
-
-
 
 
 }
