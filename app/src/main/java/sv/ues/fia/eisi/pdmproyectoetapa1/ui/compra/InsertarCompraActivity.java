@@ -110,7 +110,7 @@ public class InsertarCompraActivity extends AppCompatActivity {
 
             // Actualizar monto total de la compra
             if (nuevaCompra != null) {
-                nuevaCompra.setMontoTotal(nuevaCompra.getMontoTotal() + subtotal);
+                nuevaCompra.setMontoTotal(subtotal);
                 helper.getCompraDAO().modificar(nuevaCompra);
             }
 

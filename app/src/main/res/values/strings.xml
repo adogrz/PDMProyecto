@@ -30,6 +30,14 @@
     <string name="etCantidad">Cantidad</string>
     <string name="btnRegistrarComp">Registrar</string>
 
+    <!--  Consulta de compra  -->
+    <string name="txtConsultarComp">Consultar compra</string>
+    <string name="btnConsultar">Consultar</string>
+    <string name="txtFechaComp">Fecha de compra</string>
+    <string name="txtCantidadComp">Cantidad comprada</string>
+    <string name="txtPrecioUniComp">Precio unitario articulo</string>
+    <string name="txtMontoTotalComp">Monto total</string>
+
     <!-- Menú de Medicamentos -->
     <string name="medicamentos_menu">Función a Ejecutar el Medicamento</string>
     <string name="insertar_medicamento">Insertar medicamento</string>
