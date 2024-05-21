@@ -78,7 +78,7 @@
         android:hint="@string/CantidadVenta"
         android:inputType="number"
         android:minHeight="48dp"
-        android:textColorHint="#78909C"
+        android:textColorHint="#546E7A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.955"
@@ -117,11 +117,10 @@
         app:layout_constraintVertical_bias="0.761" />
 
     <Button
-        android:id="@+id/btn_consultar"
+        android:id="@+id/btn_actualizar"
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:fontFamily="@font/baloo_tammudu"
-        android:onClick="agregarVenta"
         android:text="@string/Guardar"
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -198,7 +197,7 @@
         android:hint="@string/NombreCliente"
         android:inputType="text"
         android:minHeight="48dp"
-        android:textColorHint="#78909C"
+        android:textColorHint="#546E7A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.763"
@@ -215,7 +214,7 @@
         android:hint="@string/ApellidoCliente"
         android:inputType="text"
         android:minHeight="48dp"
-        android:textColorHint="#78909C"
+        android:textColorHint="#546E7A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.763"
@@ -246,7 +245,7 @@
         android:hint="@string/Codigo"
         android:inputType="text"
         android:minHeight="48dp"
-        android:textColorHint="#78909C"
+        android:textColorHint="#546E7A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.763"
@@ -276,11 +275,13 @@
         android:hint="@string/CodigoV"
         android:inputType="text"
         android:minHeight="48dp"
+        android:textColorHint="#546E7A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.92"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/textView9"
@@ -298,16 +299,18 @@
 
     <EditText
         android:id="@+id/txt_codigoDetalle"
-        android:layout_width="139dp"
-        android:layout_height="36dp"
+        android:layout_width="138dp"
+        android:layout_height="50dp"
         android:ems="10"
         android:hint="@string/CodigoDetalle"
         android:inputType="text"
+        android:textColorHint="#546E7A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.941"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.835" />
+        app:layout_constraintVertical_bias="0.835"
+        android:autofillHints="" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

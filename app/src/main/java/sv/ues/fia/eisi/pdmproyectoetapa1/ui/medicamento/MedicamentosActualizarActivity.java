@@ -96,8 +96,10 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
             List<Articulo> articuloList;
             try {
                 String idTipoArticulo = db.getTipoArticuloDAO().obtenerTodos().get(0).getId();
+              
                 // Obtener todos los artículos
                 articuloList = articuloDAO.obtenerTodos();
+              
                 // Filtrar solo los artículos de tipo "medicamento"
                 List<Articulo> articulosMedicamento = new ArrayList<>();
                 for (Articulo articulo : articuloList) {
@@ -105,19 +107,20 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
                         articulosMedicamento.add(articulo);
                     }
                 }
+              
                 // Verificar si la lista de artículos está vacía
                 if (articulosMedicamento.isEmpty()) {
                     Toast.makeText(this, "No hay artículos de tipo medicamento registrados", Toast.LENGTH_SHORT).show();
                     finish();
                     return;
                 }
+              
                 // Crear el adaptador con la lista filtrada
                 ArrayAdapter<Articulo> adapterArticulo = new ArrayAdapter<>(this,
                         androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, articulosMedicamento);
 
                 // Asignar el adaptador al spinner
                 articuloMedicamento.setAdapter(adapterArticulo);
-
             } catch (DAOException e) {
                 throw new RuntimeException(e);
             }
@@ -223,12 +226,7 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
         }catch (DAOException e){
             Toast.makeText(this, "Error al actualizar el medicamento", Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
-
-
 }
 
 

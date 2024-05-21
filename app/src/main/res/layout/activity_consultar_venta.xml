@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.045" />
 
     <Button
-        android:id="@+id/btn_consultar"
+        android:id="@+id/btn_actualizar"
         android:layout_width="145dp"
         android:layout_height="50dp"
         android:fontFamily="@font/baloo_tammudu"
@@ -178,12 +178,14 @@
         android:hint="@string/CodigoV"
         android:inputType="text"
         android:minHeight="48dp"
+        android:textColorHint="#546E7A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.83" />
+        app:layout_constraintVertical_bias="0.83"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/txt_cantidad"
@@ -267,7 +269,8 @@
         app:layout_constraintHorizontal_bias="0.974"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.716" />
+        app:layout_constraintVertical_bias="0.716"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/opcion_metodoPago"

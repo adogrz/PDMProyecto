@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Spinner;
@@ -33,21 +34,28 @@ public class AgregarVentaActivity extends Activity {
 
     Spinner metodoPago, articulo;
 
+    Button btnAgregarVenta, btnLimpiarCampos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_venta);
 
-        editCodigoVenta = (EditText) findViewById(R.id.txt_codigoVenta);
-        editCodigoDetalle = (EditText) findViewById(R.id.txt_codigoDetalle);
-        editCodigoCliente = (EditText) findViewById(R.id.txt_codigoCliente);
-        editNombreCliente = (EditText) findViewById(R.id.txt_nombreCliente);
-        editApellidoCliente = (EditText) findViewById(R.id.txt_apellidoCliente);
-        editCantidad = (EditText) findViewById(R.id.txt_cantidad);
+        editCodigoVenta = findViewById(R.id.txt_codigoVenta);
+        editCodigoDetalle = findViewById(R.id.txt_codigoDetalle);
+        editCodigoCliente = findViewById(R.id.txt_codigoCliente);
+        editNombreCliente = findViewById(R.id.txt_nombreCliente);
+        editApellidoCliente = findViewById(R.id.txt_apellidoCliente);
+        editCantidad = findViewById(R.id.txt_cantidad);
         metodoPago = findViewById(R.id.opcion_metodoPago);
         articulo = findViewById(R.id.opcion_articulo);
         spinnerMetodosPagos(metodoPago);
         spinnerArticulos(articulo);
+
+        btnAgregarVenta = findViewById(R.id.btn_actualizar);
+        btnLimpiarCampos = findViewById(R.id.btn_limpiarVenta);
+
+        btnAgregarVenta.setOnClickListener(v -> agregarVenta());
     }
 
     //Metodo para implementar el spinner de metodos de pago
@@ -74,20 +82,27 @@ public class AgregarVentaActivity extends Activity {
         ControlBaseDatos db=ControlBaseDatos.obtenerInstancia(AgregarVentaActivity.this);
         ArticuloDAO articuloDAO= db.getArticuloDAO();
 
+        List<Articulo> articulos;
         try {
-            List<Articulo> articulos = articuloDAO.obtenerTodos();
-            ArrayAdapter<Articulo> adapterArticulo=new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, articulos);
+            articulos = articuloDAO.obtenerTodos();
 
-            articulo.setAdapter(adapterArticulo);
+            if (articulos.isEmpty()) {
+                Toast.makeText(AgregarVentaActivity.this, "No hay articulos registrados.", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
 
         } catch (DAOException e) {
             throw new RuntimeException(e);
         }
 
+        ArrayAdapter<Articulo> adapterArticulo=new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, articulos);
+        articulo.setAdapter(adapterArticulo);
+
     }
 
     //Metodo para agregar una venta
-    public void agregarVenta(View view) {
+    public void agregarVenta() {
         //Obteniendo la instancia de la base de datos
         ControlBaseDatos controlBaseDatos = ControlBaseDatos.obtenerInstancia(AgregarVentaActivity.this);
 
@@ -111,7 +126,24 @@ public class AgregarVentaActivity extends Activity {
         String nombreCliente = editNombreCliente.getText().toString();
         String ApellidoCliente = editApellidoCliente.getText().toString();
         String Cantidad = editCantidad.getText().toString();
-        String montoTotal = String.valueOf(precioArticulo * Double.parseDouble(Cantidad));
+
+        //Verificando si los campos estan vacios
+        if (codigoVenta.isEmpty() || codigoCliente.isEmpty() || idDetalleVenta.isEmpty() || Cantidad.isEmpty() || nombreCliente.isEmpty() || ApellidoCliente.isEmpty()) {
+            Toast.makeText(AgregarVentaActivity.this, "Por favor llene todos los campos.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //Verificando si la cantidad es un número
+        int cantidadInt;
+        try {
+            cantidadInt = Integer.parseInt(Cantidad);
+        } catch (NumberFormatException e) {
+            Toast.makeText(AgregarVentaActivity.this, "Cantidad debe ser un número.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //Calculando el monto total de la venta
+        String montoTotal = String.valueOf(precioArticulo * cantidadInt);
 
         //Creando las instancias de los objetos
         Cliente cliente = new Cliente();
@@ -141,10 +173,6 @@ public class AgregarVentaActivity extends Activity {
 
         //Se obtienen los datos de los campos de texto y verifica que no exista ningun error
         try {
-            if (codigoVenta.isEmpty() || codigoCliente.isEmpty() || idDetalleVenta.isEmpty() || Cantidad.isEmpty()) {
-                Toast.makeText(AgregarVentaActivity.this, "Por favor llene todos los campos.", Toast.LENGTH_SHORT).show();
-                return;
-            }
             //Verificando si el articulo seleccionado tiene stock suficiente
             if (articuloSeleccionado.getStock() < Integer.parseInt(Cantidad)) {
                 Toast.makeText(AgregarVentaActivity.this, "No hay stock suficiente para realizar la venta.", Toast.LENGTH_SHORT).show();
