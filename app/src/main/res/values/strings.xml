@@ -15,6 +15,29 @@
     <string name="title_activity_medicamentos_eliminar">MedicamentosEliminarActivity</string>
     <string name="title_activity_medicamentos_actualizar">MedicamentosActualizarActivity</string>
 
+    <!--  Menú de compras  -->
+    <string name="txtMenuComp">Menú de compras</string>
+    <string name="btnInsertarComp">Insertar compra</string>
+    <string name="btnConsultarComp">Consultar compra</string>
+    <string name="btnEliminarComp">Eliminar compra</string>
+    <string name="btnActualizarComp">Actualizar compra</string>
+
+    <!--  Registro de compra  -->
+    <string name="txtInsertarComp">Insertar compra</string>
+    <string name="etIdComp">ID Compra</string>
+    <string name="txtProv">Proveedor</string>
+    <string name="txtArt">Artículo</string>
+    <string name="etCantidad">Cantidad</string>
+    <string name="btnRegistrarComp">Registrar</string>
+
+    <!--  Consulta de compra  -->
+    <string name="txtConsultarComp">Consultar compra</string>
+    <string name="btnConsultar">Consultar</string>
+    <string name="txtFechaComp">Fecha de compra</string>
+    <string name="txtCantidadComp">Cantidad comprada</string>
+    <string name="txtPrecioUniComp">Precio unitario articulo</string>
+    <string name="txtMontoTotalComp">Monto total</string>
+
     <!-- Menú de Medicamentos -->
     <string name="medicamentos_menu">Función a Ejecutar el Medicamento</string>
     <string name="insertar_medicamento">Insertar medicamento</string>
@@ -148,4 +171,5 @@
     <string name="consultar_receta_medica">Consultar receta médica</string>
     <string name="modificar_receta_medica">Modificar receta médica</string>
     <string name="eliminar_receta_medica">Eliminar receta médica</string>
+    <string name="id_articulo_label">Id articulo</string>
 </resources>

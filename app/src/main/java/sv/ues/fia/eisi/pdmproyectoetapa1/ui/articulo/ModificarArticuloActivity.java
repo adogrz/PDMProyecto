@@ -122,7 +122,7 @@ public class ModificarArticuloActivity extends AppCompatActivity {
         Local local = (Local) spinnerLocal.getSelectedItem();
 
         // Validar los datos
-        if (idArticulo.isEmpty() || nombreArticulo.isEmpty() || descripcionArticulo.isEmpty() || precioArticulo.isEmpty()) {
+        if (idArticulo.isEmpty() || nombreArticulo.isEmpty()  || precioArticulo.isEmpty()) {
             Toast.makeText(ModificarArticuloActivity.this, "Por favor, rellene todos los campos",
                     Toast.LENGTH_SHORT).show();
             return;
@@ -130,8 +130,8 @@ public class ModificarArticuloActivity extends AppCompatActivity {
 
         // Crear el objeto Articulo
         Articulo articulo = new Articulo(idArticulo, nombreArticulo,
-                Double.parseDouble(precioArticulo), 0, descripcionArticulo,
-                proveedor.getIdProveedor(), tipoArticulo.getId());
+                Double.parseDouble(precioArticulo), descripcionArticulo, proveedor.getIdProveedor(),
+                tipoArticulo.getId());
 
         // Crear el objeto LocalArticulo
         LocalArticulo localArticulo = new LocalArticulo(local.getIdLocal(), idArticulo);

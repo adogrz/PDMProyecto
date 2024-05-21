@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.ArticuloDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.CompraDAO;
+import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.DetalleCompraDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.DetalleRecetaDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.MedicamentoDAO;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.MedicoDAO;
@@ -47,6 +49,8 @@ public final class ControlBaseDatos {
     private VentaDAO venta = null;
     private MetodoPagoDAO metodoPago = null;
     private DetalleVentaDAO detalleVenta = null;
+    private CompraDAO compras = null;
+    private DetalleCompraDAO detallesCompra = null;
 
     public ControlBaseDatos(Context contexto) {
         if (baseDatos == null) {
@@ -68,16 +72,6 @@ public final class ControlBaseDatos {
 
     public SQLiteDatabase getDb() {
         return baseDatos.getWritableDatabase();
-    }
-
-    public void abrir() {
-        baseDatos.getWritableDatabase();
-    }
-
-    public void cerrar() {
-        if (baseDatos != null) {
-            baseDatos.close();
-        }
     }
 
     /**
@@ -246,5 +240,19 @@ public final class ControlBaseDatos {
             detalleVenta = new DetalleVentaDAOImpl(baseDatos);
         }
         return detalleVenta;
+    }
+
+    public CompraDAO getCompraDAO() {
+        if (compras == null) {
+            compras = new CompraDAOImpl(baseDatos);
+        }
+        return compras;
+    }
+
+    public DetalleCompraDAO getDetalleCompraDAO() {
+        if (detallesCompra == null) {
+            detallesCompra = new DetalleCompraDAOImpl(baseDatos);
+        }
+        return detallesCompra;
     }
 }

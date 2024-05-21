@@ -11,7 +11,7 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.sqlite.FarmaciaContrato.*;
  * Clase que administra la conexión a la base de datos SQLite y su estructura.
  */
 public final class BaseDatosFarmacia extends SQLiteOpenHelper {
-    private static final String NOMBRE_BASE_DATOS = "proyectoEtapa1.s3db";
+    private static final String NOMBRE_BASE_DATOS = "proyectoEtapa1.db";
     private static final int VERSION_BASE_DATOS = 1;
 
     /**
@@ -38,6 +38,8 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         String DETALLE_RECETA = "detalle_receta";
         String MEDICO = "medico";
         String DETALLE_VENTA = "detalle_venta";
+        String COMPRA = "compra";
+        String DETALLE_COMPRA = "detalle_compra";
     }
 
     /**
@@ -70,7 +72,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Tablas.METODO_PAGO, EntradaMetodoPago.ID_METODO_PAGO);
         String ID_CLIENTE = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.CLIENTE, EntradaCliente.ID_CLIENTE);
-       String ID_MEDICAMENTO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+        String ID_MEDICAMENTO = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.MEDICAMENTO, EntradaMedicamento.ID_MEDICAMENTO);
         String ID_RECETA_MEDICA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.RECETA_MEDICA, EntradaRecetaMedica.ID_RECETA_MEDICA);
@@ -78,6 +80,8 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 Tablas.MEDICO, EntradaMedico.ID_MEDICO);
         String ID_VENTA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
                 Tablas.VENTA, EntradaVenta.ID_VENTA);
+        String ID_COMPRA = String.format("REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE CASCADE",
+                Tablas.COMPRA, EntradaCompra.ID_COMPRA);
     }
 
     public BaseDatosFarmacia(Context context) {
@@ -114,7 +118,7 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
         // Crear la tabla ARTICULO
         db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s REAL NOT NULL, %s INTEGER " +
-                        "NOT NULL CHECK(%s>=0), %s TEXT NOT NULL, %s TEXT NOT NULL %s, %s TEXT " +
+                        "NOT NULL CHECK(%s>=0), %s TEXT, %s TEXT NOT NULL %s, %s TEXT " +
                         "NOT NULL %s)", Tablas.ARTICULO, BaseColumns._ID, EntradaArticulo.ID_ARTICULO,
                 EntradaArticulo.NOMBRE_ARTICULO, EntradaArticulo.PRECIO_UNITARIO_ARTICULO,
                 EntradaArticulo.STOCK_ARTICULO, EntradaArticulo.STOCK_ARTICULO,
@@ -247,6 +251,21 @@ public final class BaseDatosFarmacia extends SQLiteOpenHelper {
                 EntradaDetalleVenta.CANTIDAD_PRODUCTO_VENTA, EntradaDetalleVenta.SUBTOTAL_VENTA,
                 EntradaDetalleVenta.ID_VENTA, Referencias.ID_VENTA,
                 EntradaDetalleVenta.ID_ARTICULO, Referencias.ID_ARTICULO));
+
+        // Crear la tabla COMPRA
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT UNIQUE NOT NULL, %s TEXT NOT NULL, %s REAL NOT NULL, %s TEXT " +
+                        "NOT NULL %s)", Tablas.COMPRA, BaseColumns._ID, EntradaCompra.ID_COMPRA,
+                EntradaCompra.FECHA_COMPRA, EntradaCompra.MONTO_TOTAL_COMPRA,
+                EntradaCompra.ID_PROVEEDOR, Referencias.ID_PROVEEDOR));
+
+        // Crear la tabla DETALLE_COMPRA
+        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s TEXT UNIQUE NOT NULL, %s INTEGER NOT NULL, %s REAL NOT NULL, %s TEXT " +
+                        "NOT NULL %s, %s TEXT NOT NULL %s)", Tablas.DETALLE_COMPRA, BaseColumns._ID,
+                EntradaDetalleCompra.ID_DETALLE_COMPRA, EntradaDetalleCompra.CANTIDAD_PRODUCTO_COMPRA,
+                EntradaDetalleCompra.SUBTOTAL_COMPRA, EntradaDetalleCompra.ID_COMPRA,
+                Referencias.ID_COMPRA, EntradaDetalleCompra.ID_ARTICULO, Referencias.ID_ARTICULO));
     }
 
     private void insertarDatosProveedores(SQLiteDatabase db) {
