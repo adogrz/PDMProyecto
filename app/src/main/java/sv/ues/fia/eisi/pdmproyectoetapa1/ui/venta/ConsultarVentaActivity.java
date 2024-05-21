@@ -3,7 +3,6 @@ package sv.ues.fia.eisi.pdmproyectoetapa1.ui.venta;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -30,23 +29,18 @@ public class ConsultarVentaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultar_venta);
 
-        editCodigoVenta = (EditText) findViewById(R.id.txt_codigoVenta);
-        editCodigoDetalle = (EditText) findViewById(R.id.txt_codigoDetalle);
-        editCodigoCliente = (EditText) findViewById(R.id.txt_codigoCliente);
-        editNombreCliente = (EditText) findViewById(R.id.txt_nombreCliente);
-        editApellidoCliente = (EditText) findViewById(R.id.txt_apellidoCliente);
-        editCantidad = (EditText) findViewById(R.id.txt_cantidad);
-        editArticulo = (EditText) findViewById(R.id.opcion_articulo);
-        editMetodoPago = (EditText) findViewById(R.id.opcion_metodoPago);
+        editCodigoVenta = findViewById(R.id.txt_codigoVenta);
+        editCodigoDetalle = findViewById(R.id.txt_codigoDetalle);
+        editCodigoCliente = findViewById(R.id.txt_codigoCliente);
+        editNombreCliente = findViewById(R.id.txt_nombreCliente);
+        editApellidoCliente = findViewById(R.id.txt_apellidoCliente);
+        editCantidad = findViewById(R.id.txt_cantidad);
+        editArticulo = findViewById(R.id.opcion_articulo);
+        editMetodoPago = findViewById(R.id.opcion_metodoPago);
 
-        botonConsultarVenta = (Button) findViewById(R.id.btn_consultar);
+        botonConsultarVenta = findViewById(R.id.btn_actualizar);
 
-        botonConsultarVenta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                consultarVenta();
-            }
-        });
+        botonConsultarVenta.setOnClickListener(v -> consultarVenta());
     }
 
     private void consultarVenta() {
@@ -72,7 +66,7 @@ public class ConsultarVentaActivity extends AppCompatActivity {
 
             Toast.makeText(ConsultarVentaActivity.this, "Datos obtenidos de la venta.", Toast.LENGTH_SHORT).show();
         } catch (DAOException e) {
-            Toast.makeText(ConsultarVentaActivity.this, "Error al obtener datos de laa venta.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConsultarVentaActivity.this, "No se obtuvo ninguna venta", Toast.LENGTH_SHORT).show();
         }
 
         if (ventaEncontrada != null && clienteEncontrado != null && detalleVentaEncontrado != null) {

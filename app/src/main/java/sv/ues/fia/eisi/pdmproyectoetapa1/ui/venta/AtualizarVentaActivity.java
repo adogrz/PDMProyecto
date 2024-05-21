@@ -37,12 +37,12 @@ public class AtualizarVentaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atualizar_venta);
 
-        editCodigoVenta = (EditText) findViewById(R.id.txt_codigoVenta);
-        editCodigoDetalle = (EditText) findViewById(R.id.txt_codigoDetalle);
-        editCodigoCliente = (EditText) findViewById(R.id.txt_codigoCliente);
-        editNombreCliente = (EditText) findViewById(R.id.txt_nombreCliente);
-        editApellidoCliente = (EditText) findViewById(R.id.txt_apellidoCliente);
-        editCantidad = (EditText) findViewById(R.id.txt_cantidad);
+        editCodigoVenta = findViewById(R.id.txt_codigoVenta);
+        editCodigoDetalle = findViewById(R.id.txt_codigoDetalle);
+        editCodigoCliente = findViewById(R.id.txt_codigoCliente);
+        editNombreCliente = findViewById(R.id.txt_nombreCliente);
+        editApellidoCliente = findViewById(R.id.txt_apellidoCliente);
+        editCantidad = findViewById(R.id.txt_cantidad);
         metodoPago = findViewById(R.id.opcion_metodoPago);
         articulo = findViewById(R.id.opcion_articulo);
         spinnerMetodosPagos(metodoPago);
@@ -72,15 +72,22 @@ public class AtualizarVentaActivity extends AppCompatActivity {
         ControlBaseDatos db=ControlBaseDatos.obtenerInstancia(AtualizarVentaActivity.this);
         ArticuloDAO articuloDAO= db.getArticuloDAO();
 
+        List<Articulo> articulos;
         try {
-            List<Articulo> articulos = articuloDAO.obtenerTodos();
-            ArrayAdapter<Articulo> adapterArticulo=new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, articulos);
+            articulos = articuloDAO.obtenerTodos();
 
-            articulo.setAdapter(adapterArticulo);
+            if (articulos.isEmpty()) {
+                Toast.makeText(AtualizarVentaActivity.this, "No hay articulos registrados.", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
 
         } catch (DAOException e) {
             throw new RuntimeException(e);
         }
+
+        ArrayAdapter<Articulo> adapterArticulo=new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, articulos);
+        articulo.setAdapter(adapterArticulo);
     }
 
     //Metodo para actualizar una venta
@@ -96,7 +103,6 @@ public class AtualizarVentaActivity extends AppCompatActivity {
             VentaDAO ventaDAO = controlBaseDatos.getVentaDAO();
             ClienteDAO clienteDAO = controlBaseDatos.getClienteDAO();
             DetalleVentaDAO detalleVentaDAO = controlBaseDatos.getDetalleVentaDAO();
-            ArticuloDAO articuloDAO = controlBaseDatos.getArticuloDAO();
 
             //Obteniendo la opcion seleccionada en los spinners
             Articulo articuloSeleccionado = (Articulo) articulo.getSelectedItem();
@@ -112,9 +118,24 @@ public class AtualizarVentaActivity extends AppCompatActivity {
             String nombreCliente = editNombreCliente.getText().toString();
             String ApellidoCliente = editApellidoCliente.getText().toString();
             String Cantidad = editCantidad.getText().toString();
-            String montoTotal = String.valueOf(precioArticulo * Double.parseDouble(Cantidad));
 
+            //Verificando si los campos estan vacios
+            if (codigoVenta.isEmpty() || codigoCliente.isEmpty() || idDetalleVenta.isEmpty() || Cantidad.isEmpty() || nombreCliente.isEmpty() || ApellidoCliente.isEmpty()) {
+                Toast.makeText(AtualizarVentaActivity.this, "Por favor llene todos los campos.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
+            //Verificando si la cantidad es un número
+            int cantidadInt;
+            try {
+                cantidadInt = Integer.parseInt(Cantidad);
+            } catch (NumberFormatException e) {
+                Toast.makeText(AtualizarVentaActivity.this, "Cantidad debe ser un número.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            //Calculando el monto total de la venta
+            String montoTotal = String.valueOf(precioArticulo * cantidadInt);
 
             //Creando las instancias de los objetos
             Cliente cliente = new Cliente();
@@ -142,10 +163,6 @@ public class AtualizarVentaActivity extends AppCompatActivity {
             detalleVenta.setSubtotalVenta(Double.parseDouble(montoTotal));
             detalleVenta.setCantidadProductoVenta(Integer.parseInt(Cantidad));
 
-            if (codigoVenta.isEmpty() || codigoCliente.isEmpty() || nombreCliente.isEmpty() || ApellidoCliente.isEmpty() || Cantidad.isEmpty()) {
-                Toast.makeText(AtualizarVentaActivity.this, "Por favor, rellene todos los campos.", Toast.LENGTH_SHORT).show();
-                return;
-            }
 
             //Insertando los datos en la base de datos
             clienteDAO.modificar(cliente);

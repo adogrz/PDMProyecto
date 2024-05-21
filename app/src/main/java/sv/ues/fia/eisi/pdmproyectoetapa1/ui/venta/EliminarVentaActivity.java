@@ -24,15 +24,10 @@ public class EliminarVentaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eliminar_venta);
 
-        editCodigoVenta = (EditText) findViewById(R.id.txt_codVenta);
-        botonEliminarVenta = (Button) findViewById(R.id.btn_eliminar);
+        editCodigoVenta = findViewById(R.id.txt_codVenta);
+        botonEliminarVenta = findViewById(R.id.btn_eliminar);
 
-        botonEliminarVenta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                eliminarVenta();
-            }
-        });
+        botonEliminarVenta.setOnClickListener(v -> eliminarVenta());
     }
 
     //Metodo para eliminar una venta
@@ -40,6 +35,12 @@ public class EliminarVentaActivity extends AppCompatActivity {
         ControlBaseDatos controlBaseDatos = ControlBaseDatos.obtenerInstancia(EliminarVentaActivity.this);
         VentaDAO ventaDAO = controlBaseDatos.getVentaDAO();
         String idVenta = editCodigoVenta.getText().toString();
+
+        //Verificando si los campos estan vacios
+        if (idVenta.isEmpty()) {
+            Toast.makeText(EliminarVentaActivity.this, "Por favor llene todos los campos.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         try {
             Venta venta = ventaDAO.obtener(idVenta);
