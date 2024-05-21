@@ -3,6 +3,7 @@ package sv.ues.fia.eisi.pdmproyectoetapa1.ui.recetamedica;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.service.controls.Control;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -79,7 +80,6 @@ public class RecetasInsertarActivity extends AppCompatActivity {
     }
 
     private void insertarReceta(){
-
         String idRecetaMedica = editIdRecetaMedica.getText().toString();
         String numeroReceta = editNumeroReceta.getText().toString();
         String fechaReceta = editFechaReceta.getText().toString();
@@ -100,10 +100,9 @@ public class RecetasInsertarActivity extends AppCompatActivity {
         if(idRecetaMedica.isEmpty() || numeroReceta.isEmpty() || fechaReceta.isEmpty() ||
                 nombreMedico.isEmpty() || apellidoMedico.isEmpty() || especialidadMedico.isEmpty()
                 || jvpm.isEmpty() || dosisReceta.isEmpty() || periodicidadReceta.isEmpty() ||
-                fechaInicioTratamiento.isEmpty() || fechaFinTratamiento.isEmpty() || idDetalleReceta.isEmpty()
-                || idMedicamento.isEmpty() || idMedico.isEmpty()){
+                fechaInicioTratamiento.isEmpty() || fechaFinTratamiento.isEmpty() ){
             //mostrar mensaje de error
-            Toast.makeText(this, "Debe completar todos los campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RecetasInsertarActivity.this, "Debe completar todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
 
