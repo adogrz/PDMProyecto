@@ -7,7 +7,7 @@
     tools:context=".ui.articulo.ModificarArticuloActivity">
 
     <TextView
-        android:id="@+id/textViewTitle"
+        android:id="@+id/tv_insertar_articulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -20,7 +20,7 @@
         android:id="@+id/textViewIdArticuloHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewTitle"
+        android:layout_below="@id/tv_insertar_articulo"
         android:layout_marginTop="32dp"
         android:text="@string/id_articulo"
         android:textSize="16sp"

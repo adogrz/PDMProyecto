@@ -15,6 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -42,14 +43,14 @@ public class InsertarArticuloActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insertar_articulo);
-        editIdArticulo = findViewById(R.id.editTextIdArticulo);
-        editNombreArticulo = findViewById(R.id.editTextNombreArticulo);
-        editDescripcionArticulo = findViewById(R.id.editTextDescripcionArticulo);
-        editPrecioArticulo = findViewById(R.id.editTextPrecioUnitarioArticulo);
-        spinnerProveedor = findViewById(R.id.spinnerProveedorArticulo);
-        spinnerTipoArticulo = findViewById(R.id.spinnerTipoArticuloArticulo);
-        spinnerLocal = findViewById(R.id.spinnerLocalArticulo);
-        FloatingActionButton botGuardarArticulo = findViewById(R.id.fabGuardarActiculo);
+        editIdArticulo = findViewById(R.id.et_id_articulo);
+        editNombreArticulo = findViewById(R.id.et_nombre_articulo);
+        editDescripcionArticulo = findViewById(R.id.et_descripcion_articulo);
+        editPrecioArticulo = findViewById(R.id.et_precio_unitario_articulo);
+        spinnerProveedor = findViewById(R.id.spinner_proveedor);
+        spinnerTipoArticulo = findViewById(R.id.spinner_tipo_articulo);
+        spinnerLocal = findViewById(R.id.spinner_sucursal);
+        MaterialButton botGuardarArticulo = findViewById(R.id.btn_guardar_articulo);
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -86,7 +87,7 @@ public class InsertarArticuloActivity extends AppCompatActivity {
 
         String urlLoc = "https://pdmproyectouno.000webhostapp.com/articulo_sucursal_insertar.php" +
                 "?id_articulo=" + idArticulo + "&id_sucursal=" + local.getIdLocal();
-        
+
         new InsertDataTask().execute(urlLoc);
 
         // Finalizar la actividad
