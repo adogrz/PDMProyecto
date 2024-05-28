@@ -12,6 +12,7 @@ lombok = "1.18.32"
 volley = "1.2.1"
 
 [libraries]
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -22,6 +23,7 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
 volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

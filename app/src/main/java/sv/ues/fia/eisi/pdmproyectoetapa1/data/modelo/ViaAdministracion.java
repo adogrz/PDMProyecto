@@ -1,7 +1,13 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ViaAdministracion {
+
+    @SerializedName("id_via_administracion")
     private String idViaAdministracion;
+
+    @SerializedName("tipo_via_administracion")
     private String viaAdministracion;
     private String viaAdministracionCustom;
 
