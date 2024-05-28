@@ -1,7 +1,13 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Laboratorio {
+
+    @SerializedName("id_laboratorio")
     private String idLaboratorio;
+
+    @SerializedName("nombre_laboratorio")
     private String nombreLaboratorio;
     private String laboratorioCustom;
 

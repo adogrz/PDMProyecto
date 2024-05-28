@@ -2,14 +2,32 @@ package sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Medicamento {
+
+    @SerializedName("id_medicamento")
     private String idMedicamento;
+
+    @SerializedName("fecha_expedicion_medicamento")
     private String fechaExpedicion;
+
+    @SerializedName("fecha_expiracion_medicamento")
     private String fechaExpiracion;
+
+    @SerializedName("requiere_receta_medica")
     private String requiereRecetaMedica;
+
+    @SerializedName("id_articulo")
     private String idArticulo;
+
+    @SerializedName("id_forma_farmaceutica")
     private String idFormaFarmaceutica;
+
+    @SerializedName("id_via_administracion")
     private String idViaAdministracion;
+
+    @SerializedName("id_laboratorio")
     private String idLaboratorio;
 
     public Medicamento() {
