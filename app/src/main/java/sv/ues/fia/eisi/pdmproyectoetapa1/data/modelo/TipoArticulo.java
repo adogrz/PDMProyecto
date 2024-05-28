@@ -2,8 +2,12 @@ package sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 public class TipoArticulo {
+    @SerializedName("id_tipo_articulo")
     private String id;
+    @SerializedName("nombre_tipo_articulo")
     private String nombre;
 
     public TipoArticulo() {

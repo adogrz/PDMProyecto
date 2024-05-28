@@ -1,7 +1,11 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Proveedor {
+    @SerializedName("id_proveedor")
     private String idProveedor;
+    @SerializedName("nombre_proveedor")
     private String nombre;
     private String telefono;
 

@@ -121,8 +121,8 @@
     <string name="stock_label">Stock:</string>
     <string name="precio_unitario_label">Precio Unitario:</string>
     <string name="titulo_vista_articulos">Artículos</string>
-    <string name="tipo_articulo">Tipo:</string>
-    <string name="local_articulo">Local:</string>
+    <string name="tipo_articulo">Tipo</string>
+    <string name="local_articulo">Local</string>
     <string name="proveedor_articulo">Proveedor:</string>
     <string name="action_edit_articulo">Editar artículo</string>
     <string name="action_delete_articulo">Eliminar Artículo</string>
