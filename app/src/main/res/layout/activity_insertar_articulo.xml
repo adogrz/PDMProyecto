@@ -1,169 +1,174 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_insertar_articulo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".ui.articulo.InsertarArticuloActivity">
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="@string/insertar_articulo_label"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textViewIdArticuloHint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewTitle"
-        android:layout_marginTop="16dp"
-        android:text="@string/id_articulo_label"
-        android:textColor="#A9A9A9"
-        android:textSize="16sp"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/editTextIdArticulo"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/textViewIdArticuloHint"
-        android:layout_marginTop="8dp"
-        android:autofillHints=""
-        android:inputType="text"
-        tools:ignore="LabelFor,SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/textViewNombreArticuloHint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editTextIdArticulo"
-        android:layout_marginTop="16dp"
-        android:text="@string/nombre_articulo"
-        android:textColor="#A9A9A9"
-        android:textSize="16sp"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/editTextNombreArticulo"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/textViewNombreArticuloHint"
-        android:layout_marginTop="8dp"
-        android:autofillHints=""
-        android:inputType="text"
-        tools:ignore="LabelFor,SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/textViewPrecioUnitarioArticuloHint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editTextNombreArticulo"
-        android:layout_marginTop="16dp"
-        android:text="@string/precio_unitario_articulo"
-        android:textColor="#A9A9A9"
-        android:textSize="16sp"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/editTextPrecioUnitarioArticulo"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/textViewPrecioUnitarioArticuloHint"
-        android:layout_marginTop="8dp"
-        android:autofillHints=""
-        android:inputType="numberDecimal"
-        tools:ignore="LabelFor,SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/textViewDescripcionArticuloHint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editTextPrecioUnitarioArticulo"
-        android:layout_marginTop="16dp"
-        android:text="@string/descripcion_articulo"
-        android:textColor="#A9A9A9"
-        android:textSize="16sp"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/editTextDescripcionArticulo"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewDescripcionArticuloHint"
-        android:layout_marginTop="8dp"
-        android:autofillHints=""
-        android:inputType="textMultiLine"
-        android:minLines="3"
-        tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:padding="15dp">
 
-    <TextView
-        android:id="@+id/textViewProveedorArticuloHint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editTextDescripcionArticulo"
-        android:layout_marginTop="16dp"
-        android:text="@string/proveedor_articulo"
-        android:textColor="#A9A9A9"
-        android:textSize="16sp"
-        tools:ignore="TextContrastCheck" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:text="@string/insertar_articulo_label"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/spinnerProveedorArticulo"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/textViewProveedorArticuloHint"
-        android:layout_marginTop="8dp"/>
+        <!--    Id de articulo    -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textViewTipoArticuloHint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/spinnerProveedorArticulo"
-        android:layout_marginTop="16dp"
-        android:text="@string/tipo_articulo_articulo"
-        android:textColor="#A9A9A9"
-        android:textSize="16sp"
-        tools:ignore="TextContrastCheck" />
+            <EditText
+                android:id="@+id/et_id_articulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:hint="@string/id_articulo_label"
+                android:inputType="text" />
 
-    <Spinner
-        android:id="@+id/spinnerTipoArticuloArticulo"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/textViewTipoArticuloHint"
-        android:layout_marginTop="8dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/textViewLocalArticuloHint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/spinnerTipoArticuloArticulo"
-        android:layout_marginTop="16dp"
-        android:text="@string/local_articulo"
-        android:textColor="#A9A9A9"
-        android:textSize="16sp"
-        tools:ignore="TextContrastCheck" />
+        <!--    Nombre del producto    -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
 
-    <Spinner
-        android:id="@+id/spinnerLocalArticulo"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/textViewLocalArticuloHint"
-        android:layout_marginTop="8dp"
-        tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
+            <EditText
+                android:id="@+id/et_nombre_articulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:hint="@string/nombre_articulo"
+                android:inputType="text" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabGuardarActiculo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:contentDescription="@string/insertar_un_nuevo_articulo"
-        android:src="@android:drawable/ic_menu_save"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-</RelativeLayout>
+        <!--    Precio unitario    -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <EditText
+                android:id="@+id/et_precio_unitario_articulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:hint="@string/precio_unitario_articulo"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--    Descripcion    -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <EditText
+                android:id="@+id/et_descripcion_articulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:hint="@string/descripcion_articulo"
+                android:inputType="textMultiLine" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--    Proveedor    -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewProveedorArticuloHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/proveedor_articulo"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <Spinner
+                android:id="@+id/spinner_proveedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--    Tipo de articulo    -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewTipoArticuloHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/tipo_articulo"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <Spinner
+                android:id="@+id/spinner_tipo_articulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--    Local    -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewLocalArticuloHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/local_articulo"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <Spinner
+                android:id="@+id/spinner_sucursal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--    Boton de guardar    -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_guardar_articulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/boton_insertar_articulo"
+            app:cornerRadius="10dp">
+
+        </com.google.android.material.button.MaterialButton>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>

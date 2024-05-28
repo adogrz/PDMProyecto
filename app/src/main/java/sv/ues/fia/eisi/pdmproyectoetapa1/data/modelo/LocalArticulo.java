@@ -1,7 +1,11 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LocalArticulo {
+    @SerializedName("id_sucursal")
     private String idLocal;
+    @SerializedName("id_articulo")
     private String idArticulo;
 
     public LocalArticulo() {
