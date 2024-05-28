@@ -51,11 +51,11 @@ public class EliminarArticuloActivity extends AppCompatActivity {
             super.onPostExecute(result);
             if (result != null) {
                 boolean success = result.get("success").getAsBoolean();
+                String message = result.get("message").getAsString();
                 if (success) {
-                    Toast.makeText(EliminarArticuloActivity.this, "Artículo eliminado exitosamente", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EliminarArticuloActivity.this, message, Toast.LENGTH_SHORT).show();
                 } else {
-                    String message = result.get("message").getAsString();
-                    Toast.makeText(EliminarArticuloActivity.this, "Error al eliminar artículo: " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EliminarArticuloActivity.this,  message, Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(EliminarArticuloActivity.this, "Error al obtener respuesta del servidor", Toast.LENGTH_SHORT).show();
