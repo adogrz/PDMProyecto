@@ -206,7 +206,6 @@ public class ModificarArticuloActivity extends AppCompatActivity {
         if (idArticulo.isEmpty() || nombreArticulo.isEmpty()  || precioArticulo.isEmpty()) {
             Toast.makeText(ModificarArticuloActivity.this, "Por favor, rellene todos los campos",
                     Toast.LENGTH_SHORT).show();
-            return;
         }
     }
 }
