@@ -1,65 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/editConsul"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical"
+    android:padding="15dp"
     tools:context=".ui.medicamento.MedicamentosEliminarActivity">
 
 
     <TextView
-        android:id="@+id/ElimM"
-        android:layout_width="256dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="52dp"
-        android:fontFamily="@font/baloo_tammudu"
-        android:text="@string/eliminar_medicamento"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.612"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextSizeCheck" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        android:text="@string/eliminar_medicamento_titulo"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
-    <Button
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/et_id_medicamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/id_articulo_label"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnElimM"
-        android:layout_width="138dp"
-        android:layout_height="49dp"
-        android:text="@string/eliminar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.385"
-        tools:ignore="TouchTargetSizeCheck" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/Eliminar"
+        app:cornerRadius="10dp">
 
-    <TextView
-        android:id="@+id/idMecaE"
-        android:layout_width="190dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="148dp"
-        android:fontFamily="@font/baloo_tammudu"
-        android:text="@string/medicamento_id"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_id_medicamento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.072"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="TextSizeCheck" />
+    </com.google.android.material.button.MaterialButton>
 
-    <EditText
-        android:id="@+id/et_id_medicamento"
-        android:layout_width="197dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="504dp"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
