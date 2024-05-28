@@ -2,113 +2,194 @@ package sv.ues.fia.eisi.pdmproyectoetapa1.ui.articulo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.R;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.DAOException;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.sqlite.ControlBaseDatos;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Articulo;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Local;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.LocalArticulo;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Proveedor;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.TipoArticulo;
 
 public class ModificarArticuloActivity extends AppCompatActivity {
+    private static final String TAG = ModificarArticuloActivity.class.getSimpleName();
+    private RequestQueue requestQueue;
     EditText editIdArticulo, editNombreArticulo, editDescripcionArticulo, editPrecioArticulo;
     Spinner spinnerProveedor, spinnerTipoArticulo, spinnerLocal;
-    Button botConsultarArticulo;
-    FloatingActionButton botGuardarArticulo;
-    ControlBaseDatos cBD;
-    List<Proveedor> proveedores = null;
-    List<TipoArticulo> tiposArticulo = null;
-    List<Local> locales = null;
+    Button botModificarArticulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificar_articulo);
-        editIdArticulo = findViewById(R.id.editTextIdArticulo);
-        editNombreArticulo = findViewById(R.id.editTextNombreArticulo);
-        editDescripcionArticulo = findViewById(R.id.editTextDescripcionArticulo);
-        editPrecioArticulo = findViewById(R.id.editTextPrecioUnitarioArticulo);
-        spinnerProveedor = findViewById(R.id.spinnerProveedorArticulo);
-        spinnerTipoArticulo = findViewById(R.id.spinnerTipoArticuloArticulo);
-        spinnerLocal = findViewById(R.id.spinnerLocalArticulo);
-        botConsultarArticulo = findViewById(R.id.btnConsultarArticulo);
-        botGuardarArticulo = findViewById(R.id.fabGuardarActiculo);
+        editIdArticulo = findViewById(R.id.et_id_articulo);
+        editNombreArticulo = findViewById(R.id.et_nombre_articulo);
+        editDescripcionArticulo = findViewById(R.id.et_descripcion_articulo);
+        editPrecioArticulo = findViewById(R.id.et_precio_unitario_articulo);
+        spinnerProveedor = findViewById(R.id.spinner_proveedor);
+        spinnerTipoArticulo = findViewById(R.id.spinner_tipo_articulo);
+        spinnerLocal = findViewById(R.id.spinner_sucursal);
+        botModificarArticulo = findViewById(R.id.btn_guardar_articulo);
 
-        cBD = ControlBaseDatos.obtenerInstancia(ModificarArticuloActivity.this);
+        requestQueue = Volley.newRequestQueue(this);
 
-        llenarSpinners();
+        llenarSpinnerProveedor();
+//        llenarSpinnerTipoArticulo();
+//        llenarSpinnerLocal();
 
-        botConsultarArticulo.setOnClickListener(v -> consultarArticulo());
-
-
-        botGuardarArticulo.setOnClickListener(v -> modificarArticulo());
+        botModificarArticulo.setOnClickListener(v -> modificarArticulo());
     }
 
-    private void consultarArticulo() {
-        // Obtener el id del artículo
-        String idArticulo = editIdArticulo.getText().toString();
+    private void llenarSpinnerProveedor() {
+        String url = "https://pdmproyectouno.000webhostapp.com/proveedor_obtener_todos.php";
 
-        // Validar el id del artículo
-        if (idArticulo.isEmpty()) {
-            Toast.makeText(ModificarArticuloActivity.this, "Ingrese el id del artículo",
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        boolean success = response.getBoolean("success");
+                        if (!success) {
+                            Toast.makeText(ModificarArticuloActivity.this, "No se pudo obtener " +
+                                    "los proveedores", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<Proveedor>>() {
+                        }.getType();
+                        List<Proveedor> proveedores = gson.fromJson(
+                                response.getJSONArray("proveedor").toString(),
+                                listType
+                        );
+                        ArrayAdapter<Proveedor> proveedorAdapter = new ArrayAdapter<>(
+                                ModificarArticuloActivity.this,
+                                android.R.layout.simple_spinner_item, proveedores
+                        );
+                        proveedorAdapter.setDropDownViewResource(
+                                android.R.layout.simple_spinner_dropdown_item
+                        );
+                        spinnerProveedor.setAdapter(proveedorAdapter);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(ModificarArticuloActivity.this, "JSON parse error",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(ModificarArticuloActivity.this, "Request error",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                });
 
-        // Consultar el artículo
-        Articulo articulo = null;
-
-        try {
-            articulo = cBD.getArticuloDAO().obtener(idArticulo);
-        } catch (DAOException e) {
-            Toast.makeText(ModificarArticuloActivity.this, "Error: " + e.getMessage(),
-                    Toast.LENGTH_SHORT).show();
-        }
-
-        // Setear los datos del artículo en los campos de texto
-        if (articulo != null) {
-            editNombreArticulo.setText(articulo.getNombre());
-            editDescripcionArticulo.setText(articulo.getDescripcion());
-            editPrecioArticulo.setText(String.valueOf(articulo.getPrecioUnitario()));
-        } else {
-            Toast.makeText(ModificarArticuloActivity.this, "No se encontró el artículo",
-                    Toast.LENGTH_SHORT).show();
-        }
+        requestQueue.add(jsonObjectRequest);
     }
 
-    private void llenarSpinners() {
-        try {
-            proveedores = cBD.getProveedorDAO().obtenerTodos();
-            tiposArticulo = cBD.getTipoArticuloDAO().obtenerTodos();
-            locales = cBD.getLocalDAO().obtenerTodos();
-        } catch (DAOException e) {
-            Toast.makeText(ModificarArticuloActivity.this, "Error al acceder a la base de datos",
-                    Toast.LENGTH_SHORT).show();
-        }
+    private void llenarSpinnerTipoArticulo() {
+        String url = "https://pdmproyectouno.000webhostapp.com/tipo_articulo_obtener_todos.php";
 
-        ArrayAdapter<Proveedor> proveedorAdapter = new ArrayAdapter<>(ModificarArticuloActivity.this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, proveedores);
-        ArrayAdapter<TipoArticulo> tipoArticuloAdapter = new ArrayAdapter<>(ModificarArticuloActivity.this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, tiposArticulo);
-        ArrayAdapter<Local> localAdapter = new ArrayAdapter<>(ModificarArticuloActivity.this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, locales);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        boolean success = response.getBoolean("success");
+                        if (!success) {
+                            Toast.makeText(ModificarArticuloActivity.this, "No se pudo obtener " +
+                                    "los tipos de articulo", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<TipoArticulo>>() {
+                        }.getType();
+                        List<TipoArticulo> tiposArticulo = gson.fromJson(
+                                response.getJSONArray("tipo_articulo").toString(),
+                                listType
+                        );
+                        ArrayAdapter<TipoArticulo> tipoArticuloAdapter = new ArrayAdapter<>(
+                                ModificarArticuloActivity.this,
+                                android.R.layout.simple_spinner_item, tiposArticulo
+                        );
+                        tipoArticuloAdapter.setDropDownViewResource(
+                                android.R.layout.simple_spinner_dropdown_item
+                        );
+                        spinnerTipoArticulo.setAdapter(tipoArticuloAdapter);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(ModificarArticuloActivity.this, "JSON parse error",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(ModificarArticuloActivity.this, "Request error",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                });
 
-        // Setup
-        spinnerProveedor.setAdapter(proveedorAdapter);
-        spinnerTipoArticulo.setAdapter(tipoArticuloAdapter);
-        spinnerLocal.setAdapter(localAdapter);
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private void llenarSpinnerLocal() {
+        String url = "https://pdmproyectouno.000webhostapp.com/sucursal_obtener_todos.php";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                (Response.Listener<JSONObject>) response -> {
+                    try {
+                        boolean success = response.getBoolean("success");
+                        if (!success) {
+                            Toast.makeText(ModificarArticuloActivity.this, "No se pudo obtener " +
+                                    "los locales", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<Local>>() {
+                        }.getType();
+                        List<Local> locales = gson.fromJson(
+                                response.getJSONArray("sucursal").toString(),
+                                listType
+                        );
+                        ArrayAdapter<Local> localAdapter = new ArrayAdapter<>(
+                                ModificarArticuloActivity.this,
+                                android.R.layout.simple_spinner_item, locales
+                        );
+                        localAdapter.setDropDownViewResource(
+                                android.R.layout.simple_spinner_dropdown_item
+                        );
+                        spinnerLocal.setAdapter(localAdapter);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(ModificarArticuloActivity.this, "JSON parse error",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                },
+                (Response.ErrorListener) error -> {
+                    error.printStackTrace();
+                    Toast.makeText(ModificarArticuloActivity.this, "Request error",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+
+        requestQueue.add(jsonObjectRequest);
     }
 
     private void modificarArticulo() {
@@ -126,26 +207,6 @@ public class ModificarArticuloActivity extends AppCompatActivity {
             Toast.makeText(ModificarArticuloActivity.this, "Por favor, rellene todos los campos",
                     Toast.LENGTH_SHORT).show();
             return;
-        }
-
-        // Crear el objeto Articulo
-        Articulo articulo = new Articulo(idArticulo, nombreArticulo,
-                Double.parseDouble(precioArticulo), descripcionArticulo, proveedor.getIdProveedor(),
-                tipoArticulo.getId());
-
-        // Crear el objeto LocalArticulo
-        LocalArticulo localArticulo = new LocalArticulo(local.getIdLocal(), idArticulo);
-
-        // Modificar el artículo
-        try {
-            cBD.getArticuloDAO().modificar(articulo);
-            cBD.getLocalArticuloDAO().modificar(localArticulo);
-            Toast.makeText(ModificarArticuloActivity.this, "Artículo modificado correctamente",
-                    Toast.LENGTH_SHORT).show();
-            finish();
-        } catch (DAOException e) {
-            Toast.makeText(ModificarArticuloActivity.this, "Error al modificar el artículo",
-                    Toast.LENGTH_SHORT).show();
         }
     }
 }
