@@ -172,4 +172,5 @@
     <string name="modificar_receta_medica">Modificar receta médica</string>
     <string name="eliminar_receta_medica">Eliminar receta médica</string>
     <string name="id_articulo_label">Id articulo</string>
+    <string name="eliminar_medicamento_titulo">Eliminar Medicamento</string>
 </resources>

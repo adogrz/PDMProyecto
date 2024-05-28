@@ -1,50 +1,52 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/eliminar_articulo_activity"
+    android:id="@+id/editConsul"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical"
+    android:padding="15dp"
     tools:context=".ui.articulo.EliminarArticuloActivity">
 
+
     <TextView
-        android:id="@+id/textViewTitleEliminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
         android:text="@string/eliminar_articulo_title"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textViewIdArticuloEliminarHint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewTitleEliminar"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="24dp"
-        android:text="@string/id_articulo"
-        android:textSize="16sp"
-        android:textColor="#A9A9A9"/>
-
-    <EditText
-        android:id="@+id/etIdArticuloEliminar"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewIdArticuloEliminarHint"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:hint="@string/id_articulo"
-        android:inputType="text"
-        android:autofillHints="" />
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/etIdArticuloEliminar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/id_articulo_label"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEliminarArticulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etIdArticuloEliminar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:text="@string/eliminar_articulo" />
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/Eliminar"
+        app:cornerRadius="10dp">
 
-</RelativeLayout>
+    </com.google.android.material.button.MaterialButton>
+
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
