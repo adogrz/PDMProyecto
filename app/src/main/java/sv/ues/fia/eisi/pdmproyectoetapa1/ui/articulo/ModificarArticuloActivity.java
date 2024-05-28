@@ -54,8 +54,8 @@ public class ModificarArticuloActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         llenarSpinnerProveedor();
-//        llenarSpinnerTipoArticulo();
-//        llenarSpinnerLocal();
+        llenarSpinnerTipoArticulo();
+        llenarSpinnerLocal();
 
         botModificarArticulo.setOnClickListener(v -> modificarArticulo());
     }
@@ -153,7 +153,7 @@ public class ModificarArticuloActivity extends AppCompatActivity {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET, url, null,
-                (Response.Listener<JSONObject>) response -> {
+                response -> {
                     try {
                         boolean success = response.getBoolean("success");
                         if (!success) {
@@ -182,7 +182,7 @@ public class ModificarArticuloActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 },
-                (Response.ErrorListener) error -> {
+                error -> {
                     error.printStackTrace();
                     Toast.makeText(ModificarArticuloActivity.this, "Request error",
                             Toast.LENGTH_SHORT).show();
