@@ -1,8 +1,13 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Local {
+    @SerializedName("id_sucursal")
     private String idLocal;
+    @SerializedName("nombre_sucursal")
     private String nombreLocal;
+    @SerializedName("id_direccion")
     private String idDireccion;
 
     public Local() {

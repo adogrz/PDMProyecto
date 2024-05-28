@@ -1,166 +1,147 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.articulo.ConsultarArticuloActivity">
 
-    <TextView
-        android:id="@+id/tvTituloConsultarArticulo"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/consultar_articulo"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:padding="15dp">
 
-    <TextView
-        android:id="@+id/tvIdArticulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/id_articulo"
-        android:layout_below="@id/tvTituloConsultarArticulo"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="16dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:text="@string/consultar_articulo"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/etNombreArticulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/tvIdArticulo"
-        android:layout_alignBaseline="@id/tvIdArticulo"
-        android:layout_marginStart="8dp"
-        android:hint="@string/id_articulo"
-        android:inputType="text"
-        android:layout_marginEnd="16dp"
-        android:autofillHints="" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnMostrarDatos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/mostrar_datos"
-        android:layout_below="@id/etNombreArticulo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"/>
+            <EditText
+                android:id="@+id/et_id_articulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:hint="@string/id_articulo_label"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tvNombreLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nombre_articulo"
-        android:layout_below="@id/btnMostrarDatos"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="16dp"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMostrarDatos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/mostrar_datos"
+            app:cornerRadius="10dp">
 
-    <TextView
-        android:id="@+id/tvNombreArticulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/tvNombreLabel"
-        android:layout_alignBaseline="@id/tvNombreLabel"
-        android:layout_marginStart="8dp" />
+        </com.google.android.material.button.MaterialButton>
 
-    <TextView
-        android:id="@+id/tvPrecioUnitarioArticuloLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/precio_unitario_label"
-        android:layout_below="@id/tvNombreLabel"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+        <TextView
+            android:id="@+id/tvNombreArticulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvPrecioUnitario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/tvPrecioUnitarioArticuloLabel"
-        android:layout_alignBaseline="@id/tvPrecioUnitarioArticuloLabel"
-        android:layout_marginStart="8dp" />
+        <TextView
+            android:id="@+id/tvPrecioUnitarioArticuloLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/precio_unitario_articulo"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvStockArticuloLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stock_label"
-        android:layout_below="@id/tvPrecioUnitarioArticuloLabel"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+        <TextView
+            android:id="@+id/tvPrecioUnitario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tvStock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/tvStockArticuloLabel"
-        android:layout_alignBaseline="@id/tvStockArticuloLabel"
-        android:layout_marginStart="8dp" />
+        <TextView
+            android:id="@+id/tvStockArticuloLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/stock_articulo"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvDescripcionArticuloLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/descripcion_articulo"
-        android:layout_below="@id/tvStockArticuloLabel"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+        <TextView
+            android:id="@+id/tvStock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tvDescripcion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/tvDescripcionArticuloLabel"
-        android:layout_alignBaseline="@id/tvDescripcionArticuloLabel"
-        android:layout_marginStart="8dp" />
+        <TextView
+            android:id="@+id/tvDescripcionArticuloLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/descripcion_articulo"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvTipoArticuloLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tipo_articulo_articulo"
-        android:layout_below="@id/tvDescripcionArticuloLabel"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+        <TextView
+            android:id="@+id/tvDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tvTipoArticulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/tvTipoArticuloLabel"
-        android:layout_alignBaseline="@id/tvTipoArticuloLabel"
-        android:layout_marginStart="8dp" />
+        <TextView
+            android:id="@+id/tvTipoArticuloLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/tipo_articulo"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvLocalArticuloLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/local_articulo"
-        android:layout_below="@id/tvTipoArticuloLabel"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+        <TextView
+            android:id="@+id/tvTipoArticulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tvLocalArticulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/tvLocalArticuloLabel"
-        android:layout_alignBaseline="@id/tvLocalArticuloLabel"
-        android:layout_marginStart="8dp" />
+        <TextView
+            android:id="@+id/tvLocalArticuloLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/local_articulo"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvProveedorArticuloLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/proveedor_articulo"
-        android:layout_below="@id/tvLocalArticuloLabel"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+        <TextView
+            android:id="@+id/tvLocalArticulo"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/tvProveedorArticulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/tvProveedorArticuloLabel"
-        android:layout_alignBaseline="@id/tvProveedorArticuloLabel"
-        android:layout_marginStart="8dp" />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tvProveedorArticuloLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/nombre_proveedor"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvProveedorArticulo"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>
