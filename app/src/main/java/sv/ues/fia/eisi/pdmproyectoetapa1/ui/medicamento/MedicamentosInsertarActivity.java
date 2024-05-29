@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
@@ -23,23 +22,16 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.R;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.HttpHandler;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.DAOException;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.MedicamentoDAO;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.sqlite.ControlBaseDatos;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Articulo;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.FormaFarmaceutica;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Laboratorio;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Medicamento;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.ViaAdministracion;
-import sv.ues.fia.eisi.pdmproyectoetapa1.ui.articulo.InsertarArticuloActivity;
 
 public class MedicamentosInsertarActivity extends AppCompatActivity {
     private static final String TAG = MedicamentosInsertarActivity.class.getSimpleName();
@@ -64,15 +56,15 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
         formaFarmaceutica = findViewById(R.id.editFormaFarmaceutica);
         viaAdministracion = findViewById(R.id.editViaAdministracion);
         laboratorio = findViewById(R.id.editLaboratorio);
-        guardarMedicamento = findViewById(R.id.insertarM);
+        Button guardarMedicamento = findViewById(R.id.insertarM);
 
         requestQueue = Volley.newRequestQueue(this);
 
         //Llenado de los spinner
-        //spinnerArticuloM();
-      spinnerViadministracion();
-      spinnerFormaFarmaceutica();
-       spinnerLaboratorio();
+        spinnerArticuloM();
+        spinnerViadministracion();
+        spinnerFormaFarmaceutica();
+        spinnerLaboratorio();
 
         //Guardar medicamento
         guardarMedicamento.setOnClickListener(v -> insertarMedicamento());
@@ -125,28 +117,28 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
         String url ="https://pdmproyectouno.000webhostapp.com/via_administracion_obtener_todos.php";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET, url, null,
-                (Response.Listener<JSONObject>)response -> {
-            try {
-                boolean success= response.getBoolean("success");
-                if (!success){
-                    Toast.makeText(MedicamentosInsertarActivity.this, "Error al obtener las vias de administracion",
-                            Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-                Gson gson = new Gson();
-                Type listType = new TypeToken<List<ViaAdministracion>>(){
-                }.getType();
-                List<ViaAdministracion> viasAdministracion = gson.fromJson(
-                        response.getJSONArray("via_administracion").toString(), listType
-                );
-                ArrayAdapter<ViaAdministracion> adapterViaAdministracion = new ArrayAdapter<>(
-                        MedicamentosInsertarActivity.this,
-                        android.R.layout.simple_spinner_item,viasAdministracion
-                );
-                adapterViaAdministracion.setDropDownViewResource(
-                        android.R.layout.simple_spinner_dropdown_item
-                );
-                viaAdministracion.setAdapter(adapterViaAdministracion);
+                response -> {
+                    try {
+                        boolean success = response.getBoolean("success");
+                        if (!success) {
+                            Toast.makeText(MedicamentosInsertarActivity.this, "Error al obtener las vias de administracion",
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<ViaAdministracion>>() {
+                        }.getType();
+                        List<ViaAdministracion> viasAdministracion = gson.fromJson(
+                                response.getJSONArray("via_administracion").toString(), listType
+                        );
+                        ArrayAdapter<ViaAdministracion> adapterViaAdministracion = new ArrayAdapter<>(
+                                MedicamentosInsertarActivity.this,
+                                android.R.layout.simple_spinner_item, viasAdministracion
+                        );
+                        adapterViaAdministracion.setDropDownViewResource(
+                                android.R.layout.simple_spinner_dropdown_item
+                        );
+                        viaAdministracion.setAdapter(adapterViaAdministracion);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -156,7 +148,7 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
         },
                 (Response.ErrorListener)error -> {
             error.printStackTrace();
-            Toast.makeText(MedicamentosInsertarActivity.this,"Request error",
+            Toast.makeText(MedicamentosInsertarActivity.this, "Request error",
                     Toast.LENGTH_SHORT).show();
             finish();
         });
@@ -166,7 +158,7 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
 
     //Metodo para llenar el spinner de forma farmaceutica
     public void spinnerFormaFarmaceutica() {
-        String url ="https://pdmproyectouno.000webhostapp.com/forma_farmaceutica_obtener_todos.php";
+        String url = "https://pdmproyectouno.000webhostapp.com/forma_farmaceutica_obtener_todos.php";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET, url, null,
                 (Response.Listener<JSONObject>)response -> {
@@ -208,43 +200,42 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
 
     //Metodo para llenar el spinner de laboratorio
     public void spinnerLaboratorio() {
-    String url ="https://pdmproyectouno.000webhostapp.com/laboratorio_obtener_todos.php";
-    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-            Request.Method.GET, url, null,
-            (Response.Listener<JSONObject>)response -> {
-        try {
-          boolean success= response.getBoolean("success");
-          if (!success){
-              Toast.makeText(MedicamentosInsertarActivity.this, "Error al obtener los laboratorios",
-                      Toast.LENGTH_SHORT).show();
-              finish();
-          }
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<Laboratorio>>(){
-            }.getType();
-            List<Laboratorio> laboratorios = gson.fromJson(
-                    response.getJSONArray("laboratorio").toString(), listType
-            );
-            ArrayAdapter<Laboratorio> adapterLaboratorio = new ArrayAdapter<>(
-                    MedicamentosInsertarActivity.this,
-                    android.R.layout.simple_spinner_item,laboratorios);
-            adapterLaboratorio.setDropDownViewResource(
-                    android.R.layout.simple_spinner_dropdown_item
-            );
-           laboratorio.setAdapter(adapterLaboratorio);
+        String url = "https://pdmproyectouno.000webhostapp.com/laboratorio_obtener_todos.php";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        boolean success = response.getBoolean("success");
+                        if (!success) {
+                            Toast.makeText(MedicamentosInsertarActivity.this, "Error al obtener los laboratorios",
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<Laboratorio>>() {
+                        }.getType();
+                        List<Laboratorio> laboratorios = gson.fromJson(
+                                response.getJSONArray("laboratorio").toString(), listType
+                        );
+                        ArrayAdapter<Laboratorio> adapterLaboratorio = new ArrayAdapter<>(
+                                MedicamentosInsertarActivity.this,
+                                android.R.layout.simple_spinner_item, laboratorios);
+                        adapterLaboratorio.setDropDownViewResource(
+                                android.R.layout.simple_spinner_dropdown_item
+                        );
+                        laboratorio.setAdapter(adapterLaboratorio);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(MedicamentosInsertarActivity.this, "JSON parse error",
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(MedicamentosInsertarActivity.this, "JSON parse error",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }, error -> {
+            error.printStackTrace();
+            Toast.makeText(MedicamentosInsertarActivity.this, "Request error",
                     Toast.LENGTH_SHORT).show();
-        }
-    },
-            (Response.ErrorListener)error -> {
-        error.printStackTrace();
-        Toast.makeText(MedicamentosInsertarActivity.this,"Request error",
-                Toast.LENGTH_SHORT).show();
-        finish();
-    });
+            finish();
+        });
         requestQueue.add(jsonObjectRequest);
 
     }
