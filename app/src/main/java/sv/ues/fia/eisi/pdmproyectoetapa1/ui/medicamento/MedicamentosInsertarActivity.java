@@ -68,6 +68,47 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
         //Guardar medicamento
         guardarMedicamento.setOnClickListener(v -> insertarMedicamento());
     }
+    // Método para insertar un medicamento
+    public void insertarMedicamento() {
+
+        //Obteniendo los valores de los campos de texto
+        String medicamentoId = medicamentoid.getText().toString();
+        String fechaExpedicion = fechaExpedicionS.getText().toString();
+        String fechaExpiracion = fechaExperacionS.getText().toString();
+         // Obteniendo el estado del Switch
+        String tieneReceta = recetaMedicaS.isChecked() ? "1" : "0";
+
+
+        //Obteniendo la opcion seleccionada de los spinners
+        Articulo articuloSeleccionado = (Articulo) articuloMedicamento.getSelectedItem();
+        FormaFarmaceutica formaFarmaceuticaSeleccionada = (FormaFarmaceutica) formaFarmaceutica.getSelectedItem();
+        ViaAdministracion viaAdministracionSeleccionada = (ViaAdministracion) viaAdministracion.getSelectedItem();
+        Laboratorio laboratorioSeleccionado = (Laboratorio) laboratorio.getSelectedItem();
+
+
+        //Verificar si los campos están vacíos
+        if (medicamentoId.isEmpty() || fechaExpedicion.isEmpty() || fechaExpiracion.isEmpty()) {
+            Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //Verificar si la fecha de expedición es menor a la fecha de expiración
+        if (fechaExpedicion.compareTo(fechaExpiracion) > 0) {
+            Toast.makeText(this, "La fecha de expiracion no puede ser menor a la fecha de expedicion", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String urlProv="https://pdmproyectouno.000webhostapp.com/medicamento_insertar.php?id="
+                +medicamentoId+"&fecha_expedicion="+fechaExpedicion+"&fecha_expiracion="
+                +fechaExpiracion+ "&requiere_receta_medica="+tieneReceta+"&id_articulo="
+                +articuloSeleccionado.getIdArticulo()+ "&id_forma_farmaceutica="
+                +formaFarmaceuticaSeleccionada.getIdFormaFarmaceutica()
+                +"&id_via_administracion=" + viaAdministracionSeleccionada.getIdViaAdministracion()
+                +"&id_laboratorio="+laboratorioSeleccionado.getIdLaboratorio();
+        new InsertDataTask().execute(urlProv);
+
+        finish();
+    }
 
     //Metodo para llenar el spinner de medicamento articulo
     private void spinnerArticuloM() {
@@ -239,33 +280,7 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
 
     }
 
-    // Método para insertar un medicamento
-    public void insertarMedicamento() {
 
-        //Obteniendo la opcion seleccionada de los spinners
-        Articulo articuloSeleccionado = (Articulo) articuloMedicamento.getSelectedItem();
-        FormaFarmaceutica formaFarmaceuticaSeleccionada = (FormaFarmaceutica) formaFarmaceutica.getSelectedItem();
-        ViaAdministracion viaAdministracionSeleccionada = (ViaAdministracion) viaAdministracion.getSelectedItem();
-        Laboratorio laboratorioSeleccionado = (Laboratorio) laboratorio.getSelectedItem();
-
-        //Obteniendo los valores de los campos de texto
-        String medicamentoId = medicamentoid.getText().toString();
-        String fechaExpedicion = fechaExpedicionS.getText().toString();
-        String fechaExpiracion = fechaExperacionS.getText().toString();
-        boolean recetaRequerida = recetaMedicaS.isChecked(); // Obteniendo el estado del Switch
-
-        //Verificar si los campos están vacíos
-        if (medicamentoId.isEmpty() || fechaExpedicion.isEmpty() || fechaExpiracion.isEmpty()) {
-            Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //Verificar si la fecha de expedición es menor a la fecha de expiración
-        if (fechaExpedicion.compareTo(fechaExpiracion) > 0) {
-            Toast.makeText(this, "La fecha de expiracion no puede ser menor a la fecha de expedicion", Toast.LENGTH_SHORT).show();
-            return;
-        }
-    }
 
     /**
      * AsyncTask para realizar la petición HTTP en un hilo secundario
