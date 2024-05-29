@@ -1,8 +1,9 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.ui.medicamento;
 
-
 import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,31 +13,31 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+
+import java.lang.reflect.Type;
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.R;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.ArticuloDAO;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.DAOException;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.FormaFarmaceuticaDAO;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.LaboratorioDAO;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.MedicamentoDAO;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.ViaAdministracionDAO;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.dao.sqlite.ControlBaseDatos;
+import sv.ues.fia.eisi.pdmproyectoetapa1.data.HttpHandler;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Articulo;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.FormaFarmaceutica;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Laboratorio;
-import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Medicamento;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.ViaAdministracion;
 
-
-
 public class MedicamentosInsertarActivity extends AppCompatActivity {
-
-    EditText medicamentoid,fechaExpedicionS, fechaExperacionS;
-    Spinner articuloMedicamento,formaFarmaceutica,viaAdministracion,laboratorio;
-    Button guardarMedicamento;
-
+    private static final String TAG = MedicamentosInsertarActivity.class.getSimpleName();
+    private RequestQueue requestQueue;
+    private EditText medicamentoid, fechaExpedicionS, fechaExperacionS;
+    private Spinner articuloMedicamento, formaFarmaceutica, viaAdministracion, laboratorio;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch recetaMedicaS;
 
@@ -54,7 +55,9 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
         formaFarmaceutica = findViewById(R.id.editFormaFarmaceutica);
         viaAdministracion = findViewById(R.id.editViaAdministracion);
         laboratorio = findViewById(R.id.editLaboratorio);
-        guardarMedicamento = findViewById(R.id.insertarM);
+        Button guardarMedicamento = findViewById(R.id.insertarM);
+
+        requestQueue = Volley.newRequestQueue(this);
 
         //Llenado de los spinner
         spinnerArticuloM();
@@ -64,105 +67,17 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
 
         //Guardar medicamento
         guardarMedicamento.setOnClickListener(v -> insertarMedicamento());
-
-
     }
-
-    //Metodo para llenar el spinner de medicamento articulo
-    public void spinnerArticuloM() {
-        ControlBaseDatos db = ControlBaseDatos.obtenerInstancia(MedicamentosInsertarActivity.this);
-        ArticuloDAO articuloDAO = db.getArticuloDAO();
-        List<Articulo> articuloList;
-        try {
-            String idTipoArticulo =db.getTipoArticuloDAO().obtenerTodos().get(0).getId();
-          
-            // Obtener todos los artículos
-             articuloList = articuloDAO.obtenerTodos();
-          
-            // Filtrar solo los artículos de tipo "medicamento"
-            List<Articulo> articulosMedicamento = new ArrayList<>();
-            for (Articulo articulo : articuloList) {
-                if (articulo.getIdTipoArticulo().equals(idTipoArticulo)) {
-                    articulosMedicamento.add(articulo);
-                }
-            }
-          
-            // Verificar si la lista de artículos está vacía
-            if (articulosMedicamento.isEmpty()) {
-                Toast.makeText(this, "No hay artículos de tipo medicamento registrados", Toast.LENGTH_SHORT).show();
-                finish();
-                return;
-            }
-          
-            // Crear el adaptador con la lista filtrada
-            ArrayAdapter<Articulo> adapterArticulo = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, articulosMedicamento);
-
-            // Asignar el adaptador al spinner
-            articuloMedicamento.setAdapter(adapterArticulo);
-        } catch (DAOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    //Metodo para llenar el spinner de via de administracion
-    public void spinnerViadministracion() {
-
-        ControlBaseDatos db = ControlBaseDatos.obtenerInstancia(MedicamentosInsertarActivity.this);
-        ViaAdministracionDAO viaAdministracionDAO = db.getViaAdministracionDAO();
-
-        try {
-            List<ViaAdministracion> viaAdministracionList = viaAdministracionDAO.obtenerTodos();
-            ArrayAdapter<ViaAdministracion> adapterViaAdministracion = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, viaAdministracionList);
-
-            viaAdministracion.setAdapter(adapterViaAdministracion);
-
-        } catch (DAOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    //Metodo para llenar el spinner de forma farmaceutica
-    public void spinnerFormaFarmaceutica() {
-        ControlBaseDatos db = ControlBaseDatos.obtenerInstancia(MedicamentosInsertarActivity.this);
-        FormaFarmaceuticaDAO formaFarmaceuticaDAO = db.getFormaFarmaceuticaDAO();
-
-        try {
-            List<FormaFarmaceutica> formaFarmaceuticaList = formaFarmaceuticaDAO.obtenerTodos();
-            ArrayAdapter<FormaFarmaceutica> adapterFormaFarmaceutica = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, formaFarmaceuticaList);
-
-            formaFarmaceutica.setAdapter(adapterFormaFarmaceutica);
-
-        } catch (DAOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    //Metodo para llenar el spinner de laboratorio
-    public void spinnerLaboratorio() {
-        ControlBaseDatos db = ControlBaseDatos.obtenerInstancia(MedicamentosInsertarActivity.this);
-        LaboratorioDAO laboratorioDAO = db.getLaboratorioDAO();
-
-        try {
-            List<Laboratorio> laboratorioList = laboratorioDAO.obtenerTodos();
-            ArrayAdapter<Laboratorio> adapterLaboratorio = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, laboratorioList);
-
-            laboratorio.setAdapter(adapterLaboratorio);
-
-        } catch (DAOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
     // Método para insertar un medicamento
     public void insertarMedicamento() {
 
-        //Obteniendo la instancia de la base de datos
-        ControlBaseDatos db = ControlBaseDatos.obtenerInstancia(MedicamentosInsertarActivity.this);
-        //Obteniendo la instancia del DAO
-        MedicamentoDAO medicamentoDAO = db.getMedicamentosDAO();
+        //Obteniendo los valores de los campos de texto
+        String medicamentoId = medicamentoid.getText().toString();
+        String fechaExpedicion = fechaExpedicionS.getText().toString();
+        String fechaExpiracion = fechaExperacionS.getText().toString();
+         // Obteniendo el estado del Switch
+        String tieneReceta = recetaMedicaS.isChecked() ? "1" : "0";
+
 
         //Obteniendo la opcion seleccionada de los spinners
         Articulo articuloSeleccionado = (Articulo) articuloMedicamento.getSelectedItem();
@@ -170,14 +85,6 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
         ViaAdministracion viaAdministracionSeleccionada = (ViaAdministracion) viaAdministracion.getSelectedItem();
         Laboratorio laboratorioSeleccionado = (Laboratorio) laboratorio.getSelectedItem();
 
-        //Obteniendo los valores de los campos de texto
-        String medicamentoId = medicamentoid.getText().toString();
-        String fechaExpedicion = fechaExpedicionS.getText().toString();
-        String fechaExpiracion = fechaExperacionS.getText().toString();
-        boolean recetaRequerida = recetaMedicaS.isChecked(); // Obteniendo el estado del Switch
-
-        //Creando las instancias de los objetos
-        Medicamento medicamento = new Medicamento();
 
         //Verificar si los campos están vacíos
         if (medicamentoId.isEmpty() || fechaExpedicion.isEmpty() || fechaExpiracion.isEmpty()) {
@@ -190,23 +97,223 @@ public class MedicamentosInsertarActivity extends AppCompatActivity {
             Toast.makeText(this, "La fecha de expiracion no puede ser menor a la fecha de expedicion", Toast.LENGTH_SHORT).show();
             return;
         }
-        try {
-            //Asignando los valores a los objetos
-            medicamento.setIdMedicamento(medicamentoId);
-            medicamento.setFechaExpedicion(fechaExpedicion);
-            medicamento.setFechaExpiracion(fechaExpiracion);
-            medicamento.setRequiereRecetaMedica(recetaRequerida ? "Si" : "No"); // Asignando el valor de la receta según el estado del Switch
-            medicamento.setIdArticulo(articuloSeleccionado.getIdArticulo());
-            medicamento.setIdFormaFarmaceutica(formaFarmaceuticaSeleccionada.getIdFormaFarmaceutica());
-            medicamento.setIdViaAdministracion(viaAdministracionSeleccionada.getIdViaAdministracion());
-            medicamento.setIdLaboratorio(laboratorioSeleccionado.getIdLaboratorio());
-            //Insertando el medicamento
-            medicamentoDAO.insertar(medicamento);
-            Toast.makeText(this, "Medicamento insertado correctamente", Toast.LENGTH_SHORT).show();
-            finish();
 
-        } catch (DAOException e) {
-            Toast.makeText(this, "Error al insertar el medicamento", Toast.LENGTH_SHORT).show();
+        String urlProv="https://pdmproyectouno.000webhostapp.com/medicamento_insertar.php?id="
+                +medicamentoId+"&fecha_expedicion="+fechaExpedicion+"&fecha_expiracion="
+                +fechaExpiracion+ "&requiere_receta_medica="+tieneReceta+"&id_articulo="
+                +articuloSeleccionado.getIdArticulo()+ "&id_forma_farmaceutica="
+                +formaFarmaceuticaSeleccionada.getIdFormaFarmaceutica()
+                +"&id_via_administracion=" + viaAdministracionSeleccionada.getIdViaAdministracion()
+                +"&id_laboratorio="+laboratorioSeleccionado.getIdLaboratorio();
+        new InsertDataTask().execute(urlProv);
+
+        finish();
+    }
+
+    //Metodo para llenar el spinner de medicamento articulo
+    private void spinnerArticuloM() {
+        String url = "https://pdmproyectouno.000webhostapp.com/articulo_medicamento_obtener_todos.php";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        boolean success = response.getBoolean("success");
+                        if (!success) {
+                            Toast.makeText(MedicamentosInsertarActivity.this, "No se pudo obtener " +
+                                    "los articulos", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<Articulo>>() {
+                        }.getType();
+                        List<Articulo> articulos = gson.fromJson(
+                                response.getJSONArray("articulo").toString(),
+                                listType
+                        );
+                        ArrayAdapter<Articulo> articuloAdapter = new ArrayAdapter<>(
+                                MedicamentosInsertarActivity.this,
+                                android.R.layout.simple_spinner_item, articulos
+                        );
+                        articuloAdapter.setDropDownViewResource(
+                                android.R.layout.simple_spinner_dropdown_item
+                        );
+                        articuloMedicamento.setAdapter(articuloAdapter);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(MedicamentosInsertarActivity.this, "JSON parse error",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(MedicamentosInsertarActivity.this, "Request error",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    //Metodo para llenar el spinner de via de administracion
+    private void spinnerViadministracion() {
+        String url = "https://pdmproyectouno.000webhostapp.com/via_administracion_obtener_todos.php";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        boolean success = response.getBoolean("success");
+                        if (!success) {
+                            Toast.makeText(MedicamentosInsertarActivity.this, "Error al obtener las vias de administracion",
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<ViaAdministracion>>() {
+                        }.getType();
+                        List<ViaAdministracion> viasAdministracion = gson.fromJson(
+                                response.getJSONArray("via_administracion").toString(), listType
+                        );
+                        ArrayAdapter<ViaAdministracion> adapterViaAdministracion = new ArrayAdapter<>(
+                                MedicamentosInsertarActivity.this,
+                                android.R.layout.simple_spinner_item, viasAdministracion
+                        );
+                        adapterViaAdministracion.setDropDownViewResource(
+                                android.R.layout.simple_spinner_dropdown_item
+                        );
+                        viaAdministracion.setAdapter(adapterViaAdministracion);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(MedicamentosInsertarActivity.this, "JSON parse error",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }, error -> {
+            error.printStackTrace();
+            Toast.makeText(MedicamentosInsertarActivity.this, "Request error",
+                    Toast.LENGTH_SHORT).show();
+            finish();
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    //Metodo para llenar el spinner de forma farmaceutica
+    public void spinnerFormaFarmaceutica() {
+        String url = "https://pdmproyectouno.000webhostapp.com/forma_farmaceutica_obtener_todos.php";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        boolean success = response.getBoolean("success");
+                        if (!success) {
+                            Toast.makeText(MedicamentosInsertarActivity.this, "Error al obtener las formas farmaceuticas",
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<FormaFarmaceutica>>() {
+                        }.getType();
+                        List<FormaFarmaceutica> formasFarmaceuticas = gson.fromJson(
+                                response.getJSONArray("forma_farmaceutica").toString(), listType
+                        );
+                        ArrayAdapter<FormaFarmaceutica> adapterFormaFarmaceutica = new ArrayAdapter<>(
+                                MedicamentosInsertarActivity.this,
+                                android.R.layout.simple_spinner_item, formasFarmaceuticas);
+                        adapterFormaFarmaceutica.setDropDownViewResource(
+                                android.R.layout.simple_spinner_dropdown_item
+                        );
+                        formaFarmaceutica.setAdapter(adapterFormaFarmaceutica);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(MedicamentosInsertarActivity.this, "JSON parse error",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(MedicamentosInsertarActivity.this, "Request error",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    //Metodo para llenar el spinner de laboratorio
+    public void spinnerLaboratorio() {
+        String url = "https://pdmproyectouno.000webhostapp.com/laboratorio_obtener_todos.php";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        boolean success = response.getBoolean("success");
+                        if (!success) {
+                            Toast.makeText(MedicamentosInsertarActivity.this, "Error al obtener los laboratorios",
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<Laboratorio>>() {
+                        }.getType();
+                        List<Laboratorio> laboratorios = gson.fromJson(
+                                response.getJSONArray("laboratorio").toString(), listType
+                        );
+                        ArrayAdapter<Laboratorio> adapterLaboratorio = new ArrayAdapter<>(
+                                MedicamentosInsertarActivity.this,
+                                android.R.layout.simple_spinner_item, laboratorios);
+                        adapterLaboratorio.setDropDownViewResource(
+                                android.R.layout.simple_spinner_dropdown_item
+                        );
+                        laboratorio.setAdapter(adapterLaboratorio);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(MedicamentosInsertarActivity.this, "JSON parse error",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }, error -> {
+            error.printStackTrace();
+            Toast.makeText(MedicamentosInsertarActivity.this, "Request error",
+                    Toast.LENGTH_SHORT).show();
+            finish();
+        });
+        requestQueue.add(jsonObjectRequest);
+
+    }
+
+
+
+    /**
+     * AsyncTask para realizar la petición HTTP en un hilo secundario
+     */
+    private class InsertDataTask extends AsyncTask<String, Void, JsonObject> {
+        @Override
+        protected JsonObject doInBackground(String... urls) {
+            JsonObject response = new HttpHandler().makeServiceCall(urls[0]);
+
+            if (response != null) {
+                Log.e(TAG, "Response from URL: " + response);
+            } else {
+                Log.e(TAG, "Couldn't get response from server.");
+            }
+
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(JsonObject result) {
+            super.onPostExecute(result);
+            if (result == null || !result.get("success").getAsBoolean()) {
+                String message = result != null ? result.get("message").getAsString() : "Unknown error";
+                Log.e(TAG, "Error: " + message);
+                Toast.makeText(MedicamentosInsertarActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+            assert result != null;
+            if (result.has("message")) {
+                String message = result.get("message").getAsString();
+                Log.e(TAG, "Message: " + message);
+                Toast.makeText(MedicamentosInsertarActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
