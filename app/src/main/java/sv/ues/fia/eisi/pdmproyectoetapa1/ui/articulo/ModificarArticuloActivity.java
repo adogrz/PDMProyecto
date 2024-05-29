@@ -27,6 +27,8 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.R;
+import sv.ues.fia.eisi.pdmproyectoetapa1.data.GetDataTask;
+import sv.ues.fia.eisi.pdmproyectoetapa1.data.HttpHandler;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Local;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Proveedor;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.TipoArticulo;
@@ -193,7 +195,7 @@ public class ModificarArticuloActivity extends AppCompatActivity {
     }
 
     private void modificarArticulo() {
-        // Obtener los datos de los campos de texto y spinners
+        // Obtener los datos de los campos
         String idArticulo = editIdArticulo.getText().toString();
         String nombreArticulo = editNombreArticulo.getText().toString();
         String descripcionArticulo = editDescripcionArticulo.getText().toString();
@@ -202,10 +204,64 @@ public class ModificarArticuloActivity extends AppCompatActivity {
         TipoArticulo tipoArticulo = (TipoArticulo) spinnerTipoArticulo.getSelectedItem();
         Local local = (Local) spinnerLocal.getSelectedItem();
 
-        // Validar los datos
-        if (idArticulo.isEmpty() || nombreArticulo.isEmpty()  || precioArticulo.isEmpty()) {
+
+        // Validar que los campos no estén vacíos
+        if (idArticulo.isEmpty() || nombreArticulo.isEmpty() || precioArticulo.isEmpty()) {
             Toast.makeText(ModificarArticuloActivity.this, "Por favor, rellene todos los campos",
                     Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String urlProv = "https://pdmproyectouno.000webhostapp.com/articulo_modificar.php?id="
+                + idArticulo + "&nombre=" + nombreArticulo + "&precio_unitario="
+                + precioArticulo + "&descripcion=" + descripcionArticulo + "&id_proveedor="
+                + proveedor.getIdProveedor() + "&id_tipo_articulo=" + tipoArticulo.getId();
+
+        new ModificarArticuloActivity.InsertDataTask().execute(urlProv);
+
+        String urlLoc = "https://pdmproyectouno.000webhostapp.com/articulo_sucursal_modificar.php" +
+                "?id_articulo=" + idArticulo + "&new_id_sucursal=" + local.getIdLocal();
+
+        new ModificarArticuloActivity.InsertDataTask().execute(urlLoc);
+
+        // Finalizar la actividad
+        finish();
+    }
+
+    private void manejarError(JsonObject result) {
+        String message = result != null ? result.get("message").getAsString() : "Unknown error";
+        Log.e(TAG, "Error: " + message);
+        Toast.makeText(ModificarArticuloActivity.this, message, Toast.LENGTH_SHORT).show();
+    }
+    private class InsertDataTask extends AsyncTask<String, Void, JsonObject> {
+        @Override
+        protected JsonObject doInBackground(String... urls) {
+            JsonObject response = new HttpHandler().makeServiceCall(urls[0]);
+
+            if (response != null) {
+                Log.e(TAG, "Response from URL: " + response);
+            } else {
+                Log.e(TAG, "Couldn't get response from server.");
+            }
+
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(JsonObject result) {
+            super.onPostExecute(result);
+            if (result == null || !result.get("success").getAsBoolean()) {
+                String message = result != null ? result.get("message").getAsString() : "Unknown error";
+                Log.e(TAG, "Error: " + message);
+                Toast.makeText(ModificarArticuloActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+            assert result != null;
+            if (result.has("message")) {
+                String message = result.get("message").getAsString();
+                Log.e(TAG, "Message: " + message);
+                Toast.makeText(ModificarArticuloActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
