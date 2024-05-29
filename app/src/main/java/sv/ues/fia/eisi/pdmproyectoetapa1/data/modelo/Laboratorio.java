@@ -9,7 +9,7 @@ public class Laboratorio {
 
     @SerializedName("nombre_laboratorio")
     private String nombreLaboratorio;
-    private String laboratorioCustom;
+
 
     public Laboratorio() {
     }
@@ -37,7 +37,6 @@ public class Laboratorio {
 
     @Override
     public String toString() {
-        this.laboratorioCustom=this.laboratorioCustom= nombreLaboratorio;
-        return laboratorioCustom;
+        return nombreLaboratorio;
     }
 }

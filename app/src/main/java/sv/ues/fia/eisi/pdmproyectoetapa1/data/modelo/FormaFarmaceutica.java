@@ -9,7 +9,7 @@ public class FormaFarmaceutica {
 
     @SerializedName("tipo_forma_farmaceutica")
     private String formaFarmaceutica;
-    private String formaFarmaceuticaCustom;
+
 
     public FormaFarmaceutica() {
     }
@@ -37,7 +37,6 @@ public class FormaFarmaceutica {
 
     @Override
     public String toString() {
-        this.formaFarmaceuticaCustom=this.formaFarmaceuticaCustom= formaFarmaceutica;
-        return formaFarmaceuticaCustom;
+       return formaFarmaceutica;
     }
 }

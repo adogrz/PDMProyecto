@@ -9,7 +9,7 @@ public class ViaAdministracion {
 
     @SerializedName("tipo_via_administracion")
     private String viaAdministracion;
-    private String viaAdministracionCustom;
+
 
     public ViaAdministracion() {
     }
@@ -37,8 +37,7 @@ public class ViaAdministracion {
 
     @Override
     public String toString() {
-        this.viaAdministracionCustom=this.viaAdministracionCustom= viaAdministracion;
-        return viaAdministracionCustom;
+        return viaAdministracion;
     }
 
 
