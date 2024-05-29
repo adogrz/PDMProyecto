@@ -173,4 +173,5 @@
     <string name="eliminar_receta_medica">Eliminar receta médica</string>
     <string name="id_articulo_label">Id articulo</string>
     <string name="eliminar_medicamento_titulo">Eliminar Medicamento</string>
+    <string name="requiere_receta_medica_question">¿Requiere receta médica?</string>
 </resources>

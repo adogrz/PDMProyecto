@@ -1,7 +1,6 @@
 package sv.ues.fia.eisi.pdmproyectoetapa1.ui.medicamento;
 
-
-import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -13,7 +12,6 @@ import android.widget.EditText;
 
 import android.widget.Spinner;
 
-import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +20,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -29,6 +29,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 
 import java.lang.reflect.Type;
+import java.util.Calendar;
 import java.util.List;
 
 import sv.ues.fia.eisi.pdmproyectoetapa1.R;
@@ -40,58 +41,72 @@ import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.ViaAdministracion;
 import sv.ues.fia.eisi.pdmproyectoetapa1.data.modelo.Medicamento;
 
 public class MedicamentosActualizarActivity extends AppCompatActivity {
-
     private static final String TAG = "MedicamentosActualizarActivity";
     private RequestQueue requestQueue;
-    private EditText fechaExpedicionS, fechaExperacionS;
-    private Spinner medicamentoid,articuloMedicamento,formaFarmaceutica,viaAdministracion,laboratorio;
+    private EditText fechaExpedicion, fechaExpiracion;
+    private Spinner medicamentoid, articuloMedicamento, formaFarmaceutica, viaAdministracion, laboratorio;
     Button actualizarMedicamento;
-
-    @SuppressLint("UseSwitchCompatOrMaterialCode")
-    Switch recetaMedicaS;
+    SwitchMaterial requiereRecetaMedica;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicamentos_actualizar);
 
-        //Busqueda de los elementos de la interfaz
-        medicamentoid = findViewById(R.id.idMedAct);
-        fechaExpedicionS = findViewById(R.id.editFechaExpedicionAct);
-        fechaExperacionS = findViewById(R.id.editFechaExpiracionAct);
-        recetaMedicaS = findViewById(R.id.editRecetaMedicaAct);
-        articuloMedicamento = findViewById(R.id.editArticuloAct);
-        formaFarmaceutica = findViewById(R.id.editFormaFarmaceuticaAct);
-        viaAdministracion = findViewById(R.id.editViaAdministracionAct);
-        laboratorio = findViewById(R.id.editLaboratorioAct);
-        actualizarMedicamento = findViewById(R.id.actualizarM);
+        medicamentoid = findViewById(R.id.spnn_id_medicamento);
+        articuloMedicamento = findViewById(R.id.spnn_id_articulo_medicamento);
+        viaAdministracion = findViewById(R.id.spnn_via_administracion);
+        formaFarmaceutica = findViewById(R.id.spnn_forma_farmaceutica);
+        laboratorio = findViewById(R.id.spnn_laboratorio);
+        fechaExpedicion = findViewById(R.id.editFechaExpedicionAct);
+        fechaExpiracion = findViewById(R.id.editFechaExpiracionAct);
+        requiereRecetaMedica = findViewById(R.id.swh_requiere_receta_medica);
+        actualizarMedicamento = findViewById(R.id.btnActualizarMedicamento);
+        TextInputLayout fechaExpedicionLayout = findViewById(R.id.tilFechaExpedicionAct);
+        TextInputLayout fechaExpiracionLayout = findViewById(R.id.tilFechaExpiracionAct);
+
         requestQueue = Volley.newRequestQueue(this);
-        //Spinners
+
         SpinnerMedicamento();
         spinnerArticuloM();
         spinnerViadministracion();
         spinnerFormaFarmaceutica();
         spinnerLaboratorio();
 
-        //Acción del botón actualizar
+        fechaExpedicionLayout.setEndIconOnClickListener(v -> mostrarCalendario(fechaExpedicion));
+        fechaExpiracionLayout.setEndIconOnClickListener(v -> mostrarCalendario(fechaExpiracion));
+
+        // Acción del botón actualizar
         actualizarMedicamento.setOnClickListener(v -> actualizarMedicamento());
     }
 
-    //Metodo actualizar medicamento
-    public void actualizarMedicamento(){
-        //Obteniendo los valores de los campos de texto
-        String fechaExpedicion = fechaExpedicionS.getText().toString();
-        String fechaExpiracion = fechaExperacionS.getText().toString();
-        // Obteniendo el estado del Switch
-        String tieneReceta = recetaMedicaS.isChecked() ? "1" : "0";
+    private void mostrarCalendario(EditText etFecha) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        new DatePickerDialog(MedicamentosActualizarActivity.this,
+                (view, selectedYear, selectedMonth, selectedDay) -> {
+                    selectedMonth += 1;
+                    String date = selectedYear + "-" + selectedMonth + "-" + selectedDay;
+                    etFecha.setText(date);
+                }, year, month, dayOfMonth).show();
+    }
 
+    //Metodo actualizar medicamento
+    public void actualizarMedicamento() {
+        //Obteniendo los valores de los campos de texto
+        String fechaExpedicion = this.fechaExpedicion.getText().toString();
+        String fechaExpiracion = this.fechaExpiracion.getText().toString();
+
+        // Obteniendo el estado del Switch
+        String tieneReceta = requiereRecetaMedica.isChecked() ? "1" : "0";
 
         //Obteniendo la opcion seleccionada de los spinners
-        Medicamento medicamentoSeleccionado=(Medicamento) medicamentoid.getSelectedItem();
+        Medicamento medicamentoSeleccionado = (Medicamento) medicamentoid.getSelectedItem();
         Articulo articuloSeleccionado = (Articulo) articuloMedicamento.getSelectedItem();
         FormaFarmaceutica formaFarmaceuticaSeleccionada = (FormaFarmaceutica) formaFarmaceutica.getSelectedItem();
         ViaAdministracion viaAdministracionSeleccionada = (ViaAdministracion) viaAdministracion.getSelectedItem();
         Laboratorio laboratorioSeleccionado = (Laboratorio) laboratorio.getSelectedItem();
-
 
         //Verificar si los campos están vacíos
         if (fechaExpedicion.isEmpty() || fechaExpiracion.isEmpty()) {
@@ -105,20 +120,20 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
             return;
         }
 
-        String urlProv="https://pdmproyectouno.000webhostapp.com/medicamento_modificar.php?id="
-                +medicamentoSeleccionado+"&fecha_expedicion="+fechaExpedicion+"&fecha_expiracion="
-                +fechaExpiracion+ "&requiere_receta_medica="+tieneReceta+"&id_articulo="
-                +articuloSeleccionado.getIdArticulo()+ "&id_forma_farmaceutica="
-                +formaFarmaceuticaSeleccionada.getIdFormaFarmaceutica()
-                +"&id_via_administracion=" + viaAdministracionSeleccionada.getIdViaAdministracion()
-                +"&id_laboratorio="+laboratorioSeleccionado.getIdLaboratorio();
+        String urlProv = "https://pdmproyectouno.000webhostapp.com/medicamento_modificar.php?id="
+                + medicamentoSeleccionado + "&fecha_expedicion=" + fechaExpedicion + "&fecha_expiracion="
+                + fechaExpiracion + "&requiere_receta_medica=" + tieneReceta + "&id_articulo="
+                + articuloSeleccionado.getIdArticulo() + "&id_forma_farmaceutica="
+                + formaFarmaceuticaSeleccionada.getIdFormaFarmaceutica()
+                + "&id_via_administracion=" + viaAdministracionSeleccionada.getIdViaAdministracion()
+                + "&id_laboratorio=" + laboratorioSeleccionado.getIdLaboratorio();
         new InsertDataTask().execute(urlProv);
 
         finish();
     }
 
     //Metodo para llenar el spinner de medicamento
-    public void SpinnerMedicamento(){
+    public void SpinnerMedicamento() {
         String url = "https://pdmproyectouno.000webhostapp.com/medicamento_obtener_todos.php";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET, url, null,
@@ -333,7 +348,6 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
 
     }
 
-
     private class InsertDataTask extends AsyncTask<String, Void, JsonObject> {
         @Override
         protected JsonObject doInBackground(String... urls) {
@@ -365,14 +379,4 @@ public class MedicamentosActualizarActivity extends AppCompatActivity {
             }
         }
     }
-
-
 }
-
-
-
-
-
-
-
-
